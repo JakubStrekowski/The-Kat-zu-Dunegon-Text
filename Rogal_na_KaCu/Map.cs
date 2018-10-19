@@ -8,7 +8,17 @@ namespace Rogal_na_KaCu
 {
     class Map
     {
-        private int[][] intMap;
+        public int[][] intMap;
+        
+        public Map()
+        {
+
+        }
+
+        public Map(int[][] intMap)
+        {
+            this.intMap = intMap;
+        }
 
         public void SwitchElements(int sourceX,int sourceY,int targetX,int targetY)
         {
