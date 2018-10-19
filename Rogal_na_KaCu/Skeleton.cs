@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Rogal_na_KaCu
 {
-    class Skeleton
+    class Skeleton:Enemy
     {
-
+        protected override void MovementBehaviour()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -11,6 +11,10 @@ namespace Rogal_na_KaCu
 
         
         Zombie() { }
-        
+        protected override void MovementBehaviour()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

@@ -8,6 +8,6 @@ namespace Rogal_na_KaCu
 {
     class Input :GameHandler
     {
-       public TakeInput() { }
+       public void TakeInput() { }
     }
 }

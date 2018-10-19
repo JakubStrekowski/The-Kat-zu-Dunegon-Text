@@ -9,6 +9,11 @@ namespace Rogal_na_KaCu
     class GameHandler
     {
         int floorNumber;
-        ResolveTurn() {  }
+        void ResolveTurn() {  }
+        int[][] LoadMap(string name="1.txt")
+        {
+            int[][] intMap = new int[20][];
+            return intMap;
+        }
     }
 }

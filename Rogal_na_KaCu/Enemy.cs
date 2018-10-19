@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Rogal_na_KaCu
 {
-   abstract class Enemy
+   abstract class Enemy:Character
     {
         public int id;
         public int speed;
         public int giveGold;
         void Die() { }
-        int MovementBehaviour() { }
+        protected abstract void MovementBehaviour();
     }
 }

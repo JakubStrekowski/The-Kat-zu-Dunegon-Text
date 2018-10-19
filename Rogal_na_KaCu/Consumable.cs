@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Rogal_na_KaCu
 {
-   abstract class Consumable
+   abstract class Consumable:Tile
     {
 
-       public UseEffect() { }
+       public void UseEffect() { }
     }
 }

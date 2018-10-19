@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rogal_na_KaCu
 {
-    class Armor
+    class Armor:Tile
     {
         string name;
         int defenceValue;

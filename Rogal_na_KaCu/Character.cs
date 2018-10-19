@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Rogal_na_KaCu
 {
-   abstract class Character
+   abstract class Character:Tile
     {
         int hp;
         int attack;
         int armor;
 
-         GetDmg() { }
-         Attack() { }
-         Die() { }
+        void GetDmg() { }
+        void Attack() { }
+        void Die() { }
 
     }
 }

@@ -44,8 +44,8 @@
   <ItemGroup>
     <Compile Include="Armor.cs" />
     <Compile Include="Character.cs" />
-    <Compile Include="Console.cs" />
     <Compile Include="Consumable.cs" />
+    <Compile Include="DisplayConsole.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="GameHandler.cs" />
     <Compile Include="HealthPotion.cs" />
