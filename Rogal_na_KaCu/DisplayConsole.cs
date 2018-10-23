@@ -50,9 +50,21 @@ namespace Rogal_na_KaCu
                 {
                         PrintTile(tileDictionary[row[i]].charID, tileDictionary[row[i]].colorID);
                 }
+                RefreshAtPosition(mapObject, 2, 0);
                 Console.Write('\n');
             }
         }
+
+        public void RefreshAtPosition(Map mapObject, int posX, int posY)
+        {
+            int prevX = Console.CursorLeft;
+            int prevY = Console.CursorTop;
+            Console.SetCursorPosition(posX, posY);
+            Console.Write("\b \b");
+            PrintTile(tileDictionary[mapObject.intMap[posX][posY]].charID, tileDictionary[mapObject.intMap[posX][posY]].colorID);
+            Console.SetCursorPosition(prevX, prevY);
+        }
+        
 
         public void PrintTile(int charID, int color)
         {

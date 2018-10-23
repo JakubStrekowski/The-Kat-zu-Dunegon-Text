@@ -11,11 +11,20 @@ namespace Rogal_na_KaCu
     {
         int floorNumber;
         Map currentMap;
+        Input input;
+        List<Character> charactersOnMap;
+
         public GameHandler()
         {
-            
+            input = new Input();
         }
-        void ResolveTurn() {  }
+
+        void ResolveTurn() {
+            foreach(Character chara in charactersOnMap)
+            {
+                chara.MovementBehaviour();
+            }
+        }
 
         public Map LoadMap(string name="1.txt")
         {
@@ -40,6 +49,20 @@ namespace Rogal_na_KaCu
             }
             Map newMap = new Map(intMap);
             return newMap;
+        }
+
+        public void PlayInMap()
+        {
+            bool heroAlife = true;
+            while (heroAlife)
+            {
+                
+            }
+        }
+
+        public void ResolveInput(String inputCommand)
+        {
+
         }
     }
 }

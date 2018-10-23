@@ -10,6 +10,9 @@ namespace Rogal_na_KaCu
     {
         List<Consumable> equipment;
 
-        
+        override public void MovementBehaviour()
+        {
+
+        }
     }
 }

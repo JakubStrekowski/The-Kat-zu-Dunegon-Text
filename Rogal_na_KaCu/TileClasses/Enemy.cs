@@ -12,6 +12,6 @@ namespace Rogal_na_KaCu
         public int speed;
         public int giveGold;
         void Die() { }
-        protected abstract void MovementBehaviour();
+        public abstract void MovementBehaviour();
     }
 }

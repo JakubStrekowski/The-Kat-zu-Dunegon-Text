@@ -8,7 +8,7 @@ namespace Rogal_na_KaCu
 {
     class Skeleton:Enemy
     {
-        protected override void MovementBehaviour()
+        public override void MovementBehaviour()
         {
             throw new NotImplementedException();
         }
