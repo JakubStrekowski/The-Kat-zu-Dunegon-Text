@@ -11,7 +11,6 @@ namespace Rogal_na_KaCu
         public int positionX;
         public int positionY;
         public bool passable;
-        public int representedBy;
-        
+        public int representedByID;
     }
 }

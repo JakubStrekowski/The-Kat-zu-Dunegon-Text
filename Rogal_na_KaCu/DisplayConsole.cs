@@ -9,20 +9,35 @@ namespace Rogal_na_KaCu
 {
     class DisplayConsole
     {
-        string[] dictionary;
-
+        string[] charDictionary;
+        TileInfo[] tileDictionary;
         public DisplayConsole()
         {
             string line;
-            dictionary = new string[20];
+            charDictionary = new string[20];
+            tileDictionary = new TileInfo[20];
             System.IO.StreamReader dictFile = new System.IO.StreamReader("display/intToCharTranslator.txt");
             while ((line = dictFile.ReadLine()) != null)
             {
                 string[] words = line.Split(' ');
                 int number = int.Parse(words[0]);
-                dictionary[number] =(words[1]);
+                charDictionary[number] =(words[1]);
             }
-            dictionary[0] = " ";
+            charDictionary[0] = " ";
+            dictFile.Close();
+
+            System.IO.StreamReader tileDictFile = new System.IO.StreamReader("display/tileToInt.txt");
+            int counter = 0;
+            while ((line = tileDictFile.ReadLine()) != null)
+            {
+                tileDictionary[counter] = new TileInfo();
+                string[] words = line.Split(' ');
+                int charID = int.Parse(words[0]);
+                int colorID = int.Parse(words[1]);
+                tileDictionary[counter].charID = charID;
+                tileDictionary[counter].colorID = colorID;
+                counter++;
+            }
         }
 
         public void DisplayWindow(Map mapObject)
@@ -33,10 +48,35 @@ namespace Rogal_na_KaCu
                 if(row!=null)
                 for(int i = 0; i < row.Length; i++)
                 {
-                    Console.Write(dictionary[row[i]]);
+                        PrintTile(tileDictionary[row[i]].charID, tileDictionary[row[i]].colorID);
                 }
                 Console.Write('\n');
             }
+        }
+
+        public void PrintTile(int charID, int color)
+        {
+            switch (color)
+            {
+                case 0: Console.ForegroundColor = ConsoleColor.White;break;
+                case 1: Console.ForegroundColor = ConsoleColor.Gray; break;
+                case 2: Console.ForegroundColor = ConsoleColor.DarkGray; break;
+                case 3: Console.ForegroundColor = ConsoleColor.Red; break;
+                case 4: Console.ForegroundColor = ConsoleColor.DarkRed; break;
+                case 5: Console.ForegroundColor = ConsoleColor.Green; break;
+                case 6: Console.ForegroundColor = ConsoleColor.DarkGreen; break;
+                case 7: Console.ForegroundColor = ConsoleColor.Blue; break;
+                case 8: Console.ForegroundColor = ConsoleColor.DarkBlue; break;
+                case 9: Console.ForegroundColor = ConsoleColor.Cyan; break;
+                case 10: Console.ForegroundColor = ConsoleColor.DarkCyan; break;
+                case 11: Console.ForegroundColor = ConsoleColor.Magenta; break;
+                case 12: Console.ForegroundColor = ConsoleColor.DarkMagenta; break;
+                case 13: Console.ForegroundColor = ConsoleColor.Yellow; break;
+                case 14: Console.ForegroundColor = ConsoleColor.DarkYellow; break;
+                case 15: Console.ForegroundColor = ConsoleColor.Black; break;
+            }
+            Console.Write(charDictionary[charID]);
+            Console.ForegroundColor = ConsoleColor.White; 
         }
     }
 }
