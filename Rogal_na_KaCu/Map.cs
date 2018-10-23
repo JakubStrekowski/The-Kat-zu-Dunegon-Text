@@ -52,10 +52,10 @@ namespace Rogal_na_KaCu
 
                 case 0:
                     return tileMap[posY-1][posX];
-                case 1: return tileMap[posX][posY+1];
-                case 2: return tileMap[posX+1][posY];
-                case 3: return tileMap[posX-1][posY];
-                default:return tileMap[posX][posY];
+                case 1: return tileMap[posY+1][posX];
+                case 2: return tileMap[posY][posX+1];
+                case 3: return tileMap[posY][posX-1];
+                default:return tileMap[posY][posX];
             }
         }
     }

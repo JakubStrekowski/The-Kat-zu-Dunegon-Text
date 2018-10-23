@@ -20,15 +20,45 @@ namespace Rogal_na_KaCu
 
         public void Move(int direction) //0 up, 1 down, 2 right, 3 left
         {
+
+            int targetPositionX = positionX;
+            int targetPositionY = positionY;
             switch (direction)
             {
                 case 0:
-                    Console.WriteLine(positionX + " " + (positionY) + " " + currentMap.GiveNeighbor(positionX, positionY, 0).passable + currentMap.GiveNeighbor(positionX, positionY, 0).representedByID);
+                    targetPositionY = targetPositionY - 1;
                     if (currentMap.GiveNeighbor(positionX,positionY, 0).passable)
                     {
-                        currentMap.SwitchElements(positionX, positionY, positionX, positionY - 1);
+                        currentMap.SwitchElements(positionX, positionY, targetPositionX, targetPositionY);
                         positionY = positionY - 1;
                         
+                    }
+                    break;
+                case 1:
+                    targetPositionY = targetPositionY + 1;
+                    if (currentMap.GiveNeighbor(positionX, positionY, 1).passable)
+                    {
+                        currentMap.SwitchElements(positionX, positionY, targetPositionX, targetPositionY);
+                        positionY = positionY + 1;
+
+                    }
+                    break;
+                case 2:
+                    targetPositionX = targetPositionX + 1;
+                    if (currentMap.GiveNeighbor(positionX, positionY, 2).passable)
+                    {
+                        currentMap.SwitchElements(positionX, positionY, targetPositionX, targetPositionY);
+                        positionX = positionX + 1;
+
+                    }
+                    break;
+                case 3:
+                    targetPositionX = targetPositionX - 1 ;
+                    if (currentMap.GiveNeighbor(positionX, positionY, 3).passable)
+                    {
+                        currentMap.SwitchElements(positionX, positionY, targetPositionX, targetPositionY);
+                        positionX = positionX - 1;
+
                     }
                     break;
             }

@@ -59,7 +59,7 @@ namespace Rogal_na_KaCu
         {
             int prevX = Console.CursorLeft;
             int prevY = Console.CursorTop;
-            Console.SetCursorPosition(posX, posY);
+            Console.SetCursorPosition(posX+1, posY);
             Console.Write("\b");
             PrintTile(tileDictionary[mapObject.tileMap[posY][posX].representedByID].charID, tileDictionary[mapObject.tileMap[posY][posX].representedByID].colorID);
             Console.SetCursorPosition(prevX, prevY);
