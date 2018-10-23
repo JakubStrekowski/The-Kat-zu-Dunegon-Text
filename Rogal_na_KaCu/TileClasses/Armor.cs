@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace Rogal_na_KaCu
 {
-    class Weapon
+    class Armor:Tile
     {
         string name;
-        int attackValue;
+        int defenceValue;
+
+        public Armor(int id, int posX, int posY) : base(id, posX, posY)
+        {
+            passable = true;
+        }
     }
 }

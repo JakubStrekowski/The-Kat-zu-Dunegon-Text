@@ -42,22 +42,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Armor.cs" />
-    <Compile Include="Character.cs" />
-    <Compile Include="Console.cs" />
-    <Compile Include="Consumable.cs" />
-    <Compile Include="Enemy.cs" />
+    <Compile Include="TileClasses\Armor.cs" />
+    <Compile Include="TileClasses\Character.cs" />
+    <Compile Include="TileClasses\Consumable.cs" />
+    <Compile Include="DisplayConsole.cs" />
+    <Compile Include="TileClasses\EmptyTile.cs" />
+    <Compile Include="TileClasses\Enemy.cs" />
     <Compile Include="GameHandler.cs" />
-    <Compile Include="HealthPotion.cs" />
-    <Compile Include="Hero.cs" />
+    <Compile Include="TileClasses\HealthPotion.cs" />
+    <Compile Include="TileClasses\Hero.cs" />
     <Compile Include="Input.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Skeleton.cs" />
-    <Compile Include="Tile.cs" />
-    <Compile Include="Weapon.cs" />
-    <Compile Include="Zombie.cs" />
+    <Compile Include="TileClasses\Skeleton.cs" />
+    <Compile Include="TileClasses\Tile.cs" />
+    <Compile Include="TileClasses\TileFactory.cs" />
+    <Compile Include="TileClasses\Wall.cs" />
+    <Compile Include="TileClasses\Weapon.cs" />
+    <Compile Include="TileClasses\Zombie.cs" />
+    <Compile Include="TileClasses\TileInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

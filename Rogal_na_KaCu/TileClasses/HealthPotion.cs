@@ -8,7 +8,9 @@ namespace Rogal_na_KaCu
 {
     class HealthPotion : Consumable
     {
-        public HealthPotion() { }
+        public HealthPotion(int id, int posX, int posY) : base(id, posX, posY) {
+
+        }
         public void useEffect() { }
     }
 }
