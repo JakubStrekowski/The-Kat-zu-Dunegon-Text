@@ -3,26 +3,60 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Rogal_na_KaCu.TileClasses;
 
 namespace Rogal_na_KaCu
 {
     class Map
     {
-        public int[][] intMap;
-        
+        DisplayConsole display;
+        public Tile[][] tileMap;
         public Map()
         {
 
         }
 
-        public Map(int[][] intMap)
+        public Map(int[][] intMap,DisplayConsole display)
         {
-            this.intMap = intMap;
+            this.display = display;
+            this.tileMap = new Tile[25][];
+            int rowCounter = 0;
+            foreach (int[] intRow in intMap)
+            {
+                this.tileMap[rowCounter] = new Tile[25];
+                int columnCounter = 0;
+                foreach(int integer in intRow)
+                {
+                    
+                    this.tileMap[rowCounter][columnCounter] = TileFactory.Get(integer, columnCounter, rowCounter);
+                    columnCounter++;
+                }
+                rowCounter++;
+            }
         }
 
         public void SwitchElements(int sourceX,int sourceY,int targetX,int targetY)
         {
+            Tile temporary = tileMap[targetY][targetX];
+            tileMap[targetY][targetX] = tileMap[sourceY][sourceX];
+            tileMap[sourceY][sourceX] = temporary;
+            display.RefreshAtPosition(this, sourceX, sourceY);
+            display.RefreshAtPosition(this, targetX, targetY);
 
+        }
+
+        public Tile GiveNeighbor(int posX, int posY, int direction) //direction going: 0-up, 1-down, 2-right, 3-left
+        {
+            switch (direction)
+            {
+
+                case 0:
+                    return tileMap[posY-1][posX];
+                case 1: return tileMap[posX][posY+1];
+                case 2: return tileMap[posX+1][posY];
+                case 3: return tileMap[posX-1][posY];
+                default:return tileMap[posX][posY];
+            }
         }
     }
 }

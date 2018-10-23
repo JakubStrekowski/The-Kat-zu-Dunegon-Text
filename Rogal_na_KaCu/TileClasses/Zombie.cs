@@ -9,8 +9,10 @@ namespace Rogal_na_KaCu
     class Zombie : Enemy
     {
 
-        
-        Zombie() { }
+        public Zombie(int id, int posX, int posY) : base(id, posX, posY)
+        {
+
+        }
         public override void MovementBehaviour()
         {
             throw new NotImplementedException();

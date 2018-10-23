@@ -13,5 +13,9 @@ namespace Rogal_na_KaCu
         public int giveGold;
         void Die() { }
         public abstract void MovementBehaviour();
+
+        public Enemy(int id, int posX, int posY) : base(id, posX, posY)
+        {
+        }
     }
 }

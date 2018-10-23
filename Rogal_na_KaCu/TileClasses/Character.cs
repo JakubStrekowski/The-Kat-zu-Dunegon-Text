@@ -8,13 +8,24 @@ namespace Rogal_na_KaCu
 {
    abstract class Character:Tile
     {
-        int hp;
-        int attack;
-        int armor;
+        protected int hp;
+        protected int attack;
+        protected int armor;
+        protected Map currentMap;
 
         void GetDmg() { }
         void Attack() { }
         void Die() { }
 
+        public Character(int id, int posX, int posY) : base(id, posX, posY)
+        {
+            passable = false;
+        }
+
+        public void SetCurrentMap(Map crMap)
+        {
+            currentMap = crMap;
+        }
+        
     }
 }

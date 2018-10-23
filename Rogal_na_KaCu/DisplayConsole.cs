@@ -43,12 +43,12 @@ namespace Rogal_na_KaCu
         public void DisplayWindow(Map mapObject)
         {
             Console.ForegroundColor = ConsoleColor.White;
-            foreach (int[] row in mapObject.intMap)
+            foreach (Tile[] row in mapObject.tileMap)
             {
                 if(row!=null)
                 for(int i = 0; i < row.Length; i++)
                 {
-                        PrintTile(tileDictionary[row[i]].charID, tileDictionary[row[i]].colorID);
+                        PrintTile(tileDictionary[row[i].representedByID].charID, tileDictionary[row[i].representedByID].colorID);
                 }
                 RefreshAtPosition(mapObject, 2, 0);
                 Console.Write('\n');
@@ -60,8 +60,8 @@ namespace Rogal_na_KaCu
             int prevX = Console.CursorLeft;
             int prevY = Console.CursorTop;
             Console.SetCursorPosition(posX, posY);
-            Console.Write("\b \b");
-            PrintTile(tileDictionary[mapObject.intMap[posX][posY]].charID, tileDictionary[mapObject.intMap[posX][posY]].colorID);
+            Console.Write("\b");
+            PrintTile(tileDictionary[mapObject.tileMap[posY][posX].representedByID].charID, tileDictionary[mapObject.tileMap[posY][posX].representedByID].colorID);
             Console.SetCursorPosition(prevX, prevY);
         }
         

@@ -12,5 +12,9 @@ namespace Rogal_na_KaCu
         {
             throw new NotImplementedException();
         }
+        public Skeleton(int id, int posX, int posY) : base(id, posX, posY)
+        {
+
+        }
     }
 }

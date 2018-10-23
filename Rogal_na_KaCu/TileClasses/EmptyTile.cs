@@ -4,14 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rogal_na_KaCu
+namespace Rogal_na_KaCu.TileClasses
 {
-    class Armor:Tile
+    class EmptyTile:Tile
     {
-        string name;
-        int defenceValue;
-
-        public Armor(int id, int posX, int posY) : base(id, posX, posY)
+        public EmptyTile(int id, int posX, int posY) : base(id, posX, posY)
         {
             passable = true;
         }
