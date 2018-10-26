@@ -45,6 +45,17 @@ namespace Rogal_na_KaCu
 
         }
 
+        public void StepOnElement(int sourceX,int sourceY, int targetX, int targetY)
+        {
+            Character chara = (Character)tileMap[sourceY][sourceX];
+            Tile temporary = tileMap[targetY][targetX];
+            tileMap[targetY][targetX] = tileMap[sourceY][sourceX];
+            tileMap[sourceY][sourceX] = chara.standingOnTile;
+            chara.standingOnTile = temporary;
+            display.RefreshAtPosition(this, sourceX, sourceY);
+            display.RefreshAtPosition(this, targetX, targetY);
+        }
+
         public Tile GiveNeighbor(int posX, int posY, int direction) //direction going: 0-up, 1-down, 2-right, 3-left
         {
             switch (direction)
@@ -52,10 +63,10 @@ namespace Rogal_na_KaCu
 
                 case 0:
                     return tileMap[posY-1][posX];
-                case 1: return tileMap[posX][posY+1];
-                case 2: return tileMap[posX+1][posY];
-                case 3: return tileMap[posX-1][posY];
-                default:return tileMap[posX][posY];
+                case 1: return tileMap[posY+1][posX];
+                case 2: return tileMap[posY][posX+1];
+                case 3: return tileMap[posY][posX-1];
+                default:return tileMap[posY][posX];
             }
         }
     }

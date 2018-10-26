@@ -66,5 +66,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="display\frameUI.txt" />
+    <Content Include="display\intToCharTranslator.txt" />
+    <Content Include="display\tileToInt.txt" />
+    <Content Include="maps\1.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

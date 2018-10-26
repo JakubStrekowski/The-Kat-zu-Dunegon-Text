@@ -93,13 +93,25 @@ namespace Rogal_na_KaCu
         {
             switch (inputCommand) {
                 case "ArrowUp":
-                    
-                    //
                     {
                         hero.Move(0);
                     }
                     break;
-
+                case "ArrowDown":
+                    {
+                        hero.Move(1);
+                    }
+                    break;
+                case "ArrowRight":
+                    {
+                        hero.Move(2);
+                    }
+                    break;
+                case "ArrowLeft":
+                    {
+                        hero.Move(3);
+                    }
+                    break;
             }
         }
     }
