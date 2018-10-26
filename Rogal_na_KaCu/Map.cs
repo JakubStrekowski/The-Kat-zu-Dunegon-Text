@@ -18,12 +18,14 @@ namespace Rogal_na_KaCu
 
         public Map(int[][] intMap,DisplayConsole display)
         {
+            int mapRowLimit = 15;
+            int mapColumnLimit = 40;
             this.display = display;
-            this.tileMap = new Tile[25][];
+            this.tileMap = new Tile[mapRowLimit][];
             int rowCounter = 0;
             foreach (int[] intRow in intMap)
             {
-                this.tileMap[rowCounter] = new Tile[25];
+                this.tileMap[rowCounter] = new Tile[mapColumnLimit];
                 int columnCounter = 0;
                 foreach(int integer in intRow)
                 {
@@ -40,8 +42,8 @@ namespace Rogal_na_KaCu
             Tile temporary = tileMap[targetY][targetX];
             tileMap[targetY][targetX] = tileMap[sourceY][sourceX];
             tileMap[sourceY][sourceX] = temporary;
-            display.RefreshAtPosition(this, sourceX, sourceY);
-            display.RefreshAtPosition(this, targetX, targetY);
+            display.RefreshFromMapAtPosition(this, sourceX, sourceY);
+            display.RefreshFromMapAtPosition(this, targetX, targetY);
 
         }
 
@@ -52,8 +54,8 @@ namespace Rogal_na_KaCu
             tileMap[targetY][targetX] = tileMap[sourceY][sourceX];
             tileMap[sourceY][sourceX] = chara.standingOnTile;
             chara.standingOnTile = temporary;
-            display.RefreshAtPosition(this, sourceX, sourceY);
-            display.RefreshAtPosition(this, targetX, targetY);
+            display.RefreshFromMapAtPosition(this, sourceX, sourceY);
+            display.RefreshFromMapAtPosition(this, targetX, targetY);
         }
 
         public Tile GiveNeighbor(int posX, int posY, int direction) //direction going: 0-up, 1-down, 2-right, 3-left

@@ -31,15 +31,17 @@ namespace Rogal_na_KaCu
         public Map LoadMap(string name="1.txt")
         {
             currentMap = new Map();
-            int[][] intMap = new int[25][];
+            int mapRowLimit=15;
+            int mapColumnLimit = 40;
+            int[][] intMap = new int[mapRowLimit][];
             string line;
             System.IO.StreamReader file = new System.IO.StreamReader("maps/"+name);
             int rowCounter = 0;
-            while(rowCounter!=25)
+            while(rowCounter!= mapRowLimit)
             if((line = file.ReadLine()) != null)
             {
                 string[] strRow = line.Split(' ');
-                int[] intRow = new int[25];
+                int[] intRow = new int[mapColumnLimit];
                 int counter = 0;
                 foreach (string st in strRow)
                 {
@@ -50,7 +52,7 @@ namespace Rogal_na_KaCu
                     }
                     counter++;
                 }
-                    while (counter < 25)
+                    while (counter < mapColumnLimit)
                     {
                         intRow[counter] = 0;
                         counter++;
@@ -60,11 +62,11 @@ namespace Rogal_na_KaCu
             }
                 else
                 {
-                    while (rowCounter < 25)
+                    while (rowCounter < mapRowLimit)
                     {
-                        intMap[rowCounter] = new int[25];
+                        intMap[rowCounter] = new int[mapColumnLimit];
                         int counter = 0;
-                        while (counter < 25)
+                        while (counter < mapColumnLimit)
                         {
                             intMap[rowCounter][counter] = 0;
                             counter++;

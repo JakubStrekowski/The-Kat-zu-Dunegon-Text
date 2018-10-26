@@ -11,7 +11,7 @@ namespace Rogal_na_KaCu
     {
         string[] charDictionary;
         TileInfo[] tileDictionary;
-        int mapFirstXPosition = 24;
+        int mapFirstXPosition = 26;
         int mapFirstYPosition = 4;
 
         public DisplayConsole()
@@ -45,31 +45,35 @@ namespace Rogal_na_KaCu
 
         public void DisplayWindow(Map mapObject)
         {
+            int prevX = Console.CursorLeft;
+            int prevY = Console.CursorTop;
             Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(mapFirstXPosition, mapFirstYPosition);
             int rowCount = 0;
             foreach (Tile[] row in mapObject.tileMap)
             {
-                if(row!=null)
+                if (row != null)
                 for(int i = 0; i < row.Length; i++)
                 {
-                    PrintTile(tileDictionary[row[i].representedByID].charID, tileDictionary[row[i].representedByID].colorID);
+                        Console.SetCursorPosition(mapFirstXPosition+i, mapFirstYPosition+rowCount);
+                        PrintTile(tileDictionary[row[i].representedByID].charID, tileDictionary[row[i].representedByID].colorID);
                 }
-                RefreshAtPosition(mapObject, 2, 0);
                 rowCount++;
                 Console.SetCursorPosition(mapFirstXPosition, mapFirstYPosition+rowCount);
             }
+            Console.SetCursorPosition(prevX, prevY);
         }
 
-        public void RefreshAtPosition(Map mapObject, int posX, int posY)
+        public void RefreshFromMapAtPosition(Map mapObject, int posX, int posY)
         {
             int prevX = Console.CursorLeft;
             int prevY = Console.CursorTop;
-            Console.SetCursorPosition(posX+1, posY);
+            Console.SetCursorPosition(posX+1+mapFirstXPosition, posY+mapFirstYPosition);
             Console.Write("\b");
             PrintTile(tileDictionary[mapObject.tileMap[posY][posX].representedByID].charID, tileDictionary[mapObject.tileMap[posY][posX].representedByID].colorID);
             Console.SetCursorPosition(prevX, prevY);
         }
+        
         
 
         public void PrintTile(int charID, int color)
