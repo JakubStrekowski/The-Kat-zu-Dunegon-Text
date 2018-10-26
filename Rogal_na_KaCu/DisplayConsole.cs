@@ -11,6 +11,9 @@ namespace Rogal_na_KaCu
     {
         string[] charDictionary;
         TileInfo[] tileDictionary;
+        int mapFirstXPosition = 26;
+        int mapFirstYPosition = 4;
+
         public DisplayConsole()
         {
             string line;
@@ -42,28 +45,35 @@ namespace Rogal_na_KaCu
 
         public void DisplayWindow(Map mapObject)
         {
+            int prevX = Console.CursorLeft;
+            int prevY = Console.CursorTop;
             Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(mapFirstXPosition, mapFirstYPosition);
+            int rowCount = 0;
             foreach (Tile[] row in mapObject.tileMap)
             {
-                if(row!=null)
+                if (row != null)
                 for(int i = 0; i < row.Length; i++)
                 {
+                        Console.SetCursorPosition(mapFirstXPosition+i, mapFirstYPosition+rowCount);
                         PrintTile(tileDictionary[row[i].representedByID].charID, tileDictionary[row[i].representedByID].colorID);
                 }
-                RefreshAtPosition(mapObject, 2, 0);
-                Console.Write('\n');
+                rowCount++;
+                Console.SetCursorPosition(mapFirstXPosition, mapFirstYPosition+rowCount);
             }
+            Console.SetCursorPosition(prevX, prevY);
         }
 
-        public void RefreshAtPosition(Map mapObject, int posX, int posY)
+        public void RefreshFromMapAtPosition(Map mapObject, int posX, int posY)
         {
             int prevX = Console.CursorLeft;
             int prevY = Console.CursorTop;
-            Console.SetCursorPosition(posX+1, posY);
+            Console.SetCursorPosition(posX+1+mapFirstXPosition, posY+mapFirstYPosition);
             Console.Write("\b");
             PrintTile(tileDictionary[mapObject.tileMap[posY][posX].representedByID].charID, tileDictionary[mapObject.tileMap[posY][posX].representedByID].colorID);
             Console.SetCursorPosition(prevX, prevY);
         }
+        
         
 
         public void PrintTile(int charID, int color)
@@ -87,8 +97,30 @@ namespace Rogal_na_KaCu
                 case 14: Console.ForegroundColor = ConsoleColor.DarkYellow; break;
                 case 15: Console.ForegroundColor = ConsoleColor.Black; break;
             }
-            Console.Write(charDictionary[charID]);
+            Console.Write('\b'+charDictionary[charID]);
             Console.ForegroundColor = ConsoleColor.White; 
+        }
+
+        public void DrawFrame() //max column length = 119
+        {
+            int currentRow=0;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(0, currentRow);
+            string line;
+            System.IO.StreamReader frameFile = new System.IO.StreamReader("display/frameUI.txt");
+            while ((line = frameFile.ReadLine()) != null)
+            {
+                Console.WriteLine(line);
+            }
+            frameFile.Close();
+        }
+
+        private void PrintNumberOfTimes(int number, int character)
+        {
+            for(int i = 0; i < number; i++)
+            {
+                Console.Write(charDictionary[character]);
+            }
         }
     }
 }
