@@ -29,7 +29,7 @@ namespace Rogal_na_KaCu
                     targetPositionY = targetPositionY - 1;
                     if (currentMap.GiveNeighbor(positionX,positionY, 0).passable)
                     {
-                        currentMap.SwitchElements(positionX, positionY, targetPositionX, targetPositionY);
+                        currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionY = positionY - 1;
                         
                     }
@@ -38,7 +38,7 @@ namespace Rogal_na_KaCu
                     targetPositionY = targetPositionY + 1;
                     if (currentMap.GiveNeighbor(positionX, positionY, 1).passable)
                     {
-                        currentMap.SwitchElements(positionX, positionY, targetPositionX, targetPositionY);
+                        currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionY = positionY + 1;
 
                     }
@@ -47,7 +47,7 @@ namespace Rogal_na_KaCu
                     targetPositionX = targetPositionX + 1;
                     if (currentMap.GiveNeighbor(positionX, positionY, 2).passable)
                     {
-                        currentMap.SwitchElements(positionX, positionY, targetPositionX, targetPositionY);
+                        currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionX = positionX + 1;
 
                     }
@@ -56,7 +56,7 @@ namespace Rogal_na_KaCu
                     targetPositionX = targetPositionX - 1 ;
                     if (currentMap.GiveNeighbor(positionX, positionY, 3).passable)
                     {
-                        currentMap.SwitchElements(positionX, positionY, targetPositionX, targetPositionY);
+                        currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionX = positionX - 1;
 
                     }

@@ -12,6 +12,7 @@ namespace Rogal_na_KaCu
         public int positionY;
         public bool passable;
         public int representedByID;
+
         public Tile(int id, int posX, int posY)
         {
             representedByID = id;
