@@ -16,7 +16,7 @@ namespace Rogal_na_KaCu
             GameHandler gameMaster = new GameHandler(display);
             Map firstMap=gameMaster.LoadMap("1.txt");
             display.DrawFrame();
-            display.DisplayWindow(firstMap);
+            display.DisplayMap(firstMap,0,0);
             gameMaster.PlayInMap();
             Console.ReadKey();
         }

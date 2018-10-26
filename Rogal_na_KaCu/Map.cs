@@ -10,6 +10,8 @@ namespace Rogal_na_KaCu
     class Map
     {
         DisplayConsole display;
+        public int relativeCenterX=0;
+        public int relativeCenterY=0;
         public Tile[][] tileMap;
         public Map()
         {
@@ -18,8 +20,8 @@ namespace Rogal_na_KaCu
 
         public Map(int[][] intMap,DisplayConsole display)
         {
-            int mapRowLimit = 15;
-            int mapColumnLimit = 40;
+            int mapRowLimit = 50;
+            int mapColumnLimit = 100;
             this.display = display;
             this.tileMap = new Tile[mapRowLimit][];
             int rowCounter = 0;
@@ -70,6 +72,15 @@ namespace Rogal_na_KaCu
                 case 3: return tileMap[posY][posX-1];
                 default:return tileMap[posY][posX];
             }
+        }
+
+        public void MoveFocus(Hero hero)
+        {
+            relativeCenterX = hero.positionX;
+            relativeCenterY = hero.positionY;
+            hero.currentCenterPositionX=hero.positionX;
+            hero.currentCenterPositionY=hero.positionY;
+            display.DisplayMap(this, hero.positionX, hero.positionY);
         }
     }
 }

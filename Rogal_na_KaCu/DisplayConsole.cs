@@ -13,6 +13,10 @@ namespace Rogal_na_KaCu
         TileInfo[] tileDictionary;
         int mapFirstXPosition = 26;
         int mapFirstYPosition = 4;
+        int maxRow = 15;
+        int maxColumn=66;
+        int mapCurrentFirstX = 0;
+        int mapCurrentFirstY = 0;
 
         public DisplayConsole()
         {
@@ -43,22 +47,53 @@ namespace Rogal_na_KaCu
             }
         }
 
-        public void DisplayWindow(Map mapObject)
+        public void DisplayMap(Map mapObject, int centerX, int centerY)
         {
             int prevX = Console.CursorLeft;
             int prevY = Console.CursorTop;
+            int beginX;
+            int beginY;
+            CleanMap();
+            if (centerX - 33 >= 0)
+            {
+                beginX = centerX - 33;
+            }
+            else
+            {
+                beginX = 0;
+            }
+            if (centerY - 7 >= 0)
+            {
+                beginY = centerY - 7;
+                if (centerY + 8 > mapObject.tileMap.Length)
+                {
+                    beginY = mapObject.tileMap.Length - maxRow;
+                }
+            }
+            else
+            {
+                beginY = 0;
+            }
+            mapCurrentFirstX = beginX;
+            mapCurrentFirstY = beginY;
             Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(mapFirstXPosition, mapFirstYPosition);
-            int rowCount = 0;
-            foreach (Tile[] row in mapObject.tileMap)
+            int rowCount = beginY;
+            Console.WriteLine("Drawing from: " + beginX + " " + beginY);
+            for(;rowCount<mapObject.tileMap.Length;rowCount++)
             {
-                if (row != null)
-                for(int i = 0; i < row.Length; i++)
+                if (rowCount == maxRow+beginY)
                 {
-                        Console.SetCursorPosition(mapFirstXPosition+i, mapFirstYPosition+rowCount);
-                        PrintTile(tileDictionary[row[i].representedByID].charID, tileDictionary[row[i].representedByID].colorID);
+                    break;
                 }
-                rowCount++;
+
+                if (mapObject.tileMap[rowCount] != null)
+                for(int i = beginX; i < mapObject.tileMap[rowCount].Length; i++)
+                {
+                        if (i == maxColumn+beginX) break;
+                        Console.SetCursorPosition(mapFirstXPosition+i-beginX, mapFirstYPosition+rowCount-beginY);
+                        PrintTile(tileDictionary[mapObject.tileMap[rowCount][i].representedByID].charID, tileDictionary[mapObject.tileMap[rowCount][i].representedByID].colorID);
+                }
                 Console.SetCursorPosition(mapFirstXPosition, mapFirstYPosition+rowCount);
             }
             Console.SetCursorPosition(prevX, prevY);
@@ -68,7 +103,7 @@ namespace Rogal_na_KaCu
         {
             int prevX = Console.CursorLeft;
             int prevY = Console.CursorTop;
-            Console.SetCursorPosition(posX+1+mapFirstXPosition, posY+mapFirstYPosition);
+            Console.SetCursorPosition(posX+1+mapFirstXPosition-mapCurrentFirstX, posY+mapFirstYPosition-mapCurrentFirstY);
             Console.Write("\b");
             PrintTile(tileDictionary[mapObject.tileMap[posY][posX].representedByID].charID, tileDictionary[mapObject.tileMap[posY][posX].representedByID].colorID);
             Console.SetCursorPosition(prevX, prevY);
@@ -76,7 +111,7 @@ namespace Rogal_na_KaCu
         
         
 
-        public void PrintTile(int charID, int color)
+        private void PrintTile(int charID, int color)
         {
             switch (color)
             {
@@ -120,6 +155,20 @@ namespace Rogal_na_KaCu
             for(int i = 0; i < number; i++)
             {
                 Console.Write(charDictionary[character]);
+            }
+        }
+
+        private void CleanMap()
+        {
+            int prevX = Console.CursorLeft;
+            int prevY = Console.CursorTop;
+            Console.SetCursorPosition(mapFirstXPosition, mapFirstYPosition);
+            for(int rowCount = 0; rowCount < maxRow; rowCount++)
+            {
+                for(int columnCount = 0; columnCount < maxColumn; columnCount++)
+                {
+                    PrintTile(0, 0);
+                }
             }
         }
     }

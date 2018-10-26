@@ -31,8 +31,8 @@ namespace Rogal_na_KaCu
         public Map LoadMap(string name="1.txt")
         {
             currentMap = new Map();
-            int mapRowLimit=15;
-            int mapColumnLimit = 40;
+            int mapRowLimit=50;
+            int mapColumnLimit = 100;
             int[][] intMap = new int[mapRowLimit][];
             string line;
             System.IO.StreamReader file = new System.IO.StreamReader("maps/"+name);

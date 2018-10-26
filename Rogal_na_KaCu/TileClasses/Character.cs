@@ -25,7 +25,7 @@ namespace Rogal_na_KaCu
             passable = false;
         }
 
-        public void SetCurrentMap(Map crMap)
+        public virtual void SetCurrentMap(Map crMap)
         {
             currentMap = crMap;
         }

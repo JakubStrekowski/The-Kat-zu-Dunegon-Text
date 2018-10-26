@@ -9,6 +9,8 @@ namespace Rogal_na_KaCu
     class Hero : Character
     {
         List<Consumable> equipment;
+        public int currentCenterPositionX;
+        public int currentCenterPositionY;
 
         public Hero(int id, int posX, int posY): base(id, posX,posY)
         {
@@ -16,6 +18,8 @@ namespace Rogal_na_KaCu
             passable = false;
             attack = 1;
             armor = 1;
+            int currentCenterPositionX=posX;
+            int currentCenterPositionY=posY;
         }
 
         public void Move(int direction) //0 up, 1 down, 2 right, 3 left
@@ -31,7 +35,10 @@ namespace Rogal_na_KaCu
                     {
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionY = positionY - 1;
-                        
+                        if (isNearBorder())
+                        {
+                            currentMap.MoveFocus(this);
+                        }
                     }
                     break;
                 case 1:
@@ -40,7 +47,10 @@ namespace Rogal_na_KaCu
                     {
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionY = positionY + 1;
-
+                        if (isNearBorder())
+                        {
+                            currentMap.MoveFocus(this);
+                        }
                     }
                     break;
                 case 2:
@@ -49,7 +59,10 @@ namespace Rogal_na_KaCu
                     {
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionX = positionX + 1;
-
+                        if (isNearBorder())
+                        {
+                            currentMap.MoveFocus(this);
+                        }
                     }
                     break;
                 case 3:
@@ -58,10 +71,29 @@ namespace Rogal_na_KaCu
                     {
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionX = positionX - 1;
-
+                        if (isNearBorder())
+                        {
+                            currentMap.MoveFocus(this);
+                        }
                     }
                     break;
             }
+        }
+
+        public bool isNearBorder()
+        {
+            if (positionX - currentCenterPositionX > 28 || positionX - currentCenterPositionX < -28 || positionY - currentCenterPositionY < -5 || positionY - currentCenterPositionY > 5)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        public override void SetCurrentMap(Map crMap)
+        {
+            base.SetCurrentMap(crMap);
+            currentMap.relativeCenterX = currentCenterPositionX;
+            currentMap.relativeCenterY = currentCenterPositionY;
         }
     }
 }
