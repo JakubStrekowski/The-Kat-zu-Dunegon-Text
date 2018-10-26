@@ -14,10 +14,23 @@ namespace Rogal_na_KaCu
         }
         public String TakeInput() {
             var input = Console.ReadKey();
+            Console.Write('\b');
             switch (input.Key)
             {
                 case ConsoleKey.UpArrow: {
                         return "ArrowUp";
+                    }
+                case ConsoleKey.DownArrow:
+                    {
+                        return "ArrowDown";
+                    }
+                case ConsoleKey.LeftArrow:
+                    {
+                        return "ArrowLeft";
+                    }
+                case ConsoleKey.RightArrow:
+                    {
+                        return "ArrowRight";
                     }
                 default: return "None";
             }
