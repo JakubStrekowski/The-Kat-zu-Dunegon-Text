@@ -11,10 +11,13 @@ namespace Rogal_na_KaCu
     {
         string[] charDictionary;
         TileInfo[] tileDictionary;
+        int mapFirstXPosition = 24;
+        int mapFirstYPosition = 4;
+
         public DisplayConsole()
         {
             string line;
-            charDictionary = new string[20];
+            charDictionary = new string[40];
             tileDictionary = new TileInfo[20];
             System.IO.StreamReader dictFile = new System.IO.StreamReader("display/intToCharTranslator.txt");
             while ((line = dictFile.ReadLine()) != null)
@@ -43,15 +46,18 @@ namespace Rogal_na_KaCu
         public void DisplayWindow(Map mapObject)
         {
             Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(mapFirstXPosition, mapFirstYPosition);
+            int rowCount = 0;
             foreach (Tile[] row in mapObject.tileMap)
             {
                 if(row!=null)
                 for(int i = 0; i < row.Length; i++)
                 {
-                        PrintTile(tileDictionary[row[i].representedByID].charID, tileDictionary[row[i].representedByID].colorID);
+                    PrintTile(tileDictionary[row[i].representedByID].charID, tileDictionary[row[i].representedByID].colorID);
                 }
                 RefreshAtPosition(mapObject, 2, 0);
-                Console.Write('\n');
+                rowCount++;
+                Console.SetCursorPosition(mapFirstXPosition, mapFirstYPosition+rowCount);
             }
         }
 
@@ -87,8 +93,30 @@ namespace Rogal_na_KaCu
                 case 14: Console.ForegroundColor = ConsoleColor.DarkYellow; break;
                 case 15: Console.ForegroundColor = ConsoleColor.Black; break;
             }
-            Console.Write(charDictionary[charID]);
+            Console.Write('\b'+charDictionary[charID]);
             Console.ForegroundColor = ConsoleColor.White; 
+        }
+
+        public void DrawFrame() //max column length = 119
+        {
+            int currentRow=0;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(0, currentRow);
+            string line;
+            System.IO.StreamReader frameFile = new System.IO.StreamReader("display/frameUI.txt");
+            while ((line = frameFile.ReadLine()) != null)
+            {
+                Console.WriteLine(line);
+            }
+            frameFile.Close();
+        }
+
+        private void PrintNumberOfTimes(int number, int character)
+        {
+            for(int i = 0; i < number; i++)
+            {
+                Console.Write(charDictionary[character]);
+            }
         }
     }
 }
