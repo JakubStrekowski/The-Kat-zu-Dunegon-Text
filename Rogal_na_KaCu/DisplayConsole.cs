@@ -14,7 +14,7 @@ namespace Rogal_na_KaCu
         public DisplayConsole()
         {
             string line;
-            charDictionary = new string[20];
+            charDictionary = new string[40];
             tileDictionary = new TileInfo[20];
             System.IO.StreamReader dictFile = new System.IO.StreamReader("display/intToCharTranslator.txt");
             while ((line = dictFile.ReadLine()) != null)

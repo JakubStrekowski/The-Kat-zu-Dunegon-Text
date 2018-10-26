@@ -1,0 +1,7 @@
+0 0 Floor
+1 0 Wall
+3 13 Hero
+3 1 Skeleton
+9 1 Door
+10 13 Coin
+4 6 Zombie
