@@ -13,6 +13,8 @@ namespace Rogal_na_KaCu
 
         }
         public String TakeInput() {
+            while (Console.KeyAvailable)
+                Console.ReadKey(true);
             var input = Console.ReadKey();
             Console.Write('\b');
             switch (input.Key)

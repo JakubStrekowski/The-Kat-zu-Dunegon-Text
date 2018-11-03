@@ -95,34 +95,38 @@ namespace Rogal_na_KaCu
             bool heroAlife = true;
             while (heroAlife)
             {
-                ResolveInput(input.TakeInput());
-                ResolveTurn();
+                if (ResolveInput(input.TakeInput()))
+                {
+                    ResolveTurn();
+                }
+                
             }
         }
 
-        public void ResolveInput(String inputCommand)
+        public bool ResolveInput(String inputCommand)
         {
             switch (inputCommand) {
                 case "ArrowUp":
                     {
                         hero.Move(0);
                     }
-                    break;
+                    return true;
                 case "ArrowDown":
                     {
                         hero.Move(1);
                     }
-                    break;
+                    return true;
                 case "ArrowRight":
                     {
                         hero.Move(2);
                     }
-                    break;
+                    return true;
                 case "ArrowLeft":
                     {
                         hero.Move(3);
                     }
-                    break;
+                    return true;
+                default: return false;
             }
         }
 

@@ -22,7 +22,7 @@ namespace Rogal_na_KaCu
         {
             int targetPositionX = positionX;
             int targetPositionY = positionY;
-            Thread.Sleep(500);
+            Thread.Sleep(200);
             switch (direction)
             {
                 case 0:
