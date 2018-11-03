@@ -8,7 +8,7 @@ namespace Rogal_na_KaCu.TileClasses
 {
     class Wall:Tile
     {
-        public Wall(int id, int posX, int posY) : base(id, posX, posY)
+        public Wall(int id, int posX, int posY, Map mp) : base(id, posX, posY, mp)
         {
             passable = false;
         }

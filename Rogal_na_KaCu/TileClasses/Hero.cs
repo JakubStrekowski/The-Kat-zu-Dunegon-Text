@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rogal_na_KaCu
 {
-    class Hero : Character
+    public class Hero : Character
     {
         List<Consumable> equipment;
         public int currentCenterPositionX;
@@ -15,7 +15,7 @@ namespace Rogal_na_KaCu
         public Weapon currentWeapon;
         public Armor currentArmor;
 
-        public Hero(int id, int posX, int posY): base(id, posX,posY)
+        public Hero(int id, int posX, int posY,Map mp): base(id, posX,posY, mp)
         {
             name = "Jacopo";
             hp = 6;

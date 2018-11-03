@@ -7,21 +7,28 @@ using Rogal_na_KaCu.TileClasses;
 
 namespace Rogal_na_KaCu
 {
-   abstract class Character:Tile
+    public abstract class Character:Tile
     {
         public int hp;
         protected int attack;
         protected int armor;
-        protected Map currentMap;
         public Tile standingOnTile;
 
-        void GetDmg() { }
-        void Attack() { }
-        void Die() { }
-
-        public Character(int id, int posX, int posY) : base(id, posX, posY)
+        public virtual void GetDmg(int value)
         {
-            standingOnTile = TileFactory.Get(0, posX, posY);
+            hp = hp - (value - armor);
+            if (hp <= 0) Die();
+        }
+
+        void Attack() { }
+
+        protected virtual void Die() {
+            currentMap.DestroyCharacter(positionX, positionY);
+        }
+
+        public Character(int id, int posX, int posY, Map mp) : base(id, posX, posY, mp)
+        {
+            standingOnTile = TileFactory.Get(0, posX, posY, mp);
             passable = false;
         }
 

@@ -11,7 +11,7 @@ namespace Rogal_na_KaCu
 
        public void UseEffect() { }
 
-        public Consumable(int id, int posX, int posY) : base(id, posX, posY)
+        public Consumable(int id, int posX, int posY, Map mp) : base(id, posX, posY, mp)
         {
 
         }

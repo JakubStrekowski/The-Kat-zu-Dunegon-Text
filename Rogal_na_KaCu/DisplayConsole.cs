@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Rogal_na_KaCu
 {
-    class DisplayConsole
+   public class DisplayConsole
     {
         string[] charDictionary;
         TileInfo[] tileDictionary;

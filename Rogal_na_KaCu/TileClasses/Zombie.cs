@@ -8,15 +8,63 @@ namespace Rogal_na_KaCu
 {
     class Zombie : Enemy
     {
-
-        public Zombie(int id, int posX, int posY) : base(id, posX, posY)
+        bool directionHorizontal; //does zombie move left-right or up-down
+        bool moveDirectionUR; //if true, moves Up/right
+        Random rnd;
+        public Zombie(int id, int posX, int posY,Map mp) : base(id, posX, posY, mp)
         {
-
+            rnd = new Random();
+            hp = 3;
+            attack = 1;
+            int random = rnd.Next(0, 1);
+            if (random == 0)
+            {
+                directionHorizontal = true;
+            }
+            else
+            {
+                directionHorizontal = false;
+            }
         }
+
         public override void MovementBehaviour()
         {
-            throw new NotImplementedException();
+            if (directionHorizontal)
+            {
+                if (moveDirectionUR)
+                {
+                    if (!moveDirection(2))
+                    {
+                        moveDirectionUR = !moveDirectionUR;
+                    }
+                }
+                else
+                {
+                    if (!moveDirection(3))
+                    {
+                        moveDirectionUR = !moveDirectionUR;
+                    }
+                }
+            }
+            else
+            {
+                if (moveDirectionUR)
+                {
+                    if (!moveDirection(0))
+                    {
+                        moveDirectionUR = !moveDirectionUR;
+                    }
+                }
+                else
+                {
+                    if(!moveDirection(1))
+                    {
+                        moveDirectionUR = !moveDirectionUR;
+                    }
+                }
+            }
         }
+        
 
     }
 }

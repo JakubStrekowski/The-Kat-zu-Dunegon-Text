@@ -12,8 +12,10 @@ namespace Rogal_na_KaCu
         {
             throw new NotImplementedException();
         }
-        public Skeleton(int id, int posX, int posY) : base(id, posX, posY)
+        public Skeleton(int id, int posX, int posY, Map mp) : base(id, posX, posY, mp)
         {
+            hp = 2;
+            attack = 1;
 
         }
     }

@@ -7,19 +7,21 @@ using Rogal_na_KaCu.TileClasses;
 
 namespace Rogal_na_KaCu
 {
-    class Map
+    public class Map
     {
         DisplayConsole display;
         public int relativeCenterX=0;
         public int relativeCenterY=0;
         public Tile[][] tileMap;
+        GameHandler gameMaster;
         public Map()
         {
 
         }
 
-        public Map(int[][] intMap,DisplayConsole display)
+        public Map(int[][] intMap,DisplayConsole display,GameHandler gm)
         {
+            gameMaster = gm;
             int mapRowLimit = 50;
             int mapColumnLimit = 100;
             this.display = display;
@@ -32,7 +34,11 @@ namespace Rogal_na_KaCu
                 foreach(int integer in intRow)
                 {
                     
-                    this.tileMap[rowCounter][columnCounter] = TileFactory.Get(integer, columnCounter, rowCounter);
+                    this.tileMap[rowCounter][columnCounter] = TileFactory.Get(integer, columnCounter, rowCounter,this);
+                    if (integer == 6)
+                    {
+                        gameMaster.AddEnemyToList((Enemy)this.tileMap[rowCounter][columnCounter]);
+                    }
                     columnCounter++;
                 }
                 rowCounter++;
@@ -86,6 +92,14 @@ namespace Rogal_na_KaCu
         public void SendUIInfo(int valueID, String value)
         {
             display.SetStatUI(valueID, value);
+        }
+
+        public void DestroyCharacter(int posX, int posY)
+        {
+            Character chara = (Character)tileMap[posY][posX];
+            Tile temporary = chara.standingOnTile;
+            tileMap[posY][posX] = temporary;
+            display.RefreshFromMapAtPosition(this, posX, posY);
         }
     }
 }

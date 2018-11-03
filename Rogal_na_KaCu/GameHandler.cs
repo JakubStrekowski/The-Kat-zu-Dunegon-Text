@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Rogal_na_KaCu
 {
-    class GameHandler
+   public class GameHandler
     {
         int floorNumber;
         Map currentMap;
@@ -17,6 +17,7 @@ namespace Rogal_na_KaCu
         Hero hero;
         public GameHandler(DisplayConsole display)
         {
+            enemiesOnMap = new List<Enemy>();
             this.display = display;
             input = new Input();
             floorNumber = 1;
@@ -50,7 +51,7 @@ namespace Rogal_na_KaCu
                     intRow[counter] = int.Parse(st);
                     if (intRow[counter] == 2)
                     {
-                        hero = new Hero(2,counter, rowCounter);
+                        hero = new Hero(2,counter, rowCounter,currentMap);
                     }
                     counter++;
                 }
@@ -78,7 +79,7 @@ namespace Rogal_na_KaCu
                     
                 }
             file.Close();
-            Map newMap = new Map(intMap,display);
+            Map newMap = new Map(intMap,display,this);
             currentMap = newMap;
             hero.SetCurrentMap(newMap);
             ChangeFloorNumber(1);
@@ -95,6 +96,7 @@ namespace Rogal_na_KaCu
             while (heroAlife)
             {
                 ResolveInput(input.TakeInput());
+                ResolveTurn();
             }
         }
 
@@ -128,6 +130,11 @@ namespace Rogal_na_KaCu
         {
             floorNumber = value;
             display.SetStatUI(0, floorNumber.ToString());
+        }
+
+        public void AddEnemyToList(Enemy toAdd)
+        {
+            enemiesOnMap.Add(toAdd);
         }
     }
 }
