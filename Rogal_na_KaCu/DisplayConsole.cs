@@ -24,7 +24,10 @@ namespace Rogal_na_KaCu
         private string armorName;
         private List<string> items;
         private List<string> LogsList;
+        private int logCurrentPosition = 0;
         private int logSize = 5;
+        private int logLastID = 0;
+        private bool writeGreyLog = false;
 
         public DisplayConsole()
         {
@@ -242,6 +245,7 @@ namespace Rogal_na_KaCu
                     }
                     Console.Write(value);
                     break;
+
                 case 4:
                     armorName = value;
                     int startPosition4 = 6;
@@ -253,6 +257,7 @@ namespace Rogal_na_KaCu
                     }
                     Console.Write(value);
                     break;
+
                 case 5:
                     break;
                 default: break;
@@ -262,7 +267,46 @@ namespace Rogal_na_KaCu
 
         public void AddLog(String log)
         {
-            
+            if (logCurrentPosition == 0)
+            {
+                writeGreyLog = !writeGreyLog;
+            }
+            LogsList.Add(logLastID.ToString() + ".     " + log);
+            logLastID = (logLastID + 1) % 1000;
+            PrintLastLog();
+            logCurrentPosition = (logCurrentPosition + 1) % logSize;
+        }
+        
+        private void PrintLastLog()
+        {
+            int prevX = Console.CursorLeft;
+            int prevY = Console.CursorTop;
+            CleanLogLine(logCurrentPosition);
+            for(int i=0;i< LogsList[LogsList.Count-1].Length; i++)
+            {
+                Console.SetCursorPosition(3, 21 + logCurrentPosition);
+                Console.Write('\b');
+            }
+            if (writeGreyLog)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+            }
+            Console.Write(LogsList[LogsList.Count-1]);
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.SetCursorPosition(prevX, prevY);
+        }
+
+        private void CleanLogLine(int whichLine)
+        {
+            int prevX = Console.CursorLeft;
+            int prevY = Console.CursorTop;
+            for (int i = 0;i<110; i++)
+            {
+                Console.SetCursorPosition(3+i, 21 + logCurrentPosition);
+                Console.Write('\b');
+                Console.Write(" ");
+            }
+            Console.SetCursorPosition(prevX, prevY);
         }
     }
 }

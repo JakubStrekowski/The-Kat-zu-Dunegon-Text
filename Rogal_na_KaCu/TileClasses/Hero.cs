@@ -50,6 +50,7 @@ namespace Rogal_na_KaCu
                         {
                             Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 0);
                             enm.GetDmg(attack);
+                            currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
                         }
                     }
                     break;
@@ -71,6 +72,7 @@ namespace Rogal_na_KaCu
                         {
                             Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 1);
                             enm.GetDmg(attack);
+                            currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
                         }
                     }
                     break;
@@ -91,6 +93,7 @@ namespace Rogal_na_KaCu
                         {
                             Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 2);
                             enm.GetDmg(attack);
+                            currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
                         }
                     }
                     break;
@@ -111,6 +114,7 @@ namespace Rogal_na_KaCu
                         {
                             Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 3);
                             enm.GetDmg(attack);
+                            currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
                         }
                     }
                     break;

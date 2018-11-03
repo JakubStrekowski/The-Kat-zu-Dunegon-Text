@@ -102,5 +102,11 @@ namespace Rogal_na_KaCu
             tileMap[posY][posX] = temporary;
             display.RefreshFromMapAtPosition(this, posX, posY);
         }
+
+        public void SendLog(String message)
+        {
+            display.AddLog(message);
+
+        }
     }
 }

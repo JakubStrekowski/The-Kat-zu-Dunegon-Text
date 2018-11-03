@@ -12,6 +12,7 @@ namespace Rogal_na_KaCu
         public int hp;
         protected int attack;
         protected int armor;
+        public string name;
         public Tile standingOnTile;
 
         public virtual void GetDmg(int value)

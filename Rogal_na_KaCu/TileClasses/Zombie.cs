@@ -13,6 +13,7 @@ namespace Rogal_na_KaCu
         Random rnd;
         public Zombie(int id, int posX, int posY,Map mp) : base(id, posX, posY, mp)
         {
+            name = "Zombie";
             rnd = new Random();
             hp = 3;
             attack = 1;
