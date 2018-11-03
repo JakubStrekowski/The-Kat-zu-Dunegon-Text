@@ -6,16 +6,24 @@ using System.Threading.Tasks;
 
 namespace Rogal_na_KaCu
 {
-    class Hero : Character
+    public class Hero : Character
     {
         List<Consumable> equipment;
+        public int currentCenterPositionX;
+        public int currentCenterPositionY;
+        public String name;
+        public Weapon currentWeapon;
+        public Armor currentArmor;
 
-        public Hero(int id, int posX, int posY): base(id, posX,posY)
+        public Hero(int id, int posX, int posY,Map mp): base(id, posX,posY, mp)
         {
+            name = "Jacopo";
             hp = 6;
             passable = false;
             attack = 1;
-            armor = 1;
+            armor = 0;
+            int currentCenterPositionX=posX;
+            int currentCenterPositionY=posY;
         }
 
         public void Move(int direction) //0 up, 1 down, 2 right, 3 left
@@ -31,7 +39,19 @@ namespace Rogal_na_KaCu
                     {
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionY = positionY - 1;
-                        
+                        if (isNearBorder())
+                        {
+                            currentMap.MoveFocus(this);
+                        }
+                    }
+                    else
+                    {
+                        if(currentMap.GiveNeighbor(positionX, positionY, 0) is Enemy)
+                        {
+                            Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 0);
+                            enm.GetDmg(attack);
+                            currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
+                        }
                     }
                     break;
                 case 1:
@@ -40,7 +60,20 @@ namespace Rogal_na_KaCu
                     {
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionY = positionY + 1;
+                        if (isNearBorder())
+                        {
+                            currentMap.MoveFocus(this);
+                        }
 
+                    }
+                    else
+                    {
+                        if (currentMap.GiveNeighbor(positionX, positionY, 1) is Enemy)
+                        {
+                            Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 1);
+                            enm.GetDmg(attack);
+                            currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
+                        }
                     }
                     break;
                 case 2:
@@ -49,7 +82,19 @@ namespace Rogal_na_KaCu
                     {
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionX = positionX + 1;
-
+                        if (isNearBorder())
+                        {
+                            currentMap.MoveFocus(this);
+                        }
+                    }
+                    else
+                    {
+                        if (currentMap.GiveNeighbor(positionX, positionY, 2) is Enemy)
+                        {
+                            Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 2);
+                            enm.GetDmg(attack);
+                            currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
+                        }
                     }
                     break;
                 case 3:
@@ -58,9 +103,67 @@ namespace Rogal_na_KaCu
                     {
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionX = positionX - 1;
-
+                        if (isNearBorder())
+                        {
+                            currentMap.MoveFocus(this);
+                        }
+                    }
+                    else
+                    {
+                        if (currentMap.GiveNeighbor(positionX, positionY, 3) is Enemy)
+                        {
+                            Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 3);
+                            enm.GetDmg(attack);
+                            currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
+                        }
                     }
                     break;
+            }
+        }
+
+        public bool isNearBorder()
+        {
+            if (positionX - currentCenterPositionX > 28 || positionX - currentCenterPositionX < -28 || positionY - currentCenterPositionY < -5 || positionY - currentCenterPositionY > 5)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        public override void SetCurrentMap(Map crMap)
+        {
+            base.SetCurrentMap(crMap);
+            currentMap.relativeCenterX = currentCenterPositionX;
+            currentMap.relativeCenterY = currentCenterPositionY;
+        }
+
+        public void GetDmg(int value)
+        {
+            hp = hp - (value - armor);
+            currentMap.SendUIInfo(2, hp.ToString());
+        }
+
+        public String ReturnWeaponName()
+        {
+            if (currentWeapon == null)
+            {
+                return "Dagger";
+            }
+            else
+            {
+                return currentWeapon.name;
+            }
+        }
+
+        public String ReturnArmorName()
+        {
+            if (currentArmor == null)
+            {
+                return "No Armor";
+            }
+            else
+            {
+                return currentArmor.name;
             }
         }
     }

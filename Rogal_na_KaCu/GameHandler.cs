@@ -7,7 +7,7 @@ using System.IO;
 
 namespace Rogal_na_KaCu
 {
-    class GameHandler
+   public class GameHandler
     {
         int floorNumber;
         Map currentMap;
@@ -15,10 +15,14 @@ namespace Rogal_na_KaCu
         Input input;
         List<Enemy> enemiesOnMap;
         Hero hero;
+        int whatInControl = 0; //0-hero, 1-game menu
+
         public GameHandler(DisplayConsole display)
         {
+            enemiesOnMap = new List<Enemy>();
             this.display = display;
             input = new Input();
+            floorNumber = 1;
         }
 
         void ResolveTurn() {
@@ -27,12 +31,13 @@ namespace Rogal_na_KaCu
                 enemy.MovementBehaviour();
             }
         }
+        
 
         public Map LoadMap(string name="1.txt")
         {
             currentMap = new Map();
-            int mapRowLimit=15;
-            int mapColumnLimit = 40;
+            int mapRowLimit=50;
+            int mapColumnLimit = 100;
             int[][] intMap = new int[mapRowLimit][];
             string line;
             System.IO.StreamReader file = new System.IO.StreamReader("maps/"+name);
@@ -48,7 +53,7 @@ namespace Rogal_na_KaCu
                     intRow[counter] = int.Parse(st);
                     if (intRow[counter] == 2)
                     {
-                        hero = new Hero(2,counter, rowCounter);
+                        hero = new Hero(2,counter, rowCounter,currentMap);
                     }
                     counter++;
                 }
@@ -76,45 +81,102 @@ namespace Rogal_na_KaCu
                     
                 }
             file.Close();
-            Map newMap = new Map(intMap,display);
+            Map newMap = new Map(intMap,display,this);
             currentMap = newMap;
             hero.SetCurrentMap(newMap);
+            ChangeFloorNumber(1);
+            display.SetStatUI(1, hero.name);
+            display.SetStatUI(2, hero.hp.ToString());
+            display.SetStatUI(3, hero.ReturnWeaponName());
+            display.SetStatUI(4, hero.ReturnArmorName());
             return newMap;
         }
 
         public void PlayInMap()
         {
+            whatInControl = 0;
             bool heroAlife = true;
             while (heroAlife)
             {
-                ResolveInput(input.TakeInput());
+                if (ResolveInput(input.TakeInput()))
+                {
+                    ResolveTurn();
+                }
+                
             }
         }
 
-        public void ResolveInput(String inputCommand)
+        public bool ResolveInput(String inputCommand)
         {
-            switch (inputCommand) {
+            if (whatInControl == 0)
+                switch (inputCommand) {
+                
                 case "ArrowUp":
                     {
                         hero.Move(0);
                     }
-                    break;
+                    return true;
                 case "ArrowDown":
                     {
                         hero.Move(1);
                     }
-                    break;
+                    return true;
                 case "ArrowRight":
                     {
                         hero.Move(2);
                     }
-                    break;
+                    return true;
                 case "ArrowLeft":
                     {
                         hero.Move(3);
                     }
-                    break;
+                    return true;
+                case "Q":
+                    {
+                        whatInControl = 1;
+                            display.DisplayMenu();
+                    }
+                    return false;
+                default: return false;
             }
+            if (whatInControl == 1)
+            {
+                switch (inputCommand)
+                {
+                    case "E":
+                        {
+                            display.AddLog("Leaving game");   //tbd
+                            break;
+                        }
+                    case "Escape":
+                    case "C":
+                        {
+                            currentMap.MoveFocus(hero);
+                            whatInControl = 0;
+                            break;
+                        }
+                    default:
+                        break;
+                }
+                return false;
+            }
+            else return false;
+        }
+
+        private void ChangeFloorNumber(int value)
+        {
+            floorNumber = value;
+            display.SetStatUI(0, floorNumber.ToString());
+        }
+
+        public void AddEnemyToList(Enemy toAdd)
+        {
+            enemiesOnMap.Add(toAdd);
+        }
+
+        public void RemoveEnemyFromList(Enemy toRemove)
+        {
+            enemiesOnMap.Remove(toRemove);
         }
     }
 }

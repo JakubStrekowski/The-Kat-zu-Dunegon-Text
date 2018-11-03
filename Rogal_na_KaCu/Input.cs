@@ -13,6 +13,8 @@ namespace Rogal_na_KaCu
 
         }
         public String TakeInput() {
+            while (Console.KeyAvailable)
+                Console.ReadKey(true);
             var input = Console.ReadKey();
             Console.Write('\b');
             switch (input.Key)
@@ -31,6 +33,22 @@ namespace Rogal_na_KaCu
                 case ConsoleKey.RightArrow:
                     {
                         return "ArrowRight";
+                    }
+                case ConsoleKey.Q:
+                    {
+                        return "Q";
+                    }
+                case ConsoleKey.C:
+                    {
+                        return "C";
+                    }
+                case ConsoleKey.Escape:
+                    {
+                        return "Escape";
+                    }
+                case ConsoleKey.E:
+                    {
+                        return "E";
                     }
                 default: return "None";
             }

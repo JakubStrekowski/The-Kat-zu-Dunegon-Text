@@ -7,19 +7,23 @@ using Rogal_na_KaCu.TileClasses;
 
 namespace Rogal_na_KaCu
 {
-    class Map
+    public class Map
     {
         DisplayConsole display;
+        public int relativeCenterX=0;
+        public int relativeCenterY=0;
         public Tile[][] tileMap;
+        GameHandler gameMaster;
         public Map()
         {
 
         }
 
-        public Map(int[][] intMap,DisplayConsole display)
+        public Map(int[][] intMap,DisplayConsole display,GameHandler gm)
         {
-            int mapRowLimit = 15;
-            int mapColumnLimit = 40;
+            gameMaster = gm;
+            int mapRowLimit = 50;
+            int mapColumnLimit = 100;
             this.display = display;
             this.tileMap = new Tile[mapRowLimit][];
             int rowCounter = 0;
@@ -30,7 +34,11 @@ namespace Rogal_na_KaCu
                 foreach(int integer in intRow)
                 {
                     
-                    this.tileMap[rowCounter][columnCounter] = TileFactory.Get(integer, columnCounter, rowCounter);
+                    this.tileMap[rowCounter][columnCounter] = TileFactory.Get(integer, columnCounter, rowCounter,this);
+                    if (integer == 6 || integer==3)
+                    {
+                        gameMaster.AddEnemyToList((Enemy)this.tileMap[rowCounter][columnCounter]);
+                    }
                     columnCounter++;
                 }
                 rowCounter++;
@@ -70,6 +78,35 @@ namespace Rogal_na_KaCu
                 case 3: return tileMap[posY][posX-1];
                 default:return tileMap[posY][posX];
             }
+        }
+
+        public void MoveFocus(Hero hero)
+        {
+            relativeCenterX = hero.positionX;
+            relativeCenterY = hero.positionY;
+            hero.currentCenterPositionX=hero.positionX;
+            hero.currentCenterPositionY=hero.positionY;
+            display.DisplayMap(this, hero.positionX, hero.positionY);
+        }
+        
+        public void SendUIInfo(int valueID, String value)
+        {
+            display.SetStatUI(valueID, value);
+        }
+
+        public void DestroyCharacter(int posX, int posY)
+        {
+            Character chara = (Character)tileMap[posY][posX];
+            Tile temporary = chara.standingOnTile;
+            gameMaster.RemoveEnemyFromList((Enemy)chara);
+            tileMap[posY][posX] = temporary;
+            display.RefreshFromMapAtPosition(this, posX, posY);
+        }
+
+        public void SendLog(String message)
+        {
+            display.AddLog(message);
+
         }
     }
 }

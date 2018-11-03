@@ -8,19 +8,26 @@ namespace Rogal_na_KaCu.TileClasses
 {
     public static class TileFactory
     {
-          public static Tile Get(int id, int posX, int posY)
+          public static Tile Get(int id, int posX, int posY,Map mp)
            {
                 switch (id)
                 {
                     case 0:
-                            return new EmptyTile(id, posX, posY);
+                            return new EmptyTile(id, posX, posY,mp);
                     case 1:
-                        return new Wall(id, posX,posY);
+                        return new Wall(id, posX,posY, mp);
                     case 2:
-                        return new Hero(id, posX, posY);
+                        return new Hero(id, posX, posY, mp);
                     case 3:
-                    default:
-                        return new EmptyTile(id, posX, posY);
+                        return new Skeleton(id, posX, posY, mp);
+                    case 4:
+                        return new EmptyTile(id, posX, posY, mp); //tbd
+                    case 5:
+                        return new EmptyTile(id, posX, posY, mp); //tbd
+                    case 6:
+                        return new Zombie(id, posX, posY, mp); 
+                default:
+                        return new EmptyTile(id, posX, posY, mp);
             }
            }
       
