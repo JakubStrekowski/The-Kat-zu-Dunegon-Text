@@ -35,7 +35,7 @@ namespace Rogal_na_KaCu
                 {
                     
                     this.tileMap[rowCounter][columnCounter] = TileFactory.Get(integer, columnCounter, rowCounter,this);
-                    if (integer == 6)
+                    if (integer == 6 || integer==3)
                     {
                         gameMaster.AddEnemyToList((Enemy)this.tileMap[rowCounter][columnCounter]);
                     }
