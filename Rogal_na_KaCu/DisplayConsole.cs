@@ -29,9 +29,11 @@ namespace Rogal_na_KaCu
         private int logLastID = 0;
         private bool writeGreyLog = false;
         string[] gameMenu;
+        string[] deathMenu;
 
         public DisplayConsole()
         {
+            deathMenu = new string[19];
             gameMenu = new string[7];
             LogsList = new List<string>();
             string line;
@@ -69,6 +71,16 @@ namespace Rogal_na_KaCu
                 counter++;
             }
             gameMenuFile.Close();
+
+            System.IO.StreamReader deathMenuFile = new System.IO.StreamReader("display/YouDied.txt");
+            counter = 0;
+            while ((line = deathMenuFile.ReadLine()) != null)
+            {
+                deathMenu[counter] = line;
+                deathMenu[counter].Replace('\n', '\0');
+                counter++;
+            }
+            deathMenuFile.Close();
         }
 
         public void DisplayMap(Map mapObject, int centerX, int centerY)
@@ -149,7 +161,27 @@ namespace Rogal_na_KaCu
             }
             Console.SetCursorPosition(prevX, prevY);
         }
+
+        public void DisplayDeathMenu()
+        {
+            ResetLogVariables();
+            Console.Clear();
+            int prevX = Console.CursorLeft;
+            int prevY = Console.CursorTop;
+            Console.SetCursorPosition(0, 0);
+            for(int j = 0; j < 19; j++)
+            {
+                Console.WriteLine(deathMenu[j]);
+            }
+        }
         
+        private void ResetLogVariables()
+        {
+            LogsList.Clear();
+            logCurrentPosition = 0;
+            logLastID = 0;
+            writeGreyLog = false;
+    }
 
         private void PrintTile(int charID, int color)
         {
@@ -304,6 +336,10 @@ namespace Rogal_na_KaCu
             logLastID = (logLastID + 1) % 1000;
             PrintLastLog();
             logCurrentPosition = (logCurrentPosition + 1) % logSize;
+            if (LogsList.Count > 99)
+            {
+                LogsList.RemoveAt(0);
+            }
         }
         
         private void PrintLastLog()

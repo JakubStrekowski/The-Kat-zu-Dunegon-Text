@@ -13,6 +13,7 @@ namespace Rogal_na_KaCu
         public int relativeCenterX=0;
         public int relativeCenterY=0;
         public Tile[][] tileMap;
+        private bool dontShow;
         GameHandler gameMaster;
         public Map()
         {
@@ -21,6 +22,7 @@ namespace Rogal_na_KaCu
 
         public Map(int[][] intMap,DisplayConsole display,GameHandler gm)
         {
+            dontShow = false;
             gameMaster = gm;
             int mapRowLimit = 50;
             int mapColumnLimit = 100;
@@ -62,8 +64,11 @@ namespace Rogal_na_KaCu
             tileMap[targetY][targetX] = tileMap[sourceY][sourceX];
             tileMap[sourceY][sourceX] = chara.standingOnTile;
             chara.standingOnTile = temporary;
-            display.RefreshFromMapAtPosition(this, sourceX, sourceY);
-            display.RefreshFromMapAtPosition(this, targetX, targetY);
+            if (!dontShow)
+            {
+                display.RefreshFromMapAtPosition(this, sourceX, sourceY);
+                display.RefreshFromMapAtPosition(this, targetX, targetY);
+            }
         }
 
         public Tile GiveNeighbor(int posX, int posY, int direction) //direction going: 0-up, 1-down, 2-right, 3-left
@@ -105,8 +110,15 @@ namespace Rogal_na_KaCu
 
         public void SendLog(String message)
         {
+            if(!dontShow)
             display.AddLog(message);
+        }
 
+        public void HeroDied()
+        {
+            dontShow = true;
+            gameMaster.SetWhatInControl(2);
+            display.DisplayDeathMenu();
         }
     }
 }
