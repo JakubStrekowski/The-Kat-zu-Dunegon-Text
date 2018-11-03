@@ -21,7 +21,7 @@ namespace Rogal_na_KaCu
             hp = 6;
             passable = false;
             attack = 1;
-            armor = 1;
+            armor = 0;
             int currentCenterPositionX=posX;
             int currentCenterPositionY=posY;
         }
@@ -137,7 +137,7 @@ namespace Rogal_na_KaCu
             currentMap.relativeCenterY = currentCenterPositionY;
         }
 
-        public void TakeDamage(int value)
+        public void GetDmg(int value)
         {
             hp = hp - (value - armor);
             currentMap.SendUIInfo(2, hp.ToString());

@@ -33,6 +33,15 @@ namespace Rogal_na_KaCu
                         positionY = positionY - 1;
                         return true;
                     }
+                    else
+                    {
+                        if (currentMap.GiveNeighbor(positionX, positionY, 0) is Hero)
+                        {
+                            Hero enm = (Hero)currentMap.GiveNeighbor(positionX, positionY, 0);
+                            enm.GetDmg(attack);
+                            currentMap.SendLog(name + " hit you  for " + attack.ToString() + " damage!");
+                        }
+                    }
                     break;
                 case 1:
                     targetPositionY = targetPositionY + 1;
@@ -41,6 +50,15 @@ namespace Rogal_na_KaCu
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionY = positionY + 1;
                         return true;
+                    }
+                    else
+                    {
+                        if (currentMap.GiveNeighbor(positionX, positionY, 1) is Hero)
+                        {
+                            Hero enm = (Hero)currentMap.GiveNeighbor(positionX, positionY, 1);
+                            enm.GetDmg(attack);
+                            currentMap.SendLog(name + " hit you  for " + attack.ToString() + " damage!");
+                        }
                     }
                     break;
                 case 2:
@@ -51,6 +69,16 @@ namespace Rogal_na_KaCu
                         positionX = positionX + 1;
                         return true;
                     }
+                    else
+                    {
+                        if (currentMap.GiveNeighbor(positionX, positionY, 2) is Hero)
+                        {
+                            Hero enm = (Hero)currentMap.GiveNeighbor(positionX, positionY, 2);
+                            enm.GetDmg(attack);
+                            currentMap.SendLog(name + " hit you  for " + attack.ToString() + " damage!");
+                        }
+                    }
+                    
                     break;
                 case 3:
                     targetPositionX = targetPositionX - 1;
@@ -59,6 +87,15 @@ namespace Rogal_na_KaCu
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionX = positionX - 1;
                         return true;
+                    }
+                    else
+                    {
+                        if (currentMap.GiveNeighbor(positionX, positionY, 3) is Hero)
+                        {
+                            Hero enm = (Hero)currentMap.GiveNeighbor(positionX, positionY, 3);
+                            enm.GetDmg(attack);
+                            currentMap.SendLog(name + " hit you  for "+ attack.ToString() + " damage!");
+                        }
                     }
                     break;
             }
