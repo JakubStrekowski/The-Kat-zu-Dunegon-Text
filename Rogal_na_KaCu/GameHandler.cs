@@ -140,5 +140,10 @@ namespace Rogal_na_KaCu
         {
             enemiesOnMap.Add(toAdd);
         }
+
+        public void RemoveEnemyFromList(Enemy toRemove)
+        {
+            enemiesOnMap.Remove(toRemove);
+        }
     }
 }

@@ -23,9 +23,12 @@ namespace Rogal_na_KaCu
         private string weaponName;
         private string armorName;
         private List<string> items;
+        private List<string> LogsList;
+        private int logSize = 5;
 
         public DisplayConsole()
         {
+            LogsList = new List<string>();
             string line;
             charDictionary = new string[40];
             tileDictionary = new TileInfo[20];
@@ -255,6 +258,11 @@ namespace Rogal_na_KaCu
                 default: break;
             }
             Console.SetCursorPosition(prevX, prevY);
+        }
+
+        public void AddLog(String log)
+        {
+            
         }
     }
 }

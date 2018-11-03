@@ -98,6 +98,7 @@ namespace Rogal_na_KaCu
         {
             Character chara = (Character)tileMap[posY][posX];
             Tile temporary = chara.standingOnTile;
+            gameMaster.RemoveEnemyFromList((Enemy)chara);
             tileMap[posY][posX] = temporary;
             display.RefreshFromMapAtPosition(this, posX, posY);
         }

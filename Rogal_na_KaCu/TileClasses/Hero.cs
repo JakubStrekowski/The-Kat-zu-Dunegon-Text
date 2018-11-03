@@ -44,6 +44,14 @@ namespace Rogal_na_KaCu
                             currentMap.MoveFocus(this);
                         }
                     }
+                    else
+                    {
+                        if(currentMap.GiveNeighbor(positionX, positionY, 0) is Enemy)
+                        {
+                            Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 0);
+                            enm.GetDmg(attack);
+                        }
+                    }
                     break;
                 case 1:
                     targetPositionY = targetPositionY + 1;
@@ -54,6 +62,15 @@ namespace Rogal_na_KaCu
                         if (isNearBorder())
                         {
                             currentMap.MoveFocus(this);
+                        }
+
+                    }
+                    else
+                    {
+                        if (currentMap.GiveNeighbor(positionX, positionY, 1) is Enemy)
+                        {
+                            Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 1);
+                            enm.GetDmg(attack);
                         }
                     }
                     break;
@@ -68,6 +85,14 @@ namespace Rogal_na_KaCu
                             currentMap.MoveFocus(this);
                         }
                     }
+                    else
+                    {
+                        if (currentMap.GiveNeighbor(positionX, positionY, 2) is Enemy)
+                        {
+                            Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 2);
+                            enm.GetDmg(attack);
+                        }
+                    }
                     break;
                 case 3:
                     targetPositionX = targetPositionX - 1 ;
@@ -78,6 +103,14 @@ namespace Rogal_na_KaCu
                         if (isNearBorder())
                         {
                             currentMap.MoveFocus(this);
+                        }
+                    }
+                    else
+                    {
+                        if (currentMap.GiveNeighbor(positionX, positionY, 3) is Enemy)
+                        {
+                            Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 3);
+                            enm.GetDmg(attack);
                         }
                     }
                     break;
