@@ -34,6 +34,22 @@ namespace Rogal_na_KaCu
                     {
                         return "ArrowRight";
                     }
+                case ConsoleKey.Q:
+                    {
+                        return "Q";
+                    }
+                case ConsoleKey.C:
+                    {
+                        return "C";
+                    }
+                case ConsoleKey.Escape:
+                    {
+                        return "Escape";
+                    }
+                case ConsoleKey.E:
+                    {
+                        return "E";
+                    }
                 default: return "None";
             }
         }

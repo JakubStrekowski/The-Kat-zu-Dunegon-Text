@@ -28,9 +28,11 @@ namespace Rogal_na_KaCu
         private int logSize = 5;
         private int logLastID = 0;
         private bool writeGreyLog = false;
+        string[] gameMenu;
 
         public DisplayConsole()
         {
+            gameMenu = new string[7];
             LogsList = new List<string>();
             string line;
             charDictionary = new string[40];
@@ -44,7 +46,7 @@ namespace Rogal_na_KaCu
             }
             charDictionary[0] = " ";
             dictFile.Close();
-
+            
             System.IO.StreamReader tileDictFile = new System.IO.StreamReader("display/tileToInt.txt");
             int counter = 0;
             while ((line = tileDictFile.ReadLine()) != null)
@@ -57,6 +59,16 @@ namespace Rogal_na_KaCu
                 tileDictionary[counter].colorID = colorID;
                 counter++;
             }
+
+            System.IO.StreamReader gameMenuFile = new System.IO.StreamReader("display/gameMenuUI.txt");
+            counter = 0;
+            while ((line = gameMenuFile.ReadLine()) != null)
+            {
+                gameMenu[counter] = line;
+                gameMenu[counter].Replace('\n', '\0');
+                counter++;
+            }
+            gameMenuFile.Close();
         }
 
         public void DisplayMap(Map mapObject, int centerX, int centerY)
@@ -118,6 +130,23 @@ namespace Rogal_na_KaCu
             Console.SetCursorPosition(posX+1+mapFirstXPosition-mapCurrentFirstX, posY+mapFirstYPosition-mapCurrentFirstY);
             Console.Write("\b");
             PrintTile(tileDictionary[mapObject.tileMap[posY][posX].representedByID].charID, tileDictionary[mapObject.tileMap[posY][posX].representedByID].colorID);
+            Console.SetCursorPosition(prevX, prevY);
+        }
+
+        public void DisplayMenu()
+        {
+
+            int prevX = Console.CursorLeft;
+            int prevY = Console.CursorTop;
+            Console.SetCursorPosition(mapFirstXPosition + 1, mapFirstYPosition + 3);
+            for(int j = 0; j < 7; j++) { 
+            for(int i = 0; i < 68; i++)
+                {
+                    Console.Write('\b');
+                 }
+                Console.SetCursorPosition(mapFirstXPosition + 1, mapFirstYPosition + 3+j);
+                Console.Write(gameMenu[j]);
+            }
             Console.SetCursorPosition(prevX, prevY);
         }
         

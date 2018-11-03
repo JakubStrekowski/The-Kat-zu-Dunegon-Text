@@ -15,6 +15,8 @@ namespace Rogal_na_KaCu
         Input input;
         List<Enemy> enemiesOnMap;
         Hero hero;
+        int whatInControl = 0; //0-hero, 1-game menu
+
         public GameHandler(DisplayConsole display)
         {
             enemiesOnMap = new List<Enemy>();
@@ -92,6 +94,7 @@ namespace Rogal_na_KaCu
 
         public void PlayInMap()
         {
+            whatInControl = 0;
             bool heroAlife = true;
             while (heroAlife)
             {
@@ -105,7 +108,9 @@ namespace Rogal_na_KaCu
 
         public bool ResolveInput(String inputCommand)
         {
-            switch (inputCommand) {
+            if (whatInControl == 0)
+                switch (inputCommand) {
+                
                 case "ArrowUp":
                     {
                         hero.Move(0);
@@ -126,8 +131,36 @@ namespace Rogal_na_KaCu
                         hero.Move(3);
                     }
                     return true;
+                case "Q":
+                    {
+                        whatInControl = 1;
+                            display.DisplayMenu();
+                    }
+                    return false;
                 default: return false;
             }
+            if (whatInControl == 1)
+            {
+                switch (inputCommand)
+                {
+                    case "E":
+                        {
+                            display.AddLog("Leaving game");   //tbd
+                            break;
+                        }
+                    case "Escape":
+                    case "C":
+                        {
+                            currentMap.MoveFocus(hero);
+                            whatInControl = 0;
+                            break;
+                        }
+                    default:
+                        break;
+                }
+                return false;
+            }
+            else return false;
         }
 
         private void ChangeFloorNumber(int value)
