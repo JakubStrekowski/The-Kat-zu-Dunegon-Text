@@ -9,7 +9,7 @@ namespace Rogal_na_KaCu
 {
    abstract class Character:Tile
     {
-        protected int hp;
+        public int hp;
         protected int attack;
         protected int armor;
         protected Map currentMap;

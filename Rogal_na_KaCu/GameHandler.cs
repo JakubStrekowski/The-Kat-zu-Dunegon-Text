@@ -19,6 +19,7 @@ namespace Rogal_na_KaCu
         {
             this.display = display;
             input = new Input();
+            floorNumber = 1;
         }
 
         void ResolveTurn() {
@@ -27,6 +28,7 @@ namespace Rogal_na_KaCu
                 enemy.MovementBehaviour();
             }
         }
+        
 
         public Map LoadMap(string name="1.txt")
         {
@@ -79,6 +81,11 @@ namespace Rogal_na_KaCu
             Map newMap = new Map(intMap,display);
             currentMap = newMap;
             hero.SetCurrentMap(newMap);
+            ChangeFloorNumber(1);
+            display.SetStatUI(1, hero.name);
+            display.SetStatUI(2, hero.hp.ToString());
+            display.SetStatUI(3, hero.ReturnWeaponName());
+            display.SetStatUI(4, hero.ReturnArmorName());
             return newMap;
         }
 
@@ -115,6 +122,12 @@ namespace Rogal_na_KaCu
                     }
                     break;
             }
+        }
+
+        private void ChangeFloorNumber(int value)
+        {
+            floorNumber = value;
+            display.SetStatUI(0, floorNumber.ToString());
         }
     }
 }

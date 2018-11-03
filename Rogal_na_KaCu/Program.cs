@@ -13,9 +13,9 @@ namespace Rogal_na_KaCu
             Console.OutputEncoding = System.Text.Encoding.UTF8;
 
             DisplayConsole display = new DisplayConsole();
+            display.DrawFrame();
             GameHandler gameMaster = new GameHandler(display);
             Map firstMap=gameMaster.LoadMap("1.txt");
-            display.DrawFrame();
             display.DisplayMap(firstMap,0,0);
             gameMaster.PlayInMap();
             Console.ReadKey();

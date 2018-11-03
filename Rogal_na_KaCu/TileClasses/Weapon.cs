@@ -8,7 +8,7 @@ namespace Rogal_na_KaCu
 {
     class Weapon:Tile
     {
-        string name;
+        public string name;
         int attackValue;
 
         public Weapon(int id, int posX, int posY) : base(id, posX, posY)

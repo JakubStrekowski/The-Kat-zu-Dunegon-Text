@@ -11,9 +11,13 @@ namespace Rogal_na_KaCu
         List<Consumable> equipment;
         public int currentCenterPositionX;
         public int currentCenterPositionY;
+        public String name;
+        public Weapon currentWeapon;
+        public Armor currentArmor;
 
         public Hero(int id, int posX, int posY): base(id, posX,posY)
         {
+            name = "Jacopo";
             hp = 6;
             passable = false;
             attack = 1;
@@ -94,6 +98,36 @@ namespace Rogal_na_KaCu
             base.SetCurrentMap(crMap);
             currentMap.relativeCenterX = currentCenterPositionX;
             currentMap.relativeCenterY = currentCenterPositionY;
+        }
+
+        public void TakeDamage(int value)
+        {
+            hp = hp - (value - armor);
+            currentMap.SendUIInfo(2, hp.ToString());
+        }
+
+        public String ReturnWeaponName()
+        {
+            if (currentWeapon == null)
+            {
+                return "Dagger";
+            }
+            else
+            {
+                return currentWeapon.name;
+            }
+        }
+
+        public String ReturnArmorName()
+        {
+            if (currentArmor == null)
+            {
+                return "No Armor";
+            }
+            else
+            {
+                return currentArmor.name;
+            }
         }
     }
 }

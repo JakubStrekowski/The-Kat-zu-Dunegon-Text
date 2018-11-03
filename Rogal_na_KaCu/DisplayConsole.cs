@@ -17,6 +17,12 @@ namespace Rogal_na_KaCu
         int maxColumn=66;
         int mapCurrentFirstX = 0;
         int mapCurrentFirstY = 0;
+        private int mapLevel;
+        private string heroName;
+        private int heroHp;
+        private string weaponName;
+        private string armorName;
+        private List<string> items;
 
         public DisplayConsole()
         {
@@ -109,7 +115,6 @@ namespace Rogal_na_KaCu
             Console.SetCursorPosition(prevX, prevY);
         }
         
-        
 
         private void PrintTile(int charID, int color)
         {
@@ -170,6 +175,86 @@ namespace Rogal_na_KaCu
                     PrintTile(0, 0);
                 }
             }
+        }
+
+        public void SetStatUI(int which, string value)
+        {
+            /*
+             *  0 floor number
+             *  1 hero name
+             *  2 hero hp
+             *  3 weapon name
+             *  4 armor name
+             *  5 items name list
+             */
+            int prevX = Console.CursorLeft;
+            int prevY = Console.CursorTop;
+            switch (which)
+            {
+                case 0:
+                    mapLevel = Int32.Parse(value);
+                    int startPosition0 = 60;
+                    for(int i = 0; i < value.Length; i++)
+                    {
+                        Console.SetCursorPosition(startPosition0, 1);
+                        Console.Write('\b');
+                    }
+                    Console.Write(value);
+                    break;
+
+                case 1:
+                    heroName = value;
+                    int startPosition1 = 10;
+                    for (int i = 0; i < value.Length; i++)
+                    {
+
+                        Console.SetCursorPosition(startPosition1, 2);
+                        Console.Write('\b');
+                    }
+                    int writePosition1 = 12 - (heroName.Length / 2);
+                    Console.SetCursorPosition(writePosition1, 2);
+                    Console.Write(value);
+                    break;
+
+                case 2:
+                    heroHp =Int32.Parse(value);
+                    int startPosition2 = 6;
+                    for (int i = 0; i < value.Length; i++)
+                    {
+
+                        Console.SetCursorPosition(startPosition2, 5);
+                        Console.Write('\b');
+                    }
+                    Console.Write(value);
+                    break;
+
+                case 3:
+                    weaponName = value;
+                    int startPosition3 = 6;
+                    for (int i = 0; i < value.Length; i++)
+                    {
+
+                        Console.SetCursorPosition(startPosition3, 7);
+                        Console.Write('\b');
+                    }
+                    Console.Write(value);
+                    break;
+                case 4:
+                    armorName = value;
+                    int startPosition4 = 6;
+                    for (int i = 0; i < value.Length; i++)
+                    {
+
+                        Console.SetCursorPosition(startPosition4, 9);
+                        Console.Write('\b');
+                    }
+                    Console.Write(value);
+                    break;
+                case 5:
+                    break;
+                default: break;
+            }
+            Console.SetCursorPosition(prevX, prevY);
         }
     }
 }

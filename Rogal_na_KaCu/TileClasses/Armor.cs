@@ -8,7 +8,7 @@ namespace Rogal_na_KaCu
 {
     class Armor:Tile
     {
-        string name;
+        public string name;
         int defenceValue;
 
         public Armor(int id, int posX, int posY) : base(id, posX, posY)

@@ -82,5 +82,10 @@ namespace Rogal_na_KaCu
             hero.currentCenterPositionY=hero.positionY;
             display.DisplayMap(this, hero.positionX, hero.positionY);
         }
+        
+        public void SendUIInfo(int valueID, String value)
+        {
+            display.SetStatUI(valueID, value);
+        }
     }
 }
