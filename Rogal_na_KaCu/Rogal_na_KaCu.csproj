@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DungeonGenerator.cs" />
     <Compile Include="TileClasses\Armor.cs" />
     <Compile Include="TileClasses\Character.cs" />
     <Compile Include="TileClasses\Consumable.cs" />

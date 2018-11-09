@@ -11,12 +11,11 @@ namespace Rogal_na_KaCu
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-
+            
             DisplayConsole display = new DisplayConsole();
-            //display.DrawFrame();
             GameHandler gameMaster = new GameHandler(display);
-            Map firstMap=gameMaster.LoadMap("1.txt");
-            //display.DisplayMap(firstMap,0,0);
+            // Map firstMap=gameMaster.LoadMap("1.txt");
+            gameMaster.GenerateRandom();
             gameMaster.PlayInMap();
             Console.ReadKey();
         }
