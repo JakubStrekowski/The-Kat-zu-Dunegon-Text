@@ -14,9 +14,11 @@ namespace Rogal_na_KaCu
         public String name;
         public Weapon currentWeapon;
         public Armor currentArmor;
+        public bool isAlife;
 
         public Hero(int id, int posX, int posY,Map mp): base(id, posX,posY, mp)
         {
+            isAlife = true;
             name = "Jacopo";
             hp = 6;
             passable = false;
@@ -137,10 +139,16 @@ namespace Rogal_na_KaCu
             currentMap.relativeCenterY = currentCenterPositionY;
         }
 
-        public void GetDmg(int value)
+        public override void GetDmg(int value)
         {
             hp = hp - (value - armor);
             currentMap.SendUIInfo(2, hp.ToString());
+            if (hp <= 0)
+            {
+                isAlife = false;
+                currentMap.HeroDied();
+            }
+            
         }
 
         public String ReturnWeaponName()

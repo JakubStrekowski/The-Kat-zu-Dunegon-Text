@@ -50,6 +50,10 @@ namespace Rogal_na_KaCu
                     {
                         return "E";
                     }
+                case ConsoleKey.S:
+                    {
+                        return "S";
+                    }
                 default: return "None";
             }
         }

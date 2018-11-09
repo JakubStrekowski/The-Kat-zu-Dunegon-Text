@@ -15,7 +15,7 @@ namespace Rogal_na_KaCu
         Input input;
         List<Enemy> enemiesOnMap;
         Hero hero;
-        int whatInControl = 0; //0-hero, 1-game menu
+        int whatInControl = 0; //0-hero, 1-game menu, 2-death menu, 3-start menu
 
         public GameHandler(DisplayConsole display)
         {
@@ -28,13 +28,18 @@ namespace Rogal_na_KaCu
         void ResolveTurn() {
             foreach(Enemy enemy in enemiesOnMap)
             {
-                enemy.MovementBehaviour();
+                if (hero.isAlife)
+                {
+                    enemy.MovementBehaviour();
+                }
             }
         }
         
 
         public Map LoadMap(string name="1.txt")
         {
+            enemiesOnMap = new List<Enemy>();
+            display.DrawFrame();
             currentMap = new Map();
             int mapRowLimit=50;
             int mapColumnLimit = 100;
@@ -89,6 +94,8 @@ namespace Rogal_na_KaCu
             display.SetStatUI(2, hero.hp.ToString());
             display.SetStatUI(3, hero.ReturnWeaponName());
             display.SetStatUI(4, hero.ReturnArmorName());
+            display.DisplayMap(newMap, 0, 0);
+            whatInControl = 0;
             return newMap;
         }
 
@@ -131,6 +138,7 @@ namespace Rogal_na_KaCu
                         hero.Move(3);
                     }
                     return true;
+                case "Escape":
                 case "Q":
                     {
                         whatInControl = 1;
@@ -160,6 +168,20 @@ namespace Rogal_na_KaCu
                 }
                 return false;
             }
+            if (whatInControl == 2)
+            {
+                switch (inputCommand)
+                {
+                    case "S":
+                        LoadMap("1.txt"); //tbd
+                        return false;
+                    case "E":
+                        display.AddLog("Leaving  game");   //tbd
+                        return false;
+                    default:
+                        return false;
+                }
+            }
             else return false;
         }
 
@@ -177,6 +199,11 @@ namespace Rogal_na_KaCu
         public void RemoveEnemyFromList(Enemy toRemove)
         {
             enemiesOnMap.Remove(toRemove);
+        }
+
+        public void SetWhatInControl(int value)
+        {
+            whatInControl = value;
         }
     }
 }
