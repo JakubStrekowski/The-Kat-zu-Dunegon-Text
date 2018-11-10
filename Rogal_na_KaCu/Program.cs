@@ -42,6 +42,12 @@ namespace Rogal_na_KaCu
                     Console.Clear();
                     Console.WriteLine("Podaj imie bohatera: ");
                     string name = Console.ReadLine();
+                    while (name.Length > 16)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Podaj imie bohatera: (Krótsze niz 16 znaków)");
+                        name = Console.ReadLine();
+                    }
                     Console.Clear();
                     display.DrawFrame();
                     
