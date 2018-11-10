@@ -205,11 +205,11 @@ namespace Rogal_na_KaCu
         {
             enemiesOnMap.Remove(toRemove);
         }
-        public void AddPotionToList(HealthPotion toAdd)
+        public void AddConsumableToList(HealthPotion toAdd)
         {
             potionOnMap.Add(toAdd);
         }
-        public void RemovPotionFromList(HealthPotion toRemove)
+        public void RemovConsumableFromList(HealthPotion toRemove)
         {
             potionOnMap.Remove(toRemove);
         }

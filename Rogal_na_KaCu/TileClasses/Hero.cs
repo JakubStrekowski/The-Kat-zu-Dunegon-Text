@@ -1,5 +1,4 @@
-﻿using Rogal_na_KaCu.TileClasses;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -151,17 +150,7 @@ namespace Rogal_na_KaCu
             }
             
         }
-        public void GetPotion(HealthPotion healthPotion)
-        {
-            equipment.Add(healthPotion);
-            
-            standingOnTile.representedByID=0;
-        }
-        public virtual void UsePotion(int value)
-        {
-            hp = +value;
-        }
-      
+
         public String ReturnWeaponName()
         {
             if (currentWeapon == null)
@@ -173,10 +162,7 @@ namespace Rogal_na_KaCu
                 return currentWeapon.name;
             }
         }
-        public void UseHealthPotion(HealthPotion healthPotion)
-        {
-            healthPotion.UseEffect(this);
-        }
+
         public String ReturnArmorName()
         {
             if (currentArmor == null)

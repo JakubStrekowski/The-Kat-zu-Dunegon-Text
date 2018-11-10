@@ -16,8 +16,7 @@ namespace Rogal_na_KaCu
         public Consumable(int id, int posX, int posY, Map mp) : base(id, posX, posY, mp)
         {
             standingOnTile = TileFactory.Get(0, posX, posY, mp);
-            passable = true;
+            passable = false;
         }
-       
     }
 }
