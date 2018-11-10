@@ -83,6 +83,32 @@ namespace Rogal_na_KaCu
             deathMenuFile.Close();
         }
 
+        public void DrowStory()
+        {
+            Console.Clear();
+            string line;
+            System.IO.StreamReader frameFile = new System.IO.StreamReader("display/story.txt");
+            while ((line = frameFile.ReadLine()) != null)
+            {
+                Console.WriteLine(line);
+            }
+            frameFile.Close();
+            Console.Read();
+        }
+        public void DrowCredits()
+        {
+
+            Console.Clear();
+            string line;
+            System.IO.StreamReader frameFile = new System.IO.StreamReader("display/credits.txt");
+            while ((line = frameFile.ReadLine()) != null)
+            {
+                Console.WriteLine(line);
+            }
+            frameFile.Close();
+            Console.Read();
+        }
+
         public void DisplayMap(Map mapObject, int centerX, int centerY)
         {
             int prevX = Console.CursorLeft;

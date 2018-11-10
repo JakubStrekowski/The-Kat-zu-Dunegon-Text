@@ -14,18 +14,14 @@ namespace Rogal_na_KaCu
         DisplayConsole display;
         Input input;
         List<Enemy> enemiesOnMap;
-        public Hero hero;
+        List<HealthPotion> potionOnMap;
+        Hero hero;
         int whatInControl = 0; //0-hero, 1-game menu, 2-death menu, 3-start menu
-
-        public void CreateHero(string name)
-        {
-            hero = new Hero(2, 0, 0, null);
-            hero.SetName(name);
-        }
 
         public GameHandler(DisplayConsole display)
         {
             enemiesOnMap = new List<Enemy>();
+            potionOnMap = new List<HealthPotion>();
             this.display = display;
             input = new Input();
             floorNumber = 1;
@@ -38,32 +34,16 @@ namespace Rogal_na_KaCu
                 {
                     enemy.MovementBehaviour();
                 }
+                
             }
+            
         }
-        public Map GenerateRandom()
-        {
-            Map currentMap = new Map();
-            enemiesOnMap = new List<Enemy>();
-            Random rnd = new Random();
-            DungeonGenerator mapGenerator = new DungeonGenerator(100,50);
-            int[][] dungeon=mapGenerator.CreateDungeon(100, 50, 18);
-            Map newMap = new Map(dungeon,display,this);
-            display.DrawFrame();
-            currentMap = newMap;
-            hero.SetCurrentMap(currentMap);
-            ChangeFloorNumber(1);
-            display.SetStatUI(1, hero.name);
-            display.SetStatUI(2, hero.hp.ToString());
-            display.SetStatUI(3, hero.ReturnWeaponName());
-            display.SetStatUI(4, hero.ReturnArmorName());
-            whatInControl = 0;
-            currentMap.SetFocus();
-            return newMap;
-        }
+        
 
         public Map LoadMap(string name="1.txt")
         {
             enemiesOnMap = new List<Enemy>();
+            potionOnMap = new List<HealthPotion>();
             display.DrawFrame();
             currentMap = new Map();
             int mapRowLimit=50;
@@ -225,7 +205,14 @@ namespace Rogal_na_KaCu
         {
             enemiesOnMap.Remove(toRemove);
         }
-
+        public void AddConsumableToList(HealthPotion toAdd)
+        {
+            potionOnMap.Add(toAdd);
+        }
+        public void RemovConsumableFromList(HealthPotion toRemove)
+        {
+            potionOnMap.Remove(toRemove);
+        }
         public void SetWhatInControl(int value)
         {
             whatInControl = value;

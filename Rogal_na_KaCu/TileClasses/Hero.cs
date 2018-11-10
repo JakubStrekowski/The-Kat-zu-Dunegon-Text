@@ -19,7 +19,7 @@ namespace Rogal_na_KaCu
         public Hero(int id, int posX, int posY,Map mp): base(id, posX,posY, mp)
         {
             isAlife = true;
-            name = "Jacopo";
+            name = "Jan";
             hp = 6;
             passable = false;
             attack = 1;

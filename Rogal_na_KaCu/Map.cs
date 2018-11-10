@@ -50,6 +50,10 @@ namespace Rogal_na_KaCu
                     {
                         gameMaster.AddEnemyToList((Enemy)this.tileMap[rowCounter][columnCounter]);
                     }
+                    if(integer == 7)
+                    {
+                        gameMaster.AddConsumableToList((HealthPotion)this.tileMap[rowCounter][columnCounter]);
+                    }
                     columnCounter++;
                 }
                 rowCounter++;
@@ -75,8 +79,13 @@ namespace Rogal_na_KaCu
             chara.standingOnTile = temporary;
             if (!dontShow)
             {
-                display.RefreshFromMapAtPosition(this, sourceX, sourceY);
-                display.RefreshFromMapAtPosition(this, targetX, targetY);
+                if(targetX - relativeCenterX>-33&& targetX - relativeCenterX<33&&sourceY-relativeCenterY>-8&&sourceY-relativeCenterY<8)
+                    if(sourceX - relativeCenterX > -33 && sourceX - relativeCenterX < 33 && targetY - relativeCenterY > -8 && targetY - relativeCenterY < 8)
+                    {
+                        display.RefreshFromMapAtPosition(this, sourceX, sourceY);
+                        display.RefreshFromMapAtPosition(this, targetX, targetY);
+                    }
+                
             }
         }
 
@@ -116,7 +125,14 @@ namespace Rogal_na_KaCu
             tileMap[posY][posX] = temporary;
             display.RefreshFromMapAtPosition(this, posX, posY);
         }
-
+        public void GetPotion(int posX,int posY)
+        {
+            Consumable consumable = (Consumable)tileMap[posX][posY];
+            Tile temporary = consumable.standingOnTile;
+            gameMaster.AddConsumableToList((HealthPotion)consumable);
+            tileMap[posY][posX] = temporary;
+            display.RefreshFromMapAtPosition(this,posX, posY);
+        }
         public void SendLog(String message)
         {
             if(!dontShow)
