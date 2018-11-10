@@ -43,7 +43,7 @@ namespace Rogal_na_KaCu
                     }
                     if(integer == 7)
                     {
-                        gameMaster.AddConsumableToList((HealthPotion)this.tileMap[rowCounter][columnCounter]);
+                        gameMaster.AddPotionToList((HealthPotion)this.tileMap[rowCounter][columnCounter]);
                     }
                     columnCounter++;
                 }
@@ -115,7 +115,8 @@ namespace Rogal_na_KaCu
         {
             Consumable consumable = (Consumable)tileMap[posX][posY];
             Tile temporary = consumable.standingOnTile;
-            gameMaster.AddConsumableToList((HealthPotion)consumable);
+            gameMaster.RemovPotionFromList((HealthPotion)tileMap[posX][posY]);
+            //hero.GetPotion((HealthPotion)consumable);
             tileMap[posY][posX] = temporary;
             display.RefreshFromMapAtPosition(this,posX, posY);
         }

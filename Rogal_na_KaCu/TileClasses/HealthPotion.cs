@@ -13,8 +13,9 @@ namespace Rogal_na_KaCu
         public HealthPotion(int id, int posX, int posY, Map mp) : base(id, posX, posY, mp) {
 
         }
-        public void useEffect(Character value) {
+        public void UseEffect(Character value) {
             value.hp = +heal;           
         }
+        
     }
 }

@@ -5,4 +5,4 @@
 9 1 Door
 10 13 Coin
 4 6 Zombie
-8 1 HealthPotion
+8 2 HealthPotion
