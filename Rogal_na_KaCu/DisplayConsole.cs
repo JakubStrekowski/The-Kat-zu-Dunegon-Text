@@ -141,6 +141,7 @@ namespace Rogal_na_KaCu
                     }
                 Console.SetCursorPosition(mapFirstXPosition, mapFirstYPosition+rowCount-1);
             }
+            Console.SetWindowPosition(0, 0);
             Console.SetCursorPosition(prevX, prevY);
         }
 
