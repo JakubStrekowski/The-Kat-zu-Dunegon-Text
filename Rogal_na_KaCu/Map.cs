@@ -70,8 +70,13 @@ namespace Rogal_na_KaCu
             chara.standingOnTile = temporary;
             if (!dontShow)
             {
-                display.RefreshFromMapAtPosition(this, sourceX, sourceY);
-                display.RefreshFromMapAtPosition(this, targetX, targetY);
+                if(targetX - relativeCenterX>-33&& targetX - relativeCenterX<33&&sourceY-relativeCenterY>-8&&sourceY-relativeCenterY<8)
+                    if(sourceX - relativeCenterX > -33 && sourceX - relativeCenterX < 33 && targetY - relativeCenterY > -8 && targetY - relativeCenterY < 8)
+                    {
+                        display.RefreshFromMapAtPosition(this, sourceX, sourceY);
+                        display.RefreshFromMapAtPosition(this, targetX, targetY);
+                    }
+                
             }
         }
 
