@@ -17,6 +17,12 @@ namespace Rogal_na_KaCu
         public Hero hero;
         int whatInControl = 0; //0-hero, 1-game menu, 2-death menu, 3-start menu
 
+        public void CreateHero(string name)
+        {
+            hero = new Hero(2, 0, 0, null);
+            hero.SetName(name);
+        }
+
         public GameHandler(DisplayConsole display)
         {
             enemiesOnMap = new List<Enemy>();
@@ -41,7 +47,6 @@ namespace Rogal_na_KaCu
             Random rnd = new Random();
             DungeonGenerator mapGenerator = new DungeonGenerator(100,50);
             int[][] dungeon=mapGenerator.CreateDungeon(100, 50, 18);
-            hero = new Hero("Jacopo");
             Map newMap = new Map(dungeon,display,this);
             display.DrawFrame();
             currentMap = newMap;
@@ -52,7 +57,7 @@ namespace Rogal_na_KaCu
             display.SetStatUI(3, hero.ReturnWeaponName());
             display.SetStatUI(4, hero.ReturnArmorName());
             whatInControl = 0;
-            newMap.SetFocus();
+            currentMap.SetFocus();
             return newMap;
         }
 

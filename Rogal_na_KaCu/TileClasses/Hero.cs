@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Rogal_na_KaCu
@@ -27,7 +28,7 @@ namespace Rogal_na_KaCu
             int currentCenterPositionY=posY;
         }
 
-        public Hero(string name):base(2,0,0,null)
+        public void SetName(string name)
         {
             this.name = name;
         }
@@ -125,6 +126,7 @@ namespace Rogal_na_KaCu
                     }
                     break;
             }
+            Thread.Sleep(200);
         }
 
         public bool isNearBorder()

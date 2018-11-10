@@ -14,12 +14,14 @@ namespace Rogal_na_KaCu
             
             DisplayConsole display = new DisplayConsole();
             GameHandler gameMaster = new GameHandler(display);
-            // Map firstMap=gameMaster.LoadMap("1.txt");
+            gameMaster.CreateHero("Jacopo");
+             Map firstMap=gameMaster.LoadMap("1.txt");
             /*
             DungeonGenerator dg = new DungeonGenerator(150, 100);
             dg.CreateDungeon(150, 100, 18);
             */
-            gameMaster.GenerateRandom();
+            /*
+            gameMaster.GenerateRandom();*/
             gameMaster.PlayInMap();
             
             Console.ReadKey();

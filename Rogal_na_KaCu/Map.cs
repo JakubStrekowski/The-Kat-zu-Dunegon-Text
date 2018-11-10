@@ -35,15 +35,17 @@ namespace Rogal_na_KaCu
                 int columnCounter = 0;
                 foreach(int integer in intRow)
                 {
-                    
-                    this.tileMap[rowCounter][columnCounter] = TileFactory.Get(integer, columnCounter, rowCounter,this);
+
+
                     if (integer == 2)
                     {
-                        tileMap[rowCounter][columnCounter]=gameMaster.hero;
+                        tileMap[rowCounter][columnCounter] = gameMaster.hero;
                         gameMaster.hero.positionX = columnCounter;
                         gameMaster.hero.positionY = rowCounter;
-                        
+                        gameMaster.hero.currentCenterPositionX = columnCounter;
+                        gameMaster.hero.currentCenterPositionY = rowCounter;
                     }
+                    else this.tileMap[rowCounter][columnCounter] = TileFactory.Get(integer, columnCounter, rowCounter, this);
                     if (integer == 6 || integer==3)
                     {
                         gameMaster.AddEnemyToList((Enemy)this.tileMap[rowCounter][columnCounter]);

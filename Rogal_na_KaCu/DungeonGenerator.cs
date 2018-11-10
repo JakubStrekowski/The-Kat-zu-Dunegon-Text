@@ -128,6 +128,19 @@ namespace Rogal_na_KaCu
                 ConnectTwoRooms(connectedRooms[room1], connectedRooms[room2]);
             }
 
+            for(int i = 1; i < rooms.Count; i++)
+            {
+                int enemyAmnt = rnd.Next(0, 5);
+                for(int j = 0; j < enemyAmnt; j++)
+                {
+                    Point pnt = rooms[i].RandomPointFromRoom();
+                    if (rnd.Next(2) == 1)
+                        dungeon[pnt.Y][pnt.X] = 3;
+                    else dungeon[pnt.Y][pnt.X] = 6;
+
+                }
+            }
+
             StreamWriter sw = new StreamWriter("test.txt");
             PutHero();
             for (int i = 0; i < sizeY; i++)
@@ -194,6 +207,14 @@ namespace Rogal_na_KaCu
             public void AddConnection(int roomID)
             {
                 connectedRooms.Add(roomID);
+            }
+
+            public Point RandomPointFromRoom()
+            {
+                Point pnt;
+                pnt.X = rnd.Next(beginX + 1, beginX + sizeX - 1);
+                pnt.Y = rnd.Next(beginY + 1, beginY + sizeY - 1);
+                return pnt;
             }
         }
 
@@ -413,7 +434,7 @@ namespace Rogal_na_KaCu
             
         }*/
 
-
+        
         
         private void ConnectTwoRooms(Room room1, Room room2)
         {
