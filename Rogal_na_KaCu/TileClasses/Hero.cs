@@ -150,7 +150,15 @@ namespace Rogal_na_KaCu
             }
             
         }
-
+        protected virtual void GetPotion()
+        {
+            
+        }
+        public virtual void UseItem(int id)
+        {
+            equipment[id].UseEffect(this);
+            
+        }
         public String ReturnWeaponName()
         {
             if (currentWeapon == null)

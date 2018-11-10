@@ -11,7 +11,7 @@ namespace Rogal_na_KaCu
     {
         public Tile standingOnTile;
 
-        public void UseEffect() { }
+        public void UseEffect(Character character) { }
 
         public Consumable(int id, int posX, int posY, Map mp) : base(id, posX, posY, mp)
         {

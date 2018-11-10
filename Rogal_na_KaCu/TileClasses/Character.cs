@@ -20,19 +20,13 @@ namespace Rogal_na_KaCu
             hp = hp - (value - armor);
             if (hp <= 0) Die();
         }
-        public virtual void UsePotion(int value)
-        {
-            hp = +value;
-        }
+      
         void Attack() { }
 
         protected virtual void Die() {
             currentMap.DestroyCharacter(positionX, positionY);
         }
-        protected virtual void GetPotion()
-        {
-            currentMap.GetPotion(positionX, positionY);
-        }
+        
         public Character(int id, int posX, int posY, Map mp) : base(id, posX, posY, mp)
         {
             standingOnTile = TileFactory.Get(0, posX, posY, mp);
