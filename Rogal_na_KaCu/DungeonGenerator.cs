@@ -11,6 +11,7 @@ namespace Rogal_na_KaCu
     {
         private int[][] dungeon;
         private List<Room> rooms;
+        private List<Room> connectedRooms;
         private int mapSizeX;
         private int mapSizeY;
         Random rnd;
@@ -18,6 +19,7 @@ namespace Rogal_na_KaCu
         {
             mapSizeX = sizeX;
             mapSizeY = sizeY;
+            connectedRooms = new List<Room>();
             rooms = new List<Room>();
             rnd = new Random();
             dungeon = new int[sizeY][];
@@ -47,6 +49,8 @@ namespace Rogal_na_KaCu
                 }
             }
             CreateIfPossible(5, 5, 0, 30, 30, false);
+            rooms[0].isConnected = true;
+            connectedRooms.Add(rooms[0]);
             int selectedRoom;
             while (rooms.Count != roomsAmnt)
             {
@@ -73,7 +77,7 @@ namespace Rogal_na_KaCu
                 Point nextPlace;
                 nextPlace.X = rnd.Next(0, mapSizeX);
                 nextPlace.Y = rnd.Next(0, mapSizeY);
-                CreateIfPossible(rnd.Next(6, 10), rnd.Next(6, 10), dir, nextPlace.X, nextPlace.Y, false);
+                CreateIfPossible(rnd.Next(6, 12), rnd.Next(6, 12), dir, nextPlace.X, nextPlace.Y, false);
                 
             }
             int id = 0;
@@ -81,18 +85,47 @@ namespace Rogal_na_KaCu
             {
                 if (!room.isConnected)
                 {
-                    int  rand= rnd.Next(rooms.Count);
+                    int  rand= rnd.Next(connectedRooms.Count);
                     Room rndroom = rooms[rand];
                     while (rndroom == room)
                     {
                         rand = rnd.Next(rooms.Count);
                         rndroom = rooms[rand];
                     }
+                    connectedRooms.Add(room);
                     ConnectTwoRooms(room, rndroom);
+                    room.AddConnection(rand);
+                    rndroom.AddConnection(id);
                     room.isConnected = true;
                     rndroom.isConnected = true;
                 }
                 id++;
+            }
+
+            /*
+            CheckIntegrity(0, 0);
+            int id1 = 0;
+            foreach(Room room in rooms)
+            {
+                if (!room.visited)
+                {
+                    int rndID = rnd.Next(connectedRooms.Count);
+                    ConnectTwoRooms(room, connectedRooms[rndID]);
+                    Console.WriteLine("Rooom " + room.beginX + " " + room.beginY + " wasnt visited, connecting to " + connectedRooms[rndID].beginX+" " + connectedRooms[rndID].beginY);
+                }
+                id1++;
+            }
+            */
+            int randomConnections = rnd.Next(2, 8);
+            for(int i = 0; i < randomConnections; i++)
+            {
+                int room1 = rnd.Next(connectedRooms.Count);
+                int room2 = rnd.Next(connectedRooms.Count);
+                if (room1 == room2)
+                {
+                    room2 = rnd.Next(connectedRooms.Count);
+                }
+                ConnectTwoRooms(connectedRooms[room1], connectedRooms[room2]);
             }
 
             StreamWriter sw = new StreamWriter("test.txt");
@@ -118,18 +151,20 @@ namespace Rogal_na_KaCu
             public int beginY;
             public int sizeY;
             public bool isConnected;
-            private int connectionAmmount;
+            public bool visited;
             private Random rnd;
+            public List<int> connectedRooms;
 
             public Room(int bx, int sx, int by, int sy)
             {
+                visited = false;
+                connectedRooms = new List<int>();
                 rnd = new Random();
                 beginX = bx;
                 sizeX = sx;
                 beginY = by;
                 sizeY = sy;
                 isConnected = false;
-                connectionAmmount = 0;
             }
 
             public Point PointFromWall(int direction)
@@ -155,9 +190,28 @@ namespace Rogal_na_KaCu
                 }
                 return point;
             }
-            
+
+            public void AddConnection(int roomID)
+            {
+                connectedRooms.Add(roomID);
+            }
+        }
+
+        public void CheckIntegrity(int roomID, int distanceFromSpawn)
+        {
+            if(!rooms[roomID].visited){
+                int checkedRoom = roomID;
+                rooms[roomID].visited = true;
+                connectedRooms.Add(rooms[roomID]);
+                distanceFromSpawn++;
+                foreach (int connectedRoom in rooms[checkedRoom].connectedRooms)
+                {
+                    CheckIntegrity(connectedRoom,distanceFromSpawn);
+                }
+            }
             
         }
+
         /*
         public class Corridor
         {
@@ -366,10 +420,10 @@ namespace Rogal_na_KaCu
             Point currentPoint;
             Point pointRoom1;
             Point pointRoom2;
-            pointRoom1.X = rnd.Next(room1.beginX, room1.beginX + room1.sizeX);
-            pointRoom1.Y = rnd.Next(room1.beginY, room1.beginY + room1.sizeY);
-            pointRoom2.X = rnd.Next(room2.beginX, room2.beginX + room2.sizeX);
-            pointRoom2.Y = rnd.Next(room2.beginY, room2.beginY + room2.sizeY);
+            pointRoom1.X = rnd.Next(room1.beginX+1, room1.beginX + room1.sizeX-1);
+            pointRoom1.Y = rnd.Next(room1.beginY+1, room1.beginY + room1.sizeY-1);
+            pointRoom2.X = rnd.Next(room2.beginX+1, room2.beginX + room2.sizeX-1);
+            pointRoom2.Y = rnd.Next(room2.beginY+1, room2.beginY + room2.sizeY-1);
             currentPoint.X = pointRoom2.X;
             currentPoint.Y = pointRoom2.Y;
             int distanceX = MeasureDistance(currentPoint, pointRoom1).X;

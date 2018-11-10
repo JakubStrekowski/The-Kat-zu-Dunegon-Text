@@ -40,7 +40,7 @@ namespace Rogal_na_KaCu
             enemiesOnMap = new List<Enemy>();
             Random rnd = new Random();
             DungeonGenerator mapGenerator = new DungeonGenerator(100,50);
-            int[][] dungeon=mapGenerator.CreateDungeon(100, 50, 16);
+            int[][] dungeon=mapGenerator.CreateDungeon(100, 50, 18);
             hero = new Hero("Jacopo");
             Map newMap = new Map(dungeon,display,this);
             display.DrawFrame();
