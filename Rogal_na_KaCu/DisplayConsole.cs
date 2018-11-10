@@ -150,14 +150,24 @@ namespace Rogal_na_KaCu
                 }
 
                 if (mapObject.tileMap[rowCount] != null)
-                for(int i = beginX; i < mapObject.tileMap[rowCount].Length; i++)
+                for(int i = beginX; i < maxColumn+beginX; i++)
                 {
-                        if (i == maxColumn+beginX) break;
-                        Console.SetCursorPosition(mapFirstXPosition+i-beginX, mapFirstYPosition+rowCount-beginY);
-                        PrintTile(tileDictionary[mapObject.tileMap[rowCount][i].representedByID].charID, tileDictionary[mapObject.tileMap[rowCount][i].representedByID].colorID);
-                }
-                Console.SetCursorPosition(mapFirstXPosition, mapFirstYPosition+rowCount);
+
+                        if (i >= mapObject.tileMap[rowCount].Length)
+                        {
+                                Console.SetCursorPosition(mapFirstXPosition + i - beginX, mapFirstYPosition + rowCount - beginY - 1);
+                                PrintTile(tileDictionary[1].charID, tileDictionary[1].colorID);
+                        }
+                        else
+                        {
+                            Console.SetCursorPosition(mapFirstXPosition + i - beginX, mapFirstYPosition + rowCount - beginY - 1);
+                            PrintTile(tileDictionary[mapObject.tileMap[rowCount][i].representedByID].charID, tileDictionary[mapObject.tileMap[rowCount][i].representedByID].colorID);
+                        }
+                        
+                    }
+                Console.SetCursorPosition(mapFirstXPosition, mapFirstYPosition+rowCount-1);
             }
+            Console.SetWindowPosition(0, 0);
             Console.SetCursorPosition(prevX, prevY);
         }
 
@@ -165,7 +175,7 @@ namespace Rogal_na_KaCu
         {
             int prevX = Console.CursorLeft;
             int prevY = Console.CursorTop;
-            Console.SetCursorPosition(posX+1+mapFirstXPosition-mapCurrentFirstX, posY+mapFirstYPosition-mapCurrentFirstY);
+            Console.SetCursorPosition(posX+1+mapFirstXPosition-mapCurrentFirstX, posY+mapFirstYPosition-mapCurrentFirstY-1);
             Console.Write("\b");
             PrintTile(tileDictionary[mapObject.tileMap[posY][posX].representedByID].charID, tileDictionary[mapObject.tileMap[posY][posX].representedByID].colorID);
             Console.SetCursorPosition(prevX, prevY);

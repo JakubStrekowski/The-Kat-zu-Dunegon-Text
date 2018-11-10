@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Rogal_na_KaCu
@@ -11,7 +12,6 @@ namespace Rogal_na_KaCu
         List<Consumable> equipment;
         public int currentCenterPositionX;
         public int currentCenterPositionY;
-        public String name;
         public Weapon currentWeapon;
         public Armor currentArmor;
         public bool isAlife;
@@ -26,6 +26,11 @@ namespace Rogal_na_KaCu
             armor = 0;
             int currentCenterPositionX=posX;
             int currentCenterPositionY=posY;
+        }
+
+        public void SetName(string name)
+        {
+            this.name = name;
         }
 
         public void Move(int direction) //0 up, 1 down, 2 right, 3 left
@@ -121,6 +126,7 @@ namespace Rogal_na_KaCu
                     }
                     break;
             }
+            Thread.Sleep(200);
         }
 
         public bool isNearBorder()

@@ -35,8 +35,17 @@ namespace Rogal_na_KaCu
                 int columnCounter = 0;
                 foreach(int integer in intRow)
                 {
-                    
-                    this.tileMap[rowCounter][columnCounter] = TileFactory.Get(integer, columnCounter, rowCounter,this);
+
+
+                    if (integer == 2)
+                    {
+                        tileMap[rowCounter][columnCounter] = gameMaster.hero;
+                        gameMaster.hero.positionX = columnCounter;
+                        gameMaster.hero.positionY = rowCounter;
+                        gameMaster.hero.currentCenterPositionX = columnCounter;
+                        gameMaster.hero.currentCenterPositionY = rowCounter;
+                    }
+                    else this.tileMap[rowCounter][columnCounter] = TileFactory.Get(integer, columnCounter, rowCounter, this);
                     if (integer == 6 || integer==3)
                     {
                         gameMaster.AddEnemyToList((Enemy)this.tileMap[rowCounter][columnCounter]);
@@ -129,6 +138,15 @@ namespace Rogal_na_KaCu
         {
             if(!dontShow)
             display.AddLog(message);
+        }
+
+        public void SetFocus()
+        {
+            relativeCenterX = gameMaster.hero.positionX;
+            relativeCenterY = gameMaster.hero.positionY;
+            gameMaster.hero.currentCenterPositionX = gameMaster.hero.positionX;
+            gameMaster.hero.currentCenterPositionY = gameMaster.hero.positionY;
+            display.DisplayMap(this, gameMaster.hero.positionX, gameMaster.hero.positionY);
         }
 
         public void HeroDied()

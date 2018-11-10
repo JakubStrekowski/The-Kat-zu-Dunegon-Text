@@ -38,19 +38,23 @@ namespace Rogal_na_KaCu
                 string selectedMenu = DrowMainMenu(menuItems);
                 if (selectedMenu == "Rozpocznij grę")
                 {
-                    
-                    
-                    display.DrawFrame();
-                    Console.WriteLine("Podaj imie bohatera: ");
-                    string n = Console.ReadLine();
+
                     Console.Clear();
+                    Console.WriteLine("Podaj imie bohatera: ");
+                    string name = Console.ReadLine();
+                    while (name.Length > 16)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Podaj imie bohatera: (Krótsze niz 16 znaków)");
+                        name = Console.ReadLine();
+                    }
+                    Console.Clear();
+                    display.DrawFrame();
+                    
                     GameHandler gameMaster = new GameHandler(display);
-                    Map firstMap = gameMaster.LoadMap("1.txt");
-                    display.DisplayMap(firstMap, 0, 0);
-                    
-                    Hero hero = new Hero(0,0,0,firstMap);
-                    hero.name = n;
-                    
+                    gameMaster.CreateHero(name);
+                    //Map firstMap = gameMaster.LoadMap("1.txt");
+                    gameMaster.GenerateRandom();
                     gameMaster.PlayInMap();
                     Console.ReadKey();
                 }
