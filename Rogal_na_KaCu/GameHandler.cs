@@ -25,7 +25,15 @@ namespace Rogal_na_KaCu
             this.display = display;
             input = new Input();
             floorNumber = 1;
+
         }
+
+        public void CreateHero(string name)
+        {
+            hero = new Hero(2, 0, 0, null);
+            hero.SetName(name);
+        }
+    
 
         void ResolveTurn() {
             foreach(Enemy enemy in enemiesOnMap)
@@ -38,9 +46,29 @@ namespace Rogal_na_KaCu
             }
             
         }
-        
 
-        public Map LoadMap(string name="1.txt")
+        public Map GenerateRandom()
+        {
+            Map currentMap = new Map();
+            enemiesOnMap = new List<Enemy>();
+            Random rnd = new Random();
+            DungeonGenerator mapGenerator = new DungeonGenerator(100, 50);
+            int[][] dungeon = mapGenerator.CreateDungeon(100, 50, 18);
+            Map newMap = new Map(dungeon, display, this);
+            display.DrawFrame();
+            currentMap = newMap;
+            hero.SetCurrentMap(currentMap);
+            ChangeFloorNumber(1);
+            display.SetStatUI(1, hero.name);
+            display.SetStatUI(2, hero.hp.ToString());
+            display.SetStatUI(3, hero.ReturnWeaponName());
+            display.SetStatUI(4, hero.ReturnArmorName());
+            whatInControl = 0;
+            currentMap.SetFocus();
+            return newMap;
+        }
+
+    public Map LoadMap(string name="1.txt")
         {
             enemiesOnMap = new List<Enemy>();
             potionOnMap = new List<HealthPotion>();
