@@ -15,7 +15,7 @@ namespace Rogal_na_KaCu
         Input input;
         List<Enemy> enemiesOnMap;
         List<HealthPotion> potionOnMap;
-        Hero hero;
+        public Hero hero;
         int whatInControl = 0; //0-hero, 1-game menu, 2-death menu, 3-start menu
 
         public GameHandler(DisplayConsole display)
