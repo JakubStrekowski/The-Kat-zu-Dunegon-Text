@@ -14,12 +14,14 @@ namespace Rogal_na_KaCu
         DisplayConsole display;
         Input input;
         List<Enemy> enemiesOnMap;
+        List<HealthPotion> potionOnMap;
         Hero hero;
         int whatInControl = 0; //0-hero, 1-game menu, 2-death menu, 3-start menu
 
         public GameHandler(DisplayConsole display)
         {
             enemiesOnMap = new List<Enemy>();
+            potionOnMap = new List<HealthPotion>();
             this.display = display;
             input = new Input();
             floorNumber = 1;
@@ -32,13 +34,16 @@ namespace Rogal_na_KaCu
                 {
                     enemy.MovementBehaviour();
                 }
+                
             }
+            
         }
         
 
         public Map LoadMap(string name="1.txt")
         {
             enemiesOnMap = new List<Enemy>();
+            potionOnMap = new List<HealthPotion>();
             display.DrawFrame();
             currentMap = new Map();
             int mapRowLimit=50;
@@ -200,7 +205,14 @@ namespace Rogal_na_KaCu
         {
             enemiesOnMap.Remove(toRemove);
         }
-
+        public void AddConsumableToList(HealthPotion toAdd)
+        {
+            potionOnMap.Add(toAdd);
+        }
+        public void RemovConsumableFromList(HealthPotion toRemove)
+        {
+            potionOnMap.Remove(toRemove);
+        }
         public void SetWhatInControl(int value)
         {
             whatInControl = value;

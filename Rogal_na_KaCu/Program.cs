@@ -38,10 +38,19 @@ namespace Rogal_na_KaCu
                 string selectedMenu = DrowMainMenu(menuItems);
                 if (selectedMenu == "Rozpocznij grę")
                 {
+                    
+                    
                     display.DrawFrame();
+                    Console.WriteLine("Podaj imie bohatera: ");
+                    string n = Console.ReadLine();
+                    Console.Clear();
                     GameHandler gameMaster = new GameHandler(display);
                     Map firstMap = gameMaster.LoadMap("1.txt");
                     display.DisplayMap(firstMap, 0, 0);
+                    
+                    Hero hero = new Hero(0,0,0,firstMap);
+                    hero.name = n;
+                    
                     gameMaster.PlayInMap();
                     Console.ReadKey();
                 }
@@ -71,15 +80,13 @@ namespace Rogal_na_KaCu
                 if (i == index)
                 {
                     Console.SetCursorPosition(36, 3 + i);
-                    Console.BackgroundColor = ConsoleColor.Cyan;
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.BackgroundColor = ConsoleColor.Gray;
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine(item[i]);
                 }
                 else
                 {
                     Console.SetCursorPosition(36, 3 + i);
-                    Console.BackgroundColor = ConsoleColor.Red;
-                    Console.ForegroundColor = ConsoleColor.Black;
                     Console.WriteLine(item[i]);
 
                 }
