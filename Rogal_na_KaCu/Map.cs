@@ -46,7 +46,7 @@ namespace Rogal_na_KaCu
                         gameMaster.hero.currentCenterPositionY = rowCounter;
                     }
                     else this.tileMap[rowCounter][columnCounter] = TileFactory.Get(integer, columnCounter, rowCounter, this);
-                    if (integer == 6 || integer==3)
+                    if (integer == 6 || integer==3|| integer == 8|| integer == 9)
                     {
                         gameMaster.AddEnemyToList((Enemy)this.tileMap[rowCounter][columnCounter]);
                     }

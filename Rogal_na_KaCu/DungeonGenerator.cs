@@ -134,9 +134,13 @@ namespace Rogal_na_KaCu
                 for(int j = 0; j < enemyAmnt; j++)
                 {
                     Point pnt = rooms[i].RandomPointFromRoom();
-                    if (rnd.Next(2) == 1)
-                        dungeon[pnt.Y][pnt.X] = 3;
-                    else dungeon[pnt.Y][pnt.X] = 6;
+                    switch (rnd.Next(5))
+                    {
+                        case 0: dungeon[pnt.Y][pnt.X] = 3; break;
+                        case 1: dungeon[pnt.Y][pnt.X] = 6; break;
+                        case 2: dungeon[pnt.Y][pnt.X] = 8; break;
+                        case 3: dungeon[pnt.Y][pnt.X] = 9; break;
+                    }
 
                 }
             }

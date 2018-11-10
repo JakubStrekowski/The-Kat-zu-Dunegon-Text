@@ -28,6 +28,10 @@ namespace Rogal_na_KaCu.TileClasses
                     return new Zombie(id, posX, posY, mp);
                 case 7:
                     return new HealthPotion(id, posX, posY, mp);
+                case 8:
+                    return new Rat(id, posX, posY, mp);
+                case 9:
+                    return new Slime(id, posX, posY, mp);
                 default:
                     return new EmptyTile(id, posX, posY, mp);
             }

@@ -56,7 +56,9 @@
     <Compile Include="Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TileClasses\Rat.cs" />
     <Compile Include="TileClasses\Skeleton.cs" />
+    <Compile Include="TileClasses\Slime.cs" />
     <Compile Include="TileClasses\Tile.cs" />
     <Compile Include="TileClasses\TileFactory.cs" />
     <Compile Include="TileClasses\Wall.cs" />
