@@ -13,15 +13,16 @@ namespace Rogal_na_KaCu
         static void Main(string[] args)
         {
 
-
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             DisplayConsole display = new DisplayConsole();
             List<string> menuItems = new List<string>()
             {
-                "Rozpocznij grę",
-                "Fabuła",
-                "Twórcy",
-                "Wyjście"
+                "Start Game",
+                "Plot",
+                "Credits",
+                "Quit Game"
             };
 
             Console.CursorVisible = false;
@@ -36,16 +37,16 @@ namespace Rogal_na_KaCu
                 frameFile.Close();
 
                 string selectedMenu = DrowMainMenu(menuItems);
-                if (selectedMenu == "Rozpocznij grę")
+                if (selectedMenu == "Start Game")
                 {
 
                     Console.Clear();
-                    Console.WriteLine("Podaj imie bohatera: ");
+                    Console.WriteLine("Write hero name: ");
                     string name = Console.ReadLine();
                     while (name.Length > 16)
                     {
                         Console.Clear();
-                        Console.WriteLine("Podaj imie bohatera: (Krótsze niz 16 znaków)");
+                        Console.WriteLine("Write hero name: (shorter than 16 characters)");
                         name = Console.ReadLine();
                     }
                     if (name.Length == 0)
@@ -61,15 +62,15 @@ namespace Rogal_na_KaCu
                     gameMaster.PlayInMap();
                     Console.ReadKey();
                 }
-                else if (selectedMenu == "Fabuła")
+                else if (selectedMenu == "Plot")
                 {
                     display.DrowStory();
                 }
-                else if (selectedMenu == "Twórcy")
+                else if (selectedMenu == "Credits")
                 {
                     display.DrowCredits();
                 }
-                else if (selectedMenu == "Wyjście")
+                else if (selectedMenu == "Quit Game")
                 {
                     Environment.Exit(0);
                 }
@@ -97,7 +98,8 @@ namespace Rogal_na_KaCu
                     Console.WriteLine(item[i]);
 
                 }
-                Console.ResetColor();
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.BackgroundColor = ConsoleColor.Black;
             }
 
             ConsoleKeyInfo consoleKey = Console.ReadKey();
