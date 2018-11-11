@@ -45,6 +45,7 @@
     <Compile Include="DungeonGenerator.cs" />
     <Compile Include="TileClasses\Armor.cs" />
     <Compile Include="TileClasses\Character.cs" />
+    <Compile Include="TileClasses\Coin.cs" />
     <Compile Include="TileClasses\Consumable.cs" />
     <Compile Include="DisplayConsole.cs" />
     <Compile Include="TileClasses\EmptyTile.cs" />

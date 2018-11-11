@@ -134,10 +134,16 @@ namespace Rogal_na_KaCu
         {
             Character chara = (Character)tileMap[posY][posX];
             Tile temporary = chara.standingOnTile;
-            gameMaster.RemoveEnemyFromList((Enemy)chara);
+            if(chara is Enemy)
+            {
+                gameMaster.RemoveEnemyFromList((Enemy)chara);
+                gameMaster.enemiesKilled++;
+                gameMaster.gold += 5;
+            }
             tileMap[posY][posX] = temporary;
             display.RefreshFromMapAtPosition(this, posX, posY);
         }
+
         public void GetPotion(int posX,int posY)
         {
             Consumable consumable = (Consumable)tileMap[posX][posY];
@@ -180,6 +186,14 @@ namespace Rogal_na_KaCu
             dontShow = true;
             gameMaster.SetWhatInControl(2);
             display.DisplayDeathMenu();
+        }
+
+        public void GotGold()
+        {
+            Random rnd = new Random();
+            int goldAmnt = rnd.Next(5, 21);
+            gameMaster.gold += goldAmnt;
+            SendLog("You found " + goldAmnt + " gold!");
         }
     }
 }

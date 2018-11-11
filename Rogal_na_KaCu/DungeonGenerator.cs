@@ -128,9 +128,12 @@ namespace Rogal_na_KaCu
                 ConnectTwoRooms(connectedRooms[room1], connectedRooms[room2]);
             }
 
+
+
             for(int i = 1; i < rooms.Count; i++)
             {
                 int enemyAmnt = rnd.Next(2, 6);
+                int goldAmnt = rnd.Next(3);
                 for(int j = 0; j < enemyAmnt; j++)
                 {
                     Point pnt = rooms[i].RandomPointFromRoom();
@@ -141,7 +144,11 @@ namespace Rogal_na_KaCu
                         case 2: dungeon[pnt.Y][pnt.X] = 8; break;
                         case 3: dungeon[pnt.Y][pnt.X] = 9; break;
                     }
-
+                }
+                for(int k = 1; k < goldAmnt; k++)
+                {
+                    Point pnt = rooms[i].RandomPointFromRoom();
+                    dungeon[pnt.Y][pnt.X] = 5;
                 }
             }
 

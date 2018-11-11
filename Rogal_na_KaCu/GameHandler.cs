@@ -9,6 +9,8 @@ namespace Rogal_na_KaCu
 {
    public class GameHandler
     {
+        public int enemiesKilled;
+        public int gold;
         public int floorNumber;
         Map currentMap;
         DisplayConsole display;
@@ -31,6 +33,8 @@ namespace Rogal_na_KaCu
         public void CreateHero(string name)
         {
             hero = new Hero(2, 0, 0, null);
+            enemiesKilled = 0;
+            gold = 0;
             hero.SetName(name);
         }
     

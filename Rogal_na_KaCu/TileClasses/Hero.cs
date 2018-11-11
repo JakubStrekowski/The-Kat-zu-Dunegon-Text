@@ -63,6 +63,11 @@ namespace Rogal_na_KaCu
                             standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
                             currentMap.MoveFocus(this);
                         }
+                        if (neighbor0 is Coin)
+                        {
+                            currentMap.GotGold();
+                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
+                        }
                     }
                     else
                     {
@@ -94,6 +99,11 @@ namespace Rogal_na_KaCu
                             currentMap.SendLog("You went down the stairs");
                             standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
                             currentMap.MoveFocus(this);
+                        }
+                        if (neighbor1 is Coin)
+                        {
+                            currentMap.GotGold();
+                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
                         }
 
                     }
@@ -128,6 +138,11 @@ namespace Rogal_na_KaCu
                             standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
                             currentMap.MoveFocus(this);
                         }
+                        if (neighbor2 is Coin)
+                        {
+                            currentMap.GotGold();
+                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
+                        }
                     }
                     else
                     {
@@ -160,6 +175,11 @@ namespace Rogal_na_KaCu
                             currentMap.SendLog("You went down the stairs");
                             standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
                             currentMap.MoveFocus(this);
+                        }
+                        if( neighbor3 is Coin)
+                        {
+                            currentMap.GotGold();
+                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
                         }
                     }
                     else

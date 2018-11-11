@@ -23,7 +23,7 @@ namespace Rogal_na_KaCu.TileClasses
                 case 4:
                     return new Stairs(id, posX, posY, mp);
                 case 5:
-                    return new EmptyTile(id, posX, posY, mp); //tbd
+                    return new Coin(id, posX, posY, mp); //tbd
                 case 6:
                     return new Zombie(id, posX, posY, mp);
                 case 7:
