@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rogal_na_KaCu.TileClasses;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -38,11 +39,14 @@ namespace Rogal_na_KaCu
 
             int targetPositionX = positionX;
             int targetPositionY = positionY;
+            
             switch (direction)
             {
                 case 0:
                     targetPositionY = targetPositionY - 1;
-                    if (currentMap.GiveNeighbor(positionX,positionY, 0).passable)
+                    Tile neighbor0;
+                    neighbor0 = currentMap.GiveNeighbor(positionX, positionY, 0);
+                    if (neighbor0.passable)
                     {
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionY = positionY - 1;
@@ -50,76 +54,119 @@ namespace Rogal_na_KaCu
                         {
                             currentMap.MoveFocus(this);
                         }
+
+                        if (neighbor0 is Stairs)
+                        {
+                            currentMap.gameMaster.NextLevel();
+                            currentMap.gameMaster.GenerateRandom(currentMap.gameMaster.floorNumber);
+                            currentMap.SendLog("You went down the stairs");
+                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
+                            currentMap.MoveFocus(this);
+                        }
                     }
                     else
                     {
-                        if(currentMap.GiveNeighbor(positionX, positionY, 0) is Enemy)
+                        if(neighbor0 is Enemy)
                         {
-                            Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 0);
+                            Enemy enm = (Enemy)neighbor0;
                             enm.GetDmg(attack);
                             currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
                         }
+
                     }
                     break;
                 case 1:
                     targetPositionY = targetPositionY + 1;
-                    if (currentMap.GiveNeighbor(positionX, positionY, 1).passable)
+                    Tile neighbor1 = currentMap.GiveNeighbor(positionX, positionY, 1);
+                    if (neighbor1.passable)
                     {
+                        
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionY = positionY + 1;
                         if (isNearBorder())
                         {
                             currentMap.MoveFocus(this);
                         }
+                        if (neighbor1 is Stairs)
+                        {
+                            currentMap.gameMaster.NextLevel();
+                            currentMap.gameMaster.GenerateRandom(currentMap.gameMaster.floorNumber);
+                            currentMap.SendLog("You went down the stairs");
+                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
+                            currentMap.MoveFocus(this);
+                        }
 
                     }
                     else
                     {
-                        if (currentMap.GiveNeighbor(positionX, positionY, 1) is Enemy)
+                        if (neighbor1 is Enemy)
                         {
-                            Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 1);
+                            Enemy enm = (Enemy)neighbor1;
                             enm.GetDmg(attack);
                             currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
                         }
+                        
                     }
                     break;
                 case 2:
+                    Tile neighbor2;
                     targetPositionX = targetPositionX + 1;
-                    if (currentMap.GiveNeighbor(positionX, positionY, 2).passable)
+                    neighbor2 = currentMap.GiveNeighbor(positionX, positionY, 2);
+                    if (neighbor2.passable)
                     {
-                        currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
-                        positionX = positionX + 1;
-                        if (isNearBorder())
+                            currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
+                            positionX = positionX + 1;
+                            if (isNearBorder())
+                            {
+                                currentMap.MoveFocus(this);
+                            }
+                        if (neighbor2 is Stairs)
                         {
+                            currentMap.gameMaster.NextLevel();
+                            currentMap.gameMaster.GenerateRandom(currentMap.gameMaster.floorNumber);
+                            currentMap.SendLog("You went down the stairs");
+                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
                             currentMap.MoveFocus(this);
                         }
                     }
                     else
                     {
-                        if (currentMap.GiveNeighbor(positionX, positionY, 2) is Enemy)
+                        if (neighbor2 is Enemy)
                         {
-                            Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 2);
+                            Enemy enm = (Enemy)neighbor2;
                             enm.GetDmg(attack);
                             currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
                         }
                     }
                     break;
                 case 3:
+                    Tile neighbor3;
                     targetPositionX = targetPositionX - 1 ;
-                    if (currentMap.GiveNeighbor(positionX, positionY, 3).passable)
+                    neighbor3 = currentMap.GiveNeighbor(positionX, positionY, 3);
+                    if (neighbor3.passable)
                     {
+
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionX = positionX - 1;
                         if (isNearBorder())
                         {
                             currentMap.MoveFocus(this);
                         }
+
+                        if (neighbor3 is Stairs)
+                        {
+                            currentMap.gameMaster.NextLevel();
+                            currentMap.gameMaster.GenerateRandom(currentMap.gameMaster.floorNumber);
+                            currentMap.SendLog("You went down the stairs");
+                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
+                            currentMap.MoveFocus(this);
+                        }
                     }
                     else
                     {
-                        if (currentMap.GiveNeighbor(positionX, positionY, 3) is Enemy)
+                        if (neighbor3 is Enemy)
                         {
-                            Enemy enm = (Enemy)currentMap.GiveNeighbor(positionX, positionY, 3);
+                            Enemy enm = (Enemy)neighbor3;
                             enm.GetDmg(attack);
                             currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
                         }

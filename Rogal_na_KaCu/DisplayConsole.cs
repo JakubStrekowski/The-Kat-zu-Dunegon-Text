@@ -141,7 +141,6 @@ namespace Rogal_na_KaCu
             Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(mapFirstXPosition, mapFirstYPosition);
             int rowCount = beginY;
-            Console.WriteLine("Drawing from: " + beginX + " " + beginY);
             for(;rowCount<mapObject.tileMap.Length;rowCount++)
             {
                 if (rowCount == maxRow+beginY)

@@ -14,18 +14,18 @@ namespace Rogal_na_KaCu
         public int relativeCenterY=0;
         public Tile[][] tileMap;
         private bool dontShow;
-        GameHandler gameMaster;
+        public GameHandler gameMaster;
         public Map()
         {
 
         }
 
-        public Map(int[][] intMap,DisplayConsole display,GameHandler gm)
+        public Map(int[][] intMap,DisplayConsole display,GameHandler gm, int rowAmmount, int ColumnAmmount)
         {
             dontShow = false;
             gameMaster = gm;
-            int mapRowLimit = 50;
-            int mapColumnLimit = 100;
+            int mapRowLimit = rowAmmount;
+            int mapColumnLimit = ColumnAmmount;
             this.display = display;
             this.tileMap = new Tile[mapRowLimit][];
             int rowCounter = 0;
@@ -35,8 +35,6 @@ namespace Rogal_na_KaCu
                 int columnCounter = 0;
                 foreach(int integer in intRow)
                 {
-
-
                     if (integer == 2)
                     {
                         tileMap[rowCounter][columnCounter] = gameMaster.hero;
@@ -106,11 +104,25 @@ namespace Rogal_na_KaCu
 
         public void MoveFocus(Hero hero)
         {
-            relativeCenterX = hero.positionX;
-            relativeCenterY = hero.positionY;
+            if (hero.positionX < 33)
+            {
+                relativeCenterX = 33;
+            }
+            else
+            {
+                relativeCenterX =hero.positionX;
+            }
+            if (hero.positionY < 8)
+            {
+                relativeCenterY = 8;
+            }
+            else
+            {
+                relativeCenterY =hero.positionY;
+            }
             hero.currentCenterPositionX=hero.positionX;
             hero.currentCenterPositionY=hero.positionY;
-            display.DisplayMap(this, hero.positionX, hero.positionY);
+            display.DisplayMap(this, relativeCenterX, relativeCenterY);
         }
         
         public void SendUIInfo(int valueID, String value)
@@ -142,11 +154,25 @@ namespace Rogal_na_KaCu
 
         public void SetFocus()
         {
-            relativeCenterX = gameMaster.hero.positionX;
-            relativeCenterY = gameMaster.hero.positionY;
-            gameMaster.hero.currentCenterPositionX = gameMaster.hero.positionX;
-            gameMaster.hero.currentCenterPositionY = gameMaster.hero.positionY;
-            display.DisplayMap(this, gameMaster.hero.positionX, gameMaster.hero.positionY);
+            if (gameMaster.hero.positionX < 33)
+            {
+                relativeCenterX = 33;
+            }
+            else
+            {
+                relativeCenterX = gameMaster.hero.positionX;
+            }
+            if (gameMaster.hero.positionY < 8)
+            {
+                relativeCenterY= 8;
+            }
+            else
+            {
+                relativeCenterY = gameMaster.hero.positionY;
+            }
+            gameMaster.hero.currentCenterPositionX = relativeCenterX;
+            gameMaster.hero.currentCenterPositionY = relativeCenterY;
+            display.DisplayMap(this, relativeCenterX, relativeCenterY);
         }
 
         public void HeroDied()

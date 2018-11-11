@@ -48,7 +48,7 @@ namespace Rogal_na_KaCu
                     dungeon[i][j] = 1;
                 }
             }
-            CreateIfPossible(5, 5, 0, 30, 30, false);
+            CreateIfPossible(5, 5, 0, 10, 10, false);
             rooms[0].isConnected = true;
             connectedRooms.Add(rooms[0]);
             int selectedRoom;
@@ -130,7 +130,7 @@ namespace Rogal_na_KaCu
 
             for(int i = 1; i < rooms.Count; i++)
             {
-                int enemyAmnt = rnd.Next(0, 5);
+                int enemyAmnt = rnd.Next(2, 6);
                 for(int j = 0; j < enemyAmnt; j++)
                 {
                     Point pnt = rooms[i].RandomPointFromRoom();
@@ -144,6 +144,10 @@ namespace Rogal_na_KaCu
 
                 }
             }
+
+            Room lastRoom = FindFurthest(rooms[0]);
+            Point randInLast = lastRoom.RandomPointFromRoom();
+            dungeon[randInLast.Y][randInLast.X] = 4;
 
             StreamWriter sw = new StreamWriter("test.txt");
             PutHero();
@@ -438,6 +442,22 @@ namespace Rogal_na_KaCu
             
         }*/
 
+        private Room FindFurthest(Room source)
+        {
+            int maxDistance = 0;
+            Room furthestRoom=source;
+            Point sourcePt = source.RandomPointFromRoom();
+            for(int i = 1; i < rooms.Count; i++)
+            {
+                Point distPt = MeasureDistance(sourcePt, rooms[i].RandomPointFromRoom());
+                if (distPt.X + distPt.Y > maxDistance)
+                {
+                    maxDistance = distPt.X + distPt.Y;
+                    furthestRoom = rooms[i];
+                }
+            }
+            return furthestRoom;
+        }
         
         
         private void ConnectTwoRooms(Room room1, Room room2)

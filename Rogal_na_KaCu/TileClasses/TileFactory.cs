@@ -21,7 +21,7 @@ namespace Rogal_na_KaCu.TileClasses
                 case 3:
                     return new Skeleton(id, posX, posY, mp);
                 case 4:
-                    return new EmptyTile(id, posX, posY, mp);
+                    return new Stairs(id, posX, posY, mp);
                 case 5:
                     return new EmptyTile(id, posX, posY, mp); //tbd
                 case 6:

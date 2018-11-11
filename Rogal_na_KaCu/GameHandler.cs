@@ -9,7 +9,7 @@ namespace Rogal_na_KaCu
 {
    public class GameHandler
     {
-        int floorNumber;
+        public int floorNumber;
         Map currentMap;
         DisplayConsole display;
         Input input;
@@ -47,18 +47,49 @@ namespace Rogal_na_KaCu
             
         }
 
-        public Map GenerateRandom()
+        public void NextLevel()
+        {
+            floorNumber++;
+        }
+
+        public Map GenerateRandom(int floorNumber)
         {
             Map currentMap = new Map();
             enemiesOnMap = new List<Enemy>();
             Random rnd = new Random();
             DungeonGenerator mapGenerator = new DungeonGenerator(100, 50);
-            int[][] dungeon = mapGenerator.CreateDungeon(100, 50, 18);
-            Map newMap = new Map(dungeon, display, this);
+            int[][] dungeon=new int[100][];
+            int rowAmmount = 0;
+            int columnAmmount = 0;
+            switch (floorNumber)
+            {
+                case 1:
+                    rowAmmount = 25;
+                    columnAmmount = 50;
+                    dungeon = mapGenerator.CreateDungeon(columnAmmount, rowAmmount, 8);
+                    break;
+                case 2:
+                    rowAmmount = 35;
+                    columnAmmount = 70;
+                    dungeon = mapGenerator.CreateDungeon(columnAmmount, rowAmmount, 13);
+                    break;
+                case 3:
+                    rowAmmount = 45;
+                    columnAmmount = 85;
+                    dungeon = mapGenerator.CreateDungeon(columnAmmount, rowAmmount, 16);
+                    break;
+                case 4:
+                    rowAmmount = 50;
+                    columnAmmount = 100;
+                    dungeon = mapGenerator.CreateDungeon(columnAmmount, rowAmmount, 20);
+                    break;
+            }
+            
+            Map newMap = new Map(dungeon, display, this,rowAmmount,columnAmmount);
             display.DrawFrame();
             currentMap = newMap;
             hero.SetCurrentMap(currentMap);
-            ChangeFloorNumber(1);
+            ChangeFloorNumber(floorNumber);
             display.SetStatUI(1, hero.name);
             display.SetStatUI(2, hero.hp.ToString());
             display.SetStatUI(3, hero.ReturnWeaponName());
@@ -119,7 +150,7 @@ namespace Rogal_na_KaCu
                     
                 }
             file.Close();
-            Map newMap = new Map(intMap,display,this);
+            Map newMap = new Map(intMap,display,this,50,100);
             currentMap = newMap;
             hero.SetCurrentMap(newMap);
             ChangeFloorNumber(1);
@@ -186,7 +217,7 @@ namespace Rogal_na_KaCu
                 {
                     case "E":
                         {
-                            display.AddLog("Leaving game");   //tbd
+                            Environment.Exit(0);
                             break;
                         }
                     case "Escape":
@@ -206,10 +237,12 @@ namespace Rogal_na_KaCu
                 switch (inputCommand)
                 {
                     case "S":
-                        LoadMap("1.txt"); //tbd
+                        CreateHero(hero.name);
+                        floorNumber = 1;
+                        GenerateRandom(floorNumber);
                         return false;
                     case "E":
-                        display.AddLog("Leaving  game");   //tbd
+                        Environment.Exit(0);
                         return false;
                     default:
                         return false;
@@ -220,7 +253,6 @@ namespace Rogal_na_KaCu
 
         private void ChangeFloorNumber(int value)
         {
-            floorNumber = value;
             display.SetStatUI(0, floorNumber.ToString());
         }
 

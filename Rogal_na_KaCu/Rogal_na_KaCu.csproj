@@ -59,6 +59,7 @@
     <Compile Include="TileClasses\Rat.cs" />
     <Compile Include="TileClasses\Skeleton.cs" />
     <Compile Include="TileClasses\Slime.cs" />
+    <Compile Include="TileClasses\Stairs.cs" />
     <Compile Include="TileClasses\Tile.cs" />
     <Compile Include="TileClasses\TileFactory.cs" />
     <Compile Include="TileClasses\Wall.cs" />

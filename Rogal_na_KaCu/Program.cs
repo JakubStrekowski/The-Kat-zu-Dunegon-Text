@@ -54,7 +54,7 @@ namespace Rogal_na_KaCu
                     GameHandler gameMaster = new GameHandler(display);
                     gameMaster.CreateHero(name);
                     //Map firstMap = gameMaster.LoadMap("1.txt");
-                    gameMaster.GenerateRandom();
+                    gameMaster.GenerateRandom(gameMaster.floorNumber);
                     gameMaster.PlayInMap();
                     Console.ReadKey();
                 }

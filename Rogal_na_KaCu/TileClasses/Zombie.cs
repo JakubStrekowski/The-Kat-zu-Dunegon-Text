@@ -14,10 +14,11 @@ namespace Rogal_na_KaCu
         public Zombie(int id, int posX, int posY,Map mp) : base(id, posX, posY, mp)
         {
             name = "Zombie";
-            rnd = new Random();
+            rnd = new Random(posX*posY);
             hp = 3;
             attack = 1;
-            int random = rnd.Next(0, 1);
+            
+            int random = rnd.Next( 2);
             if (random == 0)
             {
                 directionHorizontal = true;
