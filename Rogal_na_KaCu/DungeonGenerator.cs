@@ -48,7 +48,7 @@ namespace Rogal_na_KaCu
                     dungeon[i][j] = 1;
                 }
             }
-            CreateIfPossible(5, 5, 0, 10, 10, false);
+            CreateIfPossible(rnd.Next(4, 8), rnd.Next(4, 8), 0, rnd.Next(10,16), rnd.Next(10, 16), false);
             rooms[0].isConnected = true;
             connectedRooms.Add(rooms[0]);
             int selectedRoom;

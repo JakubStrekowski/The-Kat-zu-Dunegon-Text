@@ -15,6 +15,8 @@ namespace Rogal_na_KaCu
         public Tile[][] tileMap;
         private bool dontShow;
         public GameHandler gameMaster;
+        int mapRowLimit;
+        int mapColumnLimit;
         public Map()
         {
 
@@ -24,8 +26,8 @@ namespace Rogal_na_KaCu
         {
             dontShow = false;
             gameMaster = gm;
-            int mapRowLimit = rowAmmount;
-            int mapColumnLimit = ColumnAmmount;
+            mapRowLimit = rowAmmount;
+            mapColumnLimit = ColumnAmmount;
             this.display = display;
             this.tileMap = new Tile[mapRowLimit][];
             int rowCounter = 0;
@@ -112,6 +114,10 @@ namespace Rogal_na_KaCu
             {
                 relativeCenterX =hero.positionX;
             }
+            if (hero.positionX > mapColumnLimit - 33)
+            {
+                relativeCenterX= mapColumnLimit - 33;
+            }
             if (hero.positionY < 8)
             {
                 relativeCenterY = 8;
@@ -119,6 +125,10 @@ namespace Rogal_na_KaCu
             else
             {
                 relativeCenterY =hero.positionY;
+            }
+            if (hero.positionY > mapRowLimit - 8)
+            {
+                relativeCenterY = mapRowLimit - 8;
             }
             hero.currentCenterPositionX=hero.positionX;
             hero.currentCenterPositionY=hero.positionY;
@@ -168,6 +178,11 @@ namespace Rogal_na_KaCu
             {
                 relativeCenterX = gameMaster.hero.positionX;
             }
+            if (gameMaster.hero.positionX > mapColumnLimit - 33)
+            {
+                relativeCenterX = mapColumnLimit - 33;
+            }
+
             if (gameMaster.hero.positionY < 8)
             {
                 relativeCenterY= 8;
@@ -176,7 +191,11 @@ namespace Rogal_na_KaCu
             {
                 relativeCenterY = gameMaster.hero.positionY;
             }
-            gameMaster.hero.currentCenterPositionX = relativeCenterX;
+            if (gameMaster.hero.positionY > mapRowLimit-8)
+            {
+                relativeCenterY = mapRowLimit - 8;
+            }
+                gameMaster.hero.currentCenterPositionX = relativeCenterX;
             gameMaster.hero.currentCenterPositionY = relativeCenterY;
             display.DisplayMap(this, relativeCenterX, relativeCenterY);
         }

@@ -2,7 +2,9 @@
 1 0 Wall
 3 13 Hero
 3 1 Skeleton
-9 1 Door
-10 13 Coin
+26 1 Stairs
+27 13 Coin
 4 6 Zombie
-8 1 HealthPotion
+8 4 HealthPotion
+24 1 Rat
+25 5 Slime

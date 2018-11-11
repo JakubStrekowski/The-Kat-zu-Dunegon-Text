@@ -48,6 +48,10 @@ namespace Rogal_na_KaCu
                         Console.WriteLine("Podaj imie bohatera: (Krótsze niz 16 znaków)");
                         name = Console.ReadLine();
                     }
+                    if (name.Length == 0)
+                    {
+                        name = "Nameless Rogue";
+                    }
                     Console.Clear();
                     display.DrawFrame();
                     
