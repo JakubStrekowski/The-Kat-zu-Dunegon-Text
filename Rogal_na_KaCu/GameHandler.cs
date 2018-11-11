@@ -10,7 +10,7 @@ namespace Rogal_na_KaCu
    public class GameHandler
     {
         public int enemiesKilled;
-        public int gold;
+        private int gold;
         public int floorNumber;
         Map currentMap;
         DisplayConsole display;
@@ -28,6 +28,17 @@ namespace Rogal_na_KaCu
             input = new Input();
             floorNumber = 1;
 
+        }
+
+        public void SetGold(int value)
+        {
+            gold = value;
+            display.SetStatUI(6, gold.ToString());
+        }
+        public void AddGold(int value)
+        {
+            gold += value;
+            display.SetStatUI(6, gold.ToString());
         }
 
         public void CreateHero(string name)
@@ -98,6 +109,8 @@ namespace Rogal_na_KaCu
             display.SetStatUI(2, hero.hp.ToString());
             display.SetStatUI(3, hero.ReturnWeaponName());
             display.SetStatUI(4, hero.ReturnArmorName());
+            display.SetStatUI(6, gold.ToString());
+            display.SetStatUI(7, enemiesKilled.ToString());
             whatInControl = 0;
             currentMap.SetFocus();
             return newMap;
@@ -154,16 +167,19 @@ namespace Rogal_na_KaCu
                     
                 }
             file.Close();
-            Map newMap = new Map(intMap,display,this,50,100);
+            Map newMap = new Map(intMap, display, this, mapRowLimit, mapColumnLimit);
+            display.DrawFrame();
             currentMap = newMap;
-            hero.SetCurrentMap(newMap);
-            ChangeFloorNumber(1);
+            hero.SetCurrentMap(currentMap);
+            ChangeFloorNumber(floorNumber);
             display.SetStatUI(1, hero.name);
             display.SetStatUI(2, hero.hp.ToString());
             display.SetStatUI(3, hero.ReturnWeaponName());
             display.SetStatUI(4, hero.ReturnArmorName());
-            display.DisplayMap(newMap, 0, 0);
+            display.SetStatUI(6, gold.ToString());
+            display.SetStatUI(7, enemiesKilled.ToString());
             whatInControl = 0;
+            currentMap.SetFocus();
             return newMap;
         }
 

@@ -32,6 +32,14 @@ namespace Rogal_na_KaCu.TileClasses
                     return new Rat(id, posX, posY, mp);
                 case 9:
                     return new Slime(id, posX, posY, mp);
+                case 10:
+                    return new KatzuAvatarEyes(id, posX, posY, mp);
+                case 11:
+                    return new KatzuAvatar(id, posX, posY, mp);
+                case 12:
+                    return new KatzuAvatarArms(id, posX, posY, mp);
+                case 13:
+                    return new KatzuAvatarBody(id, posX, posY, mp);
                 default:
                     return new EmptyTile(id, posX, posY, mp);
             }

@@ -22,6 +22,8 @@ namespace Rogal_na_KaCu
         private int heroHp;
         private string weaponName;
         private string armorName;
+        private int gold;
+        private int enemiesKilled;
         private List<string> items;
         private List<string> LogsList;
         private int logCurrentPosition = 0;
@@ -33,6 +35,11 @@ namespace Rogal_na_KaCu
 
         public DisplayConsole()
         {
+            gold = 0;
+            enemiesKilled = 0;
+            heroName = "";
+            weaponName = "";
+            armorName = "";
             deathMenu = new string[19];
             gameMenu = new string[7];
             LogsList = new List<string>();
@@ -288,73 +295,109 @@ namespace Rogal_na_KaCu
              *  3 weapon name
              *  4 armor name
              *  5 items name list
+             *  6 gold
+             *  7 enemies count
              */
             int prevX = Console.CursorLeft;
             int prevY = Console.CursorTop;
             switch (which)
             {
                 case 0:
-                    mapLevel = Int32.Parse(value);
+                    
                     int startPosition0 = 60;
-                    for(int i = 0; i < value.Length; i++)
+                    for(int i = 0; i < mapLevel.ToString().Length; i++)
                     {
                         Console.SetCursorPosition(startPosition0, 1);
                         Console.Write('\b');
                     }
+                    mapLevel = Int32.Parse(value);
+                    Console.SetCursorPosition(startPosition0, 1);
                     Console.Write(value);
                     break;
 
                 case 1:
-                    heroName = value;
+                    
                     int startPosition1 = 10;
-                    for (int i = 0; i < value.Length; i++)
+                    for (int i = 0; i < heroName.Length; i++)
                     {
 
                         Console.SetCursorPosition(startPosition1, 2);
                         Console.Write('\b');
                     }
+                    
+                    heroName = value;
                     int writePosition1 = 12 - (heroName.Length / 2);
                     Console.SetCursorPosition(writePosition1, 2);
                     Console.Write(value);
                     break;
 
                 case 2:
-                    heroHp =Int32.Parse(value);
+                    
                     int startPosition2 = 6;
-                    for (int i = 0; i < value.Length; i++)
+                    for (int i = 0; i < heroHp.ToString().Length; i++)
                     {
 
                         Console.SetCursorPosition(startPosition2, 5);
                         Console.Write('\b');
                     }
+                    heroHp = Int32.Parse(value);
+                    Console.SetCursorPosition(startPosition2, 5);
                     Console.Write(value);
                     break;
 
                 case 3:
-                    weaponName = value;
+                    
                     int startPosition3 = 6;
-                    for (int i = 0; i < value.Length; i++)
+                    for (int i = 0; i < weaponName.Length; i++)
                     {
 
                         Console.SetCursorPosition(startPosition3, 7);
                         Console.Write('\b');
                     }
+                    weaponName = value;
+                    Console.SetCursorPosition(startPosition3, 7);
                     Console.Write(value);
                     break;
 
                 case 4:
-                    armorName = value;
+                    
                     int startPosition4 = 6;
-                    for (int i = 0; i < value.Length; i++)
+                    for (int i = 0; i < armorName.Length; i++)
                     {
 
                         Console.SetCursorPosition(startPosition4, 9);
                         Console.Write('\b');
                     }
+                    armorName = value;
+                    Console.SetCursorPosition(startPosition4, 9);
                     Console.Write(value);
                     break;
 
                 case 5:
+                    break;
+                case 6:
+                    int startPosition5 = 110;
+                    for (int i = 0; i < value.Length; i++)
+                    {
+
+                        Console.SetCursorPosition(startPosition5, 7);
+                        Console.Write('\b');
+                    }
+                    gold = Int32.Parse(value);
+                    Console.SetCursorPosition(startPosition5, 7);
+                    Console.Write(value);
+                    break;
+                case 7:
+                    int startPosition6 = 110;
+                    for (int i = 0; i < value.Length; i++)
+                    {
+
+                        Console.SetCursorPosition(startPosition6, 5);
+                        Console.Write('\b');
+                    }
+                    enemiesKilled = Int32.Parse(value);
+                    Console.SetCursorPosition(startPosition6, 5);
+                    Console.Write(value);
                     break;
                 default: break;
             }

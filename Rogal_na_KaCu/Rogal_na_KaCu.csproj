@@ -57,6 +57,10 @@
     <Compile Include="Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TileClasses\KatzuAvatar.cs" />
+    <Compile Include="TileClasses\KatzuAvatarArms.cs" />
+    <Compile Include="TileClasses\KatzuAvatarBody.cs" />
+    <Compile Include="TileClasses\KatzuAvatarEyes.cs" />
     <Compile Include="TileClasses\Rat.cs" />
     <Compile Include="TileClasses\Skeleton.cs" />
     <Compile Include="TileClasses\Slime.cs" />
@@ -97,6 +101,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="maps\1.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="maps\2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

@@ -8,3 +8,7 @@
 8 4 HealthPotion
 24 1 Rat
 25 5 Slime
+9 4 KatzuEyes
+28 3 Katzu
+11 4 KatzuArms
+1 8 KatzuBody

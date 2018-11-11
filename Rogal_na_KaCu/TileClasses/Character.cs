@@ -23,7 +23,7 @@ namespace Rogal_na_KaCu
       
         void Attack() { }
 
-        protected virtual void Die() {
+        public virtual void Die() {
             currentMap.SendLog(name + " is now dead!");
             currentMap.DestroyCharacter(positionX, positionY);
         }

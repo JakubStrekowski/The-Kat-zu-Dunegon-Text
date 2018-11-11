@@ -46,7 +46,7 @@ namespace Rogal_na_KaCu
                         gameMaster.hero.currentCenterPositionY = rowCounter;
                     }
                     else this.tileMap[rowCounter][columnCounter] = TileFactory.Get(integer, columnCounter, rowCounter, this);
-                    if (integer == 6 || integer==3|| integer == 8|| integer == 9)
+                    if (integer == 6 || integer==3|| integer == 8|| integer == 9||integer==11)
                     {
                         gameMaster.AddEnemyToList((Enemy)this.tileMap[rowCounter][columnCounter]);
                     }
@@ -148,7 +148,7 @@ namespace Rogal_na_KaCu
             {
                 gameMaster.RemoveEnemyFromList((Enemy)chara);
                 gameMaster.enemiesKilled++;
-                gameMaster.gold += 5;
+                display.SetStatUI(7, gameMaster.enemiesKilled.ToString());
             }
             tileMap[posY][posX] = temporary;
             display.RefreshFromMapAtPosition(this, posX, posY);
@@ -211,7 +211,7 @@ namespace Rogal_na_KaCu
         {
             Random rnd = new Random();
             int goldAmnt = rnd.Next(5, 21);
-            gameMaster.gold += goldAmnt;
+            gameMaster.AddGold(goldAmnt);
             SendLog("You found " + goldAmnt + " gold!");
         }
     }
