@@ -16,14 +16,12 @@ namespace Rogal_na_KaCu
         DisplayConsole display;
         Input input;
         List<Enemy> enemiesOnMap;
-        List<HealthPotion> potionOnMap;
         public Hero hero;
         int whatInControl = 0; //0-hero, 1-game menu, 2-death menu, 3-start menu
 
         public GameHandler(DisplayConsole display)
         {
             enemiesOnMap = new List<Enemy>();
-            potionOnMap = new List<HealthPotion>();
             this.display = display;
             input = new Input();
             floorNumber = 1;
@@ -69,9 +67,15 @@ namespace Rogal_na_KaCu
 
         public Map GenerateRandom(int floorNumber)
         {
+
             Map currentMap = new Map();
             enemiesOnMap = new List<Enemy>();
             Random rnd = new Random();
+            if (floorNumber == 5)
+            {
+                Map newMap1 = LoadMap("2.txt");
+                return newMap1;
+            }
             DungeonGenerator mapGenerator = new DungeonGenerator(100, 50);
             int[][] dungeon=new int[100][];
             int rowAmmount = 0;
@@ -107,8 +111,10 @@ namespace Rogal_na_KaCu
             ChangeFloorNumber(floorNumber);
             display.SetStatUI(1, hero.name);
             display.SetStatUI(2, hero.hp.ToString());
+            /*
             display.SetStatUI(3, hero.ReturnWeaponName());
             display.SetStatUI(4, hero.ReturnArmorName());
+            */
             display.SetStatUI(6, gold.ToString());
             display.SetStatUI(7, enemiesKilled.ToString());
             whatInControl = 0;
@@ -119,7 +125,6 @@ namespace Rogal_na_KaCu
     public Map LoadMap(string name="1.txt")
         {
             enemiesOnMap = new List<Enemy>();
-            potionOnMap = new List<HealthPotion>();
             display.DrawFrame();
             currentMap = new Map();
             int mapRowLimit=50;
@@ -137,10 +142,6 @@ namespace Rogal_na_KaCu
                 foreach (string st in strRow)
                 {
                     intRow[counter] = int.Parse(st);
-                    if (intRow[counter] == 2)
-                    {
-                        hero = new Hero(2,counter, rowCounter,currentMap);
-                    }
                     counter++;
                 }
                     while (counter < mapColumnLimit)
@@ -174,8 +175,10 @@ namespace Rogal_na_KaCu
             ChangeFloorNumber(floorNumber);
             display.SetStatUI(1, hero.name);
             display.SetStatUI(2, hero.hp.ToString());
+            /*
             display.SetStatUI(3, hero.ReturnWeaponName());
             display.SetStatUI(4, hero.ReturnArmorName());
+            */
             display.SetStatUI(6, gold.ToString());
             display.SetStatUI(7, enemiesKilled.ToString());
             whatInControl = 0;
@@ -284,14 +287,6 @@ namespace Rogal_na_KaCu
         public void RemoveEnemyFromList(Enemy toRemove)
         {
             enemiesOnMap.Remove(toRemove);
-        }
-        public void AddConsumableToList(HealthPotion toAdd)
-        {
-            potionOnMap.Add(toAdd);
-        }
-        public void RemovConsumableFromList(HealthPotion toRemove)
-        {
-            potionOnMap.Remove(toRemove);
         }
         public void SetWhatInControl(int value)
         {

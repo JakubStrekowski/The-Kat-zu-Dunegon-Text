@@ -18,7 +18,7 @@ namespace Rogal_na_KaCu.TileClasses
             gotBody = false;
             name = "Katzu Avatar";
             movementSequence = new int[24] { 0, 1, 2, 3,1,0,3,2,1,1,0,0,2,2,3,3,0,0,1,1,3,3,2,2 };
-            hp = 10;
+            hp = 3;
             attack = 2;
             currentMoveState=0;
         }
@@ -154,6 +154,7 @@ namespace Rogal_na_KaCu.TileClasses
             {
                 bodyPart.Die();
             }
+            currentMap.HeroDied();
             base.Die();
         }
     }
