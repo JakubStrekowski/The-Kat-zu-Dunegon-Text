@@ -293,7 +293,7 @@ namespace Rogal_na_KaCu
                     case "Escape":
                     case "C":
                         {
-                            currentMap.MoveFocus(hero);
+                            hero.currentMap.MoveFocus(hero);
                             whatInControl = 0;
                             break;
                         }
