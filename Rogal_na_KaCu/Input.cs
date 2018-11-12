@@ -54,6 +54,36 @@ namespace Rogal_na_KaCu
                     {
                         return "S";
                     }
+                case ConsoleKey.NumPad1:
+                case ConsoleKey.D1:
+                    {
+                        return "1";
+                    }
+                case ConsoleKey.NumPad2:
+                case ConsoleKey.D2:
+                    {
+                        return "2";
+                    }
+                case ConsoleKey.NumPad3:
+                case ConsoleKey.D3:
+                    {
+                        return "3";
+                    }
+                case ConsoleKey.NumPad4:
+                case ConsoleKey.D4:
+                    {
+                        return "4";
+                    }
+                case ConsoleKey.NumPad5:
+                case ConsoleKey.D5:
+                    {
+                        return "5";
+                    }
+                case ConsoleKey.NumPad6:
+                case ConsoleKey.D6:
+                    {
+                        return "6";
+                    }
                 default: return "None";
             }
         }

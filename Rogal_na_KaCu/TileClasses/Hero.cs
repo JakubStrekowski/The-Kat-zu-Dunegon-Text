@@ -10,7 +10,7 @@ namespace Rogal_na_KaCu
 {
     public class Hero : Character
     {
-        List<Consumable> equipment;
+        public Consumable[] equipment;
         public int currentCenterPositionX;
         public int currentCenterPositionY;
         public Weapon currentWeapon;
@@ -27,6 +27,7 @@ namespace Rogal_na_KaCu
             armor = 0;
             int currentCenterPositionX=posX;
             int currentCenterPositionY=posY;
+            equipment = new Consumable[6];
         }
 
         public void SetName(string name)
@@ -68,6 +69,7 @@ namespace Rogal_na_KaCu
                             currentMap.GotGold();
                             standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
                         }
+                        IfIsConsumable(neighbor0);
                     }
                     else
                     {
@@ -105,6 +107,7 @@ namespace Rogal_na_KaCu
                             currentMap.GotGold();
                             standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
                         }
+                        IfIsConsumable(neighbor1);
 
                     }
                     else
@@ -143,6 +146,7 @@ namespace Rogal_na_KaCu
                             currentMap.GotGold();
                             standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
                         }
+                        IfIsConsumable(neighbor2);
                     }
                     else
                     {
@@ -181,6 +185,7 @@ namespace Rogal_na_KaCu
                             currentMap.GotGold();
                             standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
                         }
+                        IfIsConsumable(neighbor3);
                     }
                     else
                     {
@@ -194,6 +199,35 @@ namespace Rogal_na_KaCu
                     break;
             }
             Thread.Sleep(200);
+        }
+
+        void IfIsConsumable(Tile tile)
+        {
+            if (tile is Consumable)
+            {
+                bool freeSpace = false;
+                int i;
+                for (i = 0; i < 6; i++)
+                {
+                    if (equipment[i] == null)
+                    {
+                        freeSpace = true;
+                        break;
+                    }
+                }
+                if (freeSpace)
+                {
+                    Consumable cons = (Consumable)tile;
+                    AddItem(i, cons);
+                    currentMap.SendLog("You picked up " + cons.name + "!");
+                    standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
+                }
+                else
+                {
+                    Consumable cons = (Consumable)tile;
+                    currentMap.SendLog("You have no room for " + cons.name + "!");
+                }
+            }
         }
 
         public bool isNearBorder()
@@ -223,15 +257,36 @@ namespace Rogal_na_KaCu
             }
             
         }
-        protected virtual void GetPotion()
-        {
-            
-        }
         public virtual void UseItem(int id)
         {
-            equipment[id].UseEffect(this);
+            id = id - 1;
+            if (id<6)
+            {
+                if (equipment[id] != null)
+                {
+                    equipment[id].UseEffect(this);
+                    RemoveItem(id);
+                }
+            }
+            else
+            {
+                currentMap.SendLog("You have no item in this slot!");
+            }
             
         }
+
+        private void AddItem(int id,Consumable item)
+        {
+            equipment[id] = item;
+            currentMap.RefreshItem(id,item.name);
+        }
+
+        private void RemoveItem(int itemId)
+        {
+            equipment[itemId] = null;
+            currentMap.RefreshItem(itemId, "Empty");
+        }
+
         public String ReturnWeaponName()
         {
             if (currentWeapon == null)

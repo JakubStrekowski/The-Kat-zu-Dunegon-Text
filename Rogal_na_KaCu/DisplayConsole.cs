@@ -24,7 +24,7 @@ namespace Rogal_na_KaCu
         private string armorName;
         private int gold;
         private int enemiesKilled;
-        private List<string> items;
+        private string[] items;
         private List<string> LogsList;
         private int logCurrentPosition = 0;
         private int logSize = 5;
@@ -43,6 +43,7 @@ namespace Rogal_na_KaCu
             deathMenu = new string[19];
             gameMenu = new string[7];
             LogsList = new List<string>();
+            items = new string[6];
             string line;
             charDictionary = new string[40];
             tileDictionary = new TileInfo[20];
@@ -53,6 +54,11 @@ namespace Rogal_na_KaCu
                 int number = int.Parse(words[0]);
                 charDictionary[number] =(words[1]);
             }
+            for(int i = 0; i < 6; i++)
+            {
+                items[i] = "Empty";
+            }
+            
             charDictionary[0] = " ";
             dictFile.Close();
             
@@ -377,17 +383,18 @@ namespace Rogal_na_KaCu
                     break;
 
                 case 5:
+                    
                     break;
                 case 6:
                     int startPosition5 = 110;
                     for (int i = 0; i < value.Length; i++)
                     {
 
-                        Console.SetCursorPosition(startPosition5, 6);
+                        Console.SetCursorPosition(startPosition5, 7);
                         Console.Write('\b');
                     }
                     gold = Int32.Parse(value);
-                    Console.SetCursorPosition(startPosition5, 6);
+                    Console.SetCursorPosition(startPosition5, 7);
                     Console.Write(value);
                     break;
                 case 7:
@@ -395,14 +402,64 @@ namespace Rogal_na_KaCu
                     for (int i = 0; i < value.Length; i++)
                     {
 
-                        Console.SetCursorPosition(startPosition6, 4);
+                        Console.SetCursorPosition(startPosition6, 5);
                         Console.Write('\b');
                     }
                     enemiesKilled = Int32.Parse(value);
-                    Console.SetCursorPosition(startPosition6, 4);
+                    Console.SetCursorPosition(startPosition6, 5);
                     Console.Write(value);
                     break;
                 default: break;
+            }
+            Console.SetCursorPosition(prevX, prevY);
+        }
+
+        
+
+        public void RefreshItem(int idInList,string newName)
+        {
+            int prevX = Console.CursorLeft;
+            int prevY = Console.CursorTop;
+            int startPosition8 = 2;
+            int counter = 0;
+            for(int j=0;j<6;j++)
+            {
+                for (int i = 0; i < 19; i++)
+                {
+
+                    Console.SetCursorPosition(startPosition8, 5 + counter);
+                    Console.Write('\b');
+                }
+                counter++;
+            }
+            if (idInList != -1)
+            {
+                items[idInList] = newName;
+            }
+            for (int i=0;i<6;i++)
+            {
+                if (i < 6&&idInList!=-1)
+                {
+                    Console.SetCursorPosition(startPosition8, 5 + counter);
+                    int iToPrint = i + 1;
+                    Console.Write("  " + iToPrint +".  "+items[i]);
+                    for(int j = 0; j < 19 - (items[i].Length + 6); j++)
+                    {
+                        Console.Write(" ");
+                    }
+                    counter++;
+                }
+                else
+                {
+                    Console.SetCursorPosition(startPosition8, 5 + counter);
+                    int iToPrint = i + 1;
+                    Console.Write("  "+ iToPrint  + ".  Empty");
+                    for (int j = 0; j < 19 - (11); j++)
+                    {
+                        Console.Write(" ");
+                    }
+                    counter++;
+                }
             }
             Console.SetCursorPosition(prevX, prevY);
         }

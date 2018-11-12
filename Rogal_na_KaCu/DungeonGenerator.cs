@@ -134,6 +134,7 @@ namespace Rogal_na_KaCu
             {
                 int enemyAmnt = rnd.Next(2, 6);
                 int goldAmnt = rnd.Next(3);
+                int healthPots = rnd.Next(4);
                 for(int j = 0; j < enemyAmnt; j++)
                 {
                     Point pnt = rooms[i].RandomPointFromRoom();
@@ -149,6 +150,11 @@ namespace Rogal_na_KaCu
                 {
                     Point pnt = rooms[i].RandomPointFromRoom();
                     dungeon[pnt.Y][pnt.X] = 5;
+                }
+                for (int k = 1; k < goldAmnt; k++)
+                {
+                    Point pnt = rooms[i].RandomPointFromRoom();
+                    dungeon[pnt.Y][pnt.X] = 7;
                 }
             }
 

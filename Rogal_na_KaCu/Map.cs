@@ -209,5 +209,12 @@ namespace Rogal_na_KaCu
             gameMaster.AddGold(goldAmnt);
             SendLog("You found " + goldAmnt + " gold!");
         }
+
+        public void RefreshItem(int idFromList, string newName)
+        {
+            display.RefreshItem(idFromList, newName);
+        }
+
+        
     }
 }

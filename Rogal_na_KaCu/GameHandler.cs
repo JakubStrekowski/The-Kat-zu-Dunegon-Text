@@ -111,12 +111,21 @@ namespace Rogal_na_KaCu
             ChangeFloorNumber(floorNumber);
             display.SetStatUI(1, hero.name);
             display.SetStatUI(2, hero.hp.ToString());
+            
             /*
             display.SetStatUI(3, hero.ReturnWeaponName());
             display.SetStatUI(4, hero.ReturnArmorName());
             */
             display.SetStatUI(6, gold.ToString());
             display.SetStatUI(7, enemiesKilled.ToString());
+            if (hero.equipment[0]!=null)
+            {
+                display.RefreshItem(0, hero.equipment[0].name);
+            }
+            else
+            {
+                display.RefreshItem(-1, "Whatever");
+            }
             whatInControl = 0;
             currentMap.SetFocus();
             return newMap;
@@ -181,6 +190,14 @@ namespace Rogal_na_KaCu
             */
             display.SetStatUI(6, gold.ToString());
             display.SetStatUI(7, enemiesKilled.ToString());
+            if (hero.equipment[0] != null)
+            {
+                display.RefreshItem(0, hero.equipment[0].name);
+            }
+            else
+            {
+                display.RefreshItem(-1, "Whatever");
+            }
             whatInControl = 0;
             currentMap.SetFocus();
             return newMap;
@@ -225,7 +242,37 @@ namespace Rogal_na_KaCu
                         hero.Move(3);
                     }
                     return true;
-                case "Escape":
+                    case "1":
+                        {
+                            hero.UseItem(1);
+                            return true;
+                        }
+                    case "2":
+                        {
+                            hero.UseItem(2);
+                            return true;
+                        }
+                    case "3":
+                        {
+                            hero.UseItem(3);
+                            return true;
+                        }
+                    case "4":
+                        {
+                            hero.UseItem(4);
+                            return true;
+                        }
+                    case "5":
+                        {
+                            hero.UseItem(5);
+                            return true;
+                        }
+                    case "6":
+                        {
+                            hero.UseItem(6);
+                            return true;
+                        }
+                    case "Escape":
                 case "Q":
                     {
                         whatInControl = 1;
