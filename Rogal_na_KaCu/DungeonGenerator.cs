@@ -133,8 +133,8 @@ namespace Rogal_na_KaCu
             for(int i = 1; i < rooms.Count; i++)
             {
                 int enemyAmnt = rnd.Next(2, 6);
-                int goldAmnt = rnd.Next(3);
-                int healthPots = rnd.Next(4);
+                int goldChance = rnd.Next(3);
+                int healthPotsChance = rnd.Next(10);
                 for(int j = 0; j < enemyAmnt; j++)
                 {
                     Point pnt = rooms[i].RandomPointFromRoom();
@@ -146,12 +146,12 @@ namespace Rogal_na_KaCu
                         case 3: dungeon[pnt.Y][pnt.X] = 9; break;
                     }
                 }
-                for(int k = 1; k < goldAmnt; k++)
+                if (goldChance == 2)
                 {
                     Point pnt = rooms[i].RandomPointFromRoom();
                     dungeon[pnt.Y][pnt.X] = 5;
                 }
-                for (int k = 1; k < goldAmnt; k++)
+                if (healthPotsChance == 9)
                 {
                     Point pnt = rooms[i].RandomPointFromRoom();
                     dungeon[pnt.Y][pnt.X] = 7;
