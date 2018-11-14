@@ -42,19 +42,16 @@ namespace Rogal_na_KaCu
                 string selectedMenu = DrowMainMenu(menuItems);
                 if (selectedMenu == "Start Game")
                 {
-
+                    while (Console.KeyAvailable)
+                        Console.ReadKey(true);
                     Console.Clear();
-                    Console.WriteLine("Write hero name: ");
+                    Console.WriteLine("Enter hero name: ");
                     string name = Console.ReadLine();
-                    while (name.Length > 16)
+                    while (name.Length > 16||name.Length==0)
                     {
                         Console.Clear();
-                        Console.WriteLine("Write hero name: (shorter than 16 characters)");
+                        Console.WriteLine("Enter hero name: (shorter than 16 characters)");
                         name = Console.ReadLine();
-                    }
-                    if (name.Length == 0)
-                    {
-                        name = "Nameless Rogue";
                     }
                     Console.Clear();
                     soundMenu = new SoundPlayer("piano.wav");
@@ -92,14 +89,14 @@ namespace Rogal_na_KaCu
             {
                 if (i == index)
                 {
-                    Console.SetCursorPosition(36, 3 + i);
+                    Console.SetCursorPosition(36, 9 + i);
                     Console.BackgroundColor = ConsoleColor.Gray;
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine(item[i]);
                 }
                 else
                 {
-                    Console.SetCursorPosition(36, 3 + i);
+                    Console.SetCursorPosition(36, 9 + i);
                     Console.WriteLine(item[i]);
 
                 }

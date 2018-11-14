@@ -374,13 +374,19 @@ namespace Rogal_na_KaCu
                 case 2:
                     
                     int startPosition2 = 6;
-                    for (int i = 0; i < heroHp.ToString().Length; i++)
+                    for (int i = 0; i <3; i++)
                     {
 
                         Console.SetCursorPosition(startPosition2,5);
                         Console.Write('\b');
                     }
+                    
                     heroHp = Int32.Parse(value);
+                    for(int i = heroHp.ToString().Length; i < 3; i++)
+                    {
+                        Console.SetCursorPosition(startPosition2+3, 5);
+                        Console.Write(' ');
+                    }
                     Console.SetCursorPosition(startPosition2, 5);
                     Console.Write(value);
                     break;
