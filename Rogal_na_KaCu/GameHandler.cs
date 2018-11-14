@@ -118,11 +118,15 @@ namespace Rogal_na_KaCu
             */
             display.SetStatUI(6, gold.ToString());
             display.SetStatUI(7, enemiesKilled.ToString());
-            if (hero.equipment[0]!=null)
-            {
-                display.RefreshItem(0, hero.equipment[0].name);
-            }
-            else
+            bool displayed = false;
+            for (int i = 0; i < 6; i++)
+                if (hero.equipment[i] != null)
+                {
+                    display.RefreshItem(i, hero.equipment[i].name);
+                    displayed = true;
+                    break;
+                }
+            if (!displayed)
             {
                 display.RefreshItem(-1, "Whatever");
             }
@@ -190,11 +194,15 @@ namespace Rogal_na_KaCu
             */
             display.SetStatUI(6, gold.ToString());
             display.SetStatUI(7, enemiesKilled.ToString());
-            if (hero.equipment[0] != null)
-            {
-                display.RefreshItem(0, hero.equipment[0].name);
-            }
-            else
+            bool displayed = false;
+            for (int i = 0; i < 6; i++)
+                if (hero.equipment[i] != null)
+                {
+                    display.RefreshItem(i, hero.equipment[i].name);
+                    displayed = true;
+                    break;
+                }
+            if (!displayed)
             {
                 display.RefreshItem(-1, "Whatever");
             }
