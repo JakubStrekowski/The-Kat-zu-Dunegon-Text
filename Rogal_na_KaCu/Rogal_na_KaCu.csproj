@@ -7,7 +7,7 @@
     <ProjectGuid>{52A0C656-DFD4-42AE-9D34-B68A114B8D57}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>Rogal_na_KaCu</RootNamespace>
-    <AssemblyName>Rogal_na_KaCu</AssemblyName>
+    <AssemblyName>The Kat%27zu Dungeon</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -30,6 +30,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>skeleblekk_EOj_1.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -106,6 +109,7 @@
     <Content Include="display\YouDied.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="heroblekk_G8w_1.ico" />
     <Content Include="maps\1.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -115,6 +119,7 @@
     <Content Include="piano.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="skeleblekk_EOj_1.ico" />
     <Content Include="the end.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

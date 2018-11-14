@@ -218,7 +218,7 @@ namespace Rogal_na_KaCu
         public void HeroWon()
         {
             dontShow = true;
-            gameMaster.SetWhatInControl(6);
+            gameMaster.SetWhatInControl(4);
             display.DisplayCrown();
         }
         

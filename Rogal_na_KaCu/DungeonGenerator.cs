@@ -161,18 +161,8 @@ namespace Rogal_na_KaCu
             Room lastRoom = FindFurthest(rooms[0]);
             Point randInLast = lastRoom.RandomPointFromRoom();
             dungeon[randInLast.Y][randInLast.X] = 4;
-
-            StreamWriter sw = new StreamWriter("test.txt");
             PutHero();
-            for (int i = 0; i < sizeY; i++)
-            {
-                for (int j = 0; j < sizeX; j++)
-                {
-                    sw.Write(dungeon[i][j] + " ");
-                }
-                sw.Write(Environment.NewLine);
-            }
-            sw.Close();
+            
             
             return dungeon;
 
