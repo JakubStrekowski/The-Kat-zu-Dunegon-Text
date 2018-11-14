@@ -251,7 +251,7 @@ namespace Rogal_na_KaCu
             int prevX = Console.CursorLeft;
             int prevY = Console.CursorTop;
             Console.SetCursorPosition(0, 0);
-            for (int j = 0; j < 19; j++)
+            for (int j = 0; j < 34; j++)
             {
                 Console.WriteLine(crown[j]);
             }
