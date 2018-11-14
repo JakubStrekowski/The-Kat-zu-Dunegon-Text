@@ -17,7 +17,7 @@ namespace Rogal_na_KaCu
         Input input;
         List<Enemy> enemiesOnMap;
         public Hero hero;
-        int whatInControl = 0; //0-hero, 1-game menu, 2-death menu, 3-start menu
+        int whatInControl = 0; //0-hero, 1-game menu, 2-death menu, 3-start menu, 4 ending
 
         public GameHandler(DisplayConsole display)
         {
@@ -312,6 +312,17 @@ namespace Rogal_na_KaCu
                         GenerateRandom(floorNumber);
                         return false;
                     case "E":
+                        Environment.Exit(0);
+                        return false;
+                    default:
+                        return false;
+                }
+            }
+            if(whatInControl == 4)
+            {
+                switch (inputCommand)
+                {
+                    case "Enter":
                         Environment.Exit(0);
                         return false;
                     default:

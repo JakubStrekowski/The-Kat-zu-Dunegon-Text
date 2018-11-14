@@ -154,7 +154,7 @@ namespace Rogal_na_KaCu.TileClasses
             {
                 bodyPart.Die();
             }
-            currentMap.HeroDied();
+            currentMap.HeroWon();
             base.Die();
         }
     }

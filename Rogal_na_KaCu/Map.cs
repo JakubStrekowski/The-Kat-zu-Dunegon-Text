@@ -215,6 +215,12 @@ namespace Rogal_na_KaCu
             display.RefreshItem(idFromList, newName);
         }
 
+        public void HeroWon()
+        {
+            dontShow = true;
+            gameMaster.SetWhatInControl(6);
+            display.DisplayCrown();
+        }
         
     }
 }

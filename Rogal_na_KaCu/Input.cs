@@ -84,6 +84,10 @@ namespace Rogal_na_KaCu
                     {
                         return "6";
                     }
+                case ConsoleKey.Enter:
+                    {
+                        return "Enter";
+                    }
                 default: return "None";
             }
         }

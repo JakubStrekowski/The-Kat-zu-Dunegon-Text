@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,11 +9,13 @@ namespace Rogal_na_KaCu
 {
     class Program
     {
+        
 
-        private static int index = 0;
+    private static int index = 0;
         static void Main(string[] args)
         {
-
+            SoundPlayer soundMenu = new SoundPlayer("8bit 2.wav");
+            soundMenu.PlayLooping();
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.OutputEncoding = System.Text.Encoding.UTF8;
@@ -54,6 +57,8 @@ namespace Rogal_na_KaCu
                         name = "Nameless Rogue";
                     }
                     Console.Clear();
+                    soundMenu = new SoundPlayer("piano.wav");
+                    soundMenu.PlayLooping();
                     display.DrawFrame();
                     
                     GameHandler gameMaster = new GameHandler(display);

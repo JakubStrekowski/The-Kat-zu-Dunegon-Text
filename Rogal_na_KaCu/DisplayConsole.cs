@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Media;
 
 namespace Rogal_na_KaCu
 {
@@ -30,6 +31,7 @@ namespace Rogal_na_KaCu
         private int logSize = 5;
         private int logLastID = 0;
         private bool writeGreyLog = false;
+        string[] crown;
         string[] gameMenu;
         string[] deathMenu;
 
@@ -40,6 +42,7 @@ namespace Rogal_na_KaCu
             heroName = "";
             weaponName = "";
             armorName = "";
+            crown = new string[34];
             deathMenu = new string[19];
             gameMenu = new string[7];
             LogsList = new List<string>();
@@ -94,6 +97,16 @@ namespace Rogal_na_KaCu
                 counter++;
             }
             deathMenuFile.Close();
+
+            System.IO.StreamReader crownMenuFile = new System.IO.StreamReader("display/crown.txt");
+            counter = 0;
+            while ((line = crownMenuFile.ReadLine()) != null)
+            {
+                crown[counter] = line;
+                crown[counter].Replace('\n', '\0');
+                counter++;
+            }
+            crownMenuFile.Close();
         }
 
         public void DrowStory()
@@ -109,6 +122,8 @@ namespace Rogal_na_KaCu
             frameFile.Close();
             Console.Read();
         }
+
+        
         public void DrowCredits()
         {
 
@@ -223,6 +238,22 @@ namespace Rogal_na_KaCu
             for(int j = 0; j < 19; j++)
             {
                 Console.WriteLine(deathMenu[j]);
+            }
+        }
+
+        public void DisplayCrown()
+        {
+            SoundPlayer snd = new SoundPlayer("the end.wav");
+            snd.PlayLooping();
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            ResetLogVariables();
+            Console.Clear();
+            int prevX = Console.CursorLeft;
+            int prevY = Console.CursorTop;
+            Console.SetCursorPosition(0, 0);
+            for (int j = 0; j < 19; j++)
+            {
+                Console.WriteLine(crown[j]);
             }
         }
         
