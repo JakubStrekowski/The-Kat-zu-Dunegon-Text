@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 
 namespace Rogal_na_KaCu.TileClasses
 {
-    class EmptyTile:Tile
+    public class EmptyTile:Tile
     {
-        public EmptyTile(int id, int posX, int posY, Map mp) : base(id, posX, posY, mp)
+        private EmptyTile(int id, Map mp) : base(id, mp)
         {
             passable = true;
+        }
+
+        public static void NewFloor(Dictionary<int, Tile> staticTiles)
+        {
+
+            staticTiles.Add(0, new EmptyTile(0, null));
         }
     }
 }

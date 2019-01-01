@@ -9,6 +9,8 @@ namespace Rogal_na_KaCu
 {
     public abstract class Character:Tile
     {
+        public int positionX;
+        public int positionY;
         public int hp;
         protected int attack;
         protected int armor;
@@ -28,8 +30,10 @@ namespace Rogal_na_KaCu
             currentMap.DestroyCharacter(positionX, positionY);
         }
         
-        public Character(int id, int posX, int posY, Map mp) : base(id, posX, posY, mp)
+        public Character(int id, int posX, int posY, Map mp) : base(id, mp)
         {
+            positionX = posX;
+            positionY = posY;
             standingOnTile = TileFactory.Get(0, posX, posY, mp);
             passable = false;
             

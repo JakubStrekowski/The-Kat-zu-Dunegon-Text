@@ -13,7 +13,7 @@ namespace Rogal_na_KaCu
         public string name;
         public abstract void UseEffect(Character character);
 
-        public Consumable(int id, int posX, int posY, Map mp) : base(id, posX, posY, mp)
+        public Consumable(int id, int posX, int posY, Map mp) : base(id, mp)
         {
             standingOnTile = TileFactory.Get(0, posX, posY, mp);
             passable = true;

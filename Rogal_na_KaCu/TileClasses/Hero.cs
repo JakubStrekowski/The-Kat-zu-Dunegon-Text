@@ -13,8 +13,6 @@ namespace Rogal_na_KaCu
         public Consumable[] equipment;
         public int currentCenterPositionX;
         public int currentCenterPositionY;
-        public Weapon currentWeapon;
-        public Armor currentArmor;
         public bool isAlife;
 
         public Hero(int id, int posX, int posY,Map mp): base(id, posX,posY, mp)
@@ -286,29 +284,6 @@ namespace Rogal_na_KaCu
             equipment[itemId] = null;
             currentMap.RefreshItem(itemId, "Empty");
         }
-
-        public String ReturnWeaponName()
-        {
-            if (currentWeapon == null)
-            {
-                return "Dagger";
-            }
-            else
-            {
-                return currentWeapon.name;
-            }
-        }
-
-        public String ReturnArmorName()
-        {
-            if (currentArmor == null)
-            {
-                return "No Armor";
-            }
-            else
-            {
-                return currentArmor.name;
-            }
-        }
+        
     }
 }

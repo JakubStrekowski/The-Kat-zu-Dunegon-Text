@@ -8,7 +8,7 @@ namespace Rogal_na_KaCu.TileClasses
 {
     class Coin:Tile
     {
-        public Coin(int id, int posX, int posY, Map mp) : base(id, posX, posY, mp)
+        public Coin(int id, int posX, int posY, Map mp) : base(id, mp)
         {
             passable = true;
         }

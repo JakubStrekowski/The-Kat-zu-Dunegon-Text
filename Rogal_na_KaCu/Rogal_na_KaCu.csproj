@@ -46,7 +46,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DungeonGenerator.cs" />
-    <Compile Include="TileClasses\Armor.cs" />
     <Compile Include="TileClasses\Character.cs" />
     <Compile Include="TileClasses\Coin.cs" />
     <Compile Include="TileClasses\Consumable.cs" />
@@ -71,7 +70,6 @@
     <Compile Include="TileClasses\Tile.cs" />
     <Compile Include="TileClasses\TileFactory.cs" />
     <Compile Include="TileClasses\Wall.cs" />
-    <Compile Include="TileClasses\Weapon.cs" />
     <Compile Include="TileClasses\Zombie.cs" />
     <Compile Include="TileClasses\TileInfo.cs" />
   </ItemGroup>

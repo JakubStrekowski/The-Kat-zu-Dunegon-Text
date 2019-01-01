@@ -246,6 +246,5 @@ namespace Rogal_na_KaCu
                 return GetEnumerator();
             }
         }
-
     }
 }

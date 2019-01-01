@@ -13,9 +13,9 @@ namespace Rogal_na_KaCu.TileClasses
             switch (id)
             {
                 case 0:
-                    return new EmptyTile(id, posX, posY, mp);
+                    return Tile.GetStaticTile(0);
                 case 1:
-                    return new Wall(id, posX, posY, mp);
+                    return Tile.GetStaticTile(1);
                 case 2:
                     return new Hero(id, posX, posY, mp);
                 case 3:
@@ -23,7 +23,7 @@ namespace Rogal_na_KaCu.TileClasses
                 case 4:
                     return new Stairs(id, posX, posY, mp);
                 case 5:
-                    return new Coin(id, posX, posY, mp); //tbd
+                    return new Coin(id, posX, posY, mp); 
                 case 6:
                     return new Zombie(id, posX, posY, mp);
                 case 7:
@@ -41,7 +41,7 @@ namespace Rogal_na_KaCu.TileClasses
                 case 13:
                     return new KatzuAvatarBody(id, posX, posY, mp);
                 default:
-                    return new EmptyTile(id, posX, posY, mp);
+                    return Tile.GetStaticTile(0);
             }
         }
 
