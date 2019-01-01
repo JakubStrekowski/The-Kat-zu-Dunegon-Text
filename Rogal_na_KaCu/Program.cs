@@ -79,9 +79,7 @@ namespace Rogal_na_KaCu
                 Console.Clear();
             };
         }
-
-
-
+        
         public static string DrowMainMenu(List<string> item)
         {
             Console.CursorVisible = false;
@@ -98,14 +96,11 @@ namespace Rogal_na_KaCu
                 {
                     Console.SetCursorPosition(36, 9 + i);
                     Console.WriteLine(item[i]);
-
                 }
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.BackgroundColor = ConsoleColor.Black;
             }
-
             ConsoleKeyInfo consoleKey = Console.ReadKey();
-
             if (consoleKey.Key == ConsoleKey.DownArrow)
             {
                 if (index == item.Count - 1)
@@ -138,11 +133,6 @@ namespace Rogal_na_KaCu
             }
             Console.Clear();
             return "";
-
-     
-
         }
-
-
     }
 }

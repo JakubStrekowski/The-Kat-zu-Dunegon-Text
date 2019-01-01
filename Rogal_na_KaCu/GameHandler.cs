@@ -15,17 +15,14 @@ namespace Rogal_na_KaCu
         Map currentMap;
         DisplayConsole display;
         Input input;
-        List<Enemy> enemiesOnMap;
         public Hero hero;
         int whatInControl = 0; //0-hero, 1-game menu, 2-death menu, 3-start menu, 4 ending
 
         public GameHandler(DisplayConsole display)
         {
-            enemiesOnMap = new List<Enemy>();
             this.display = display;
             input = new Input();
             floorNumber = 1;
-
         }
 
         public void SetGold(int value)
@@ -46,20 +43,22 @@ namespace Rogal_na_KaCu
             gold = 0;
             hero.SetName(name);
         }
-    
 
-        void ResolveTurn() {
-            foreach(Enemy enemy in enemiesOnMap)
+
+        void ResolveTurn()
+        {
+            foreach (Enemy enemy in currentMap.enemies)
             {
-                if (hero.isAlife)
+                if (hero.isAlife && !enemy.AlreadyMoved)
                 {
                     enemy.MovementBehaviour();
                 }
-                
             }
-            
+            foreach (Enemy enemy in currentMap.enemies)
+            {
+                enemy.ReenableMove();
+            }
         }
-
         public void NextLevel()
         {
             floorNumber++;
@@ -67,9 +66,6 @@ namespace Rogal_na_KaCu
 
         public Map GenerateRandom(int floorNumber)
         {
-
-            Map currentMap = new Map();
-            enemiesOnMap = new List<Enemy>();
             Random rnd = new Random();
             if (floorNumber == 5)
             {
@@ -111,11 +107,6 @@ namespace Rogal_na_KaCu
             ChangeFloorNumber(floorNumber);
             display.SetStatUI(1, hero.name);
             display.SetStatUI(2, hero.hp.ToString());
-            
-            /*
-            display.SetStatUI(3, hero.ReturnWeaponName());
-            display.SetStatUI(4, hero.ReturnArmorName());
-            */
             display.SetStatUI(6, gold.ToString());
             display.SetStatUI(7, enemiesKilled.ToString());
             bool displayed = false;
@@ -137,9 +128,7 @@ namespace Rogal_na_KaCu
 
     public Map LoadMap(string name="1.txt")
         {
-            enemiesOnMap = new List<Enemy>();
             display.DrawFrame();
-            currentMap = new Map();
             int mapRowLimit=50;
             int mapColumnLimit = 100;
             int[][] intMap = new int[mapRowLimit][];
@@ -345,15 +334,6 @@ namespace Rogal_na_KaCu
             display.SetStatUI(0, floorNumber.ToString());
         }
 
-        public void AddEnemyToList(Enemy toAdd)
-        {
-            enemiesOnMap.Add(toAdd);
-        }
-
-        public void RemoveEnemyFromList(Enemy toRemove)
-        {
-            enemiesOnMap.Remove(toRemove);
-        }
         public void SetWhatInControl(int value)
         {
             whatInControl = value;

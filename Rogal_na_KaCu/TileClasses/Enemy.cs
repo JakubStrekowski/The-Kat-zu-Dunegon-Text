@@ -12,16 +12,23 @@ namespace Rogal_na_KaCu
         public int id;
         public int speed;
         public int giveGold;
+        private bool alreadyMoved;
+        public bool AlreadyMoved
+        {
+            get { return alreadyMoved; }
+        }
         public abstract void MovementBehaviour();
 
         public Enemy(int id, int posX, int posY,Map mp) : base(id, posX, posY, mp)
         {
+            alreadyMoved = false;
         }
 
         public bool moveDirection(int direction) //0 up, 1 down, 2 right, 3 left
         {
             int targetPositionX = positionX;
             int targetPositionY = positionY;
+            alreadyMoved = true;
             switch (direction)
             {
                 case 0:
@@ -99,6 +106,11 @@ namespace Rogal_na_KaCu
                     break;
             }
             return false;
+        }
+
+        public void ReenableMove()
+        {
+            alreadyMoved = false;
         }
     }
 }

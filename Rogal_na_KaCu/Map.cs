@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +13,14 @@ namespace Rogal_na_KaCu
         DisplayConsole display;
         public int relativeCenterX=0;
         public int relativeCenterY=0;
+        
         public Tile[][] tileMap;
         private bool dontShow;
         public GameHandler gameMaster;
         int mapRowLimit;
         int mapColumnLimit;
-        public Map()
-        {
+        public EnemyIterator enemies;
 
-        }
 
         public Map(int[][] intMap,DisplayConsole display,GameHandler gm, int rowAmmount, int ColumnAmmount)
         {
@@ -46,15 +46,12 @@ namespace Rogal_na_KaCu
                         gameMaster.hero.currentCenterPositionY = rowCounter;
                     }
                     else this.tileMap[rowCounter][columnCounter] = TileFactory.Get(integer, columnCounter, rowCounter, this);
-                    if (integer == 6 || integer==3|| integer == 8|| integer == 9||integer==11)
-                    {
-                        gameMaster.AddEnemyToList((Enemy)this.tileMap[rowCounter][columnCounter]);
-                    }
                     
                     columnCounter++;
                 }
                 rowCounter++;
             }
+            enemies = new EnemyIterator(tileMap);
         }
 
         public void SwitchElements(int sourceX,int sourceY,int targetX,int targetY)
@@ -142,7 +139,6 @@ namespace Rogal_na_KaCu
             Tile temporary = chara.standingOnTile;
             if(chara is Enemy)
             {
-                gameMaster.RemoveEnemyFromList((Enemy)chara);
                 gameMaster.enemiesKilled++;
                 display.SetStatUI(7, gameMaster.enemiesKilled.ToString());
             }
@@ -221,6 +217,35 @@ namespace Rogal_na_KaCu
             gameMaster.SetWhatInControl(4);
             display.DisplayCrown();
         }
-        
+
+        public class EnemyIterator : IEnumerable<Tile>
+        {
+            public Tile[][] values;
+
+            public EnemyIterator(Tile[][] tileMap)
+            {
+                values = tileMap;
+            }
+
+            public IEnumerator<Tile> GetEnumerator()
+            {
+                for(int i = 0; i < values.Length; i++)
+                {
+                    for(int j = 0; j < values[i].Length; j++)
+                    {
+                        if(values[i][j] is Enemy)
+                        {
+                            yield return values[i][j];
+                        }
+                    }
+                }
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+        }
+
     }
 }

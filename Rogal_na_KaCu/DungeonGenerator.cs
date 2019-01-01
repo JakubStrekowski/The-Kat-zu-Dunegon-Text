@@ -56,24 +56,9 @@ namespace Rogal_na_KaCu
             {
                 
                 selectedRoom = rnd.Next(rooms.Count);
-                /*int corridorDir = rnd.Next(4);
-                Corridor cor = CreateCorridor(rnd.Next(3, 8), corridorDir, rooms[selectedRoom]);
-                */
+                
                 int dir = rnd.Next(4);
-                /*
-                if(corridorDir==0)
-                    while(dir==1) dir = rnd.Next(4);
-                if (corridorDir == 1)
-                    while (dir == 0) dir = rnd.Next(4);
-                if (corridorDir == 2)
-                    while (dir == 3) dir = rnd.Next(4);
-                if (corridorDir == 3)
-                    while (dir == 2) dir = rnd.Next(4);
-                if (cor == null)
-                {
-                    continue;
-                }
-                Point nextPlace = cor.GiveEndPoint(dir);*/
+                
                 Point nextPlace;
                 nextPlace.X = rnd.Next(0, mapSizeX);
                 nextPlace.Y = rnd.Next(0, mapSizeY);
@@ -102,20 +87,7 @@ namespace Rogal_na_KaCu
                 id++;
             }
 
-            /*
-            CheckIntegrity(0, 0);
-            int id1 = 0;
-            foreach(Room room in rooms)
-            {
-                if (!room.visited)
-                {
-                    int rndID = rnd.Next(connectedRooms.Count);
-                    ConnectTwoRooms(room, connectedRooms[rndID]);
-                    Console.WriteLine("Rooom " + room.beginX + " " + room.beginY + " wasnt visited, connecting to " + connectedRooms[rndID].beginX+" " + connectedRooms[rndID].beginY);
-                }
-                id1++;
-            }
-            */
+            
             int randomConnections = rnd.Next(2, 8);
             for(int i = 0; i < randomConnections; i++)
             {
@@ -244,47 +216,7 @@ namespace Rogal_na_KaCu
             
         }
 
-        /*
-        public class Corridor
-        {
-            public Point begin;
-            public Point end;
-            public int direction;
-            public Corridor(Point begin, Point end, int dir)
-            {
-                this.begin = begin;
-                this.end = end;
-                direction = dir;
-            }
-
-            public Point GiveEndPoint(int direction)
-            {
-                Point point;
-                point = end;
-                switch (direction)
-                {
-                    case 0:
-                        point.X = end.X;
-                        point.Y = end.Y-1;
-                        break;
-                    case 1:
-                        point.X = end.X;
-                        point.Y = end.Y+1;
-                        break;
-                    case 2:
-                        point.X = end.X+1;
-                        point.Y = end.Y;
-                        break;
-                    case 3:
-                        point.X = end.X-1;
-                        point.Y = end.Y;
-                        break;
-                }
-                return point;
-            }
-
-            
-        }*/
+       
 
         public struct Point
         {
@@ -293,46 +225,7 @@ namespace Rogal_na_KaCu
         }
 
         
-        /*
-        public void CleanCorridor(Corridor cor)
-        {
-            Point currentPoint = cor.end;
-            int dir = cor.direction;
-            while(isCorridor(currentPoint.X,currentPoint.Y))
-            {
-                switch (dir)
-                {
-                    case 0:
-                        dungeon[currentPoint.Y][currentPoint.X] = 1;
-                        currentPoint.Y += 1;
-                        break;
-                    case 1:
-                        dungeon[currentPoint.Y][currentPoint.X] = 1;
-                        currentPoint.Y -= 1;
-                        break;
-                    case 2:
-                        dungeon[currentPoint.Y][currentPoint.X] = 1;
-                        currentPoint.X -= 1;
-                        break;
-                    case 3:
-                        dungeon[currentPoint.Y][currentPoint.X] = 1;
-                        currentPoint.Y += 1;
-                        break;
-                }
-            }
-        }*/
-        /*
-        private bool isCorridor(int x, int y)
-        {
-            int neighborCounter = 4;
-            if (dungeon[y + 1][x] != 1) neighborCounter--;
-            if (dungeon[y - 1][x] != 1) neighborCounter--;
-            if (dungeon[y][x-1] != 1) neighborCounter--;
-            if (dungeon[y][x+1] != 1) neighborCounter--;
-            if (neighborCounter > 1) return false;
-            return true;
-        }
-        */
+       
         private bool CreateIfPossible(int sizeX, int sizeY, int direction, int beginX, int beginY,bool corridor)
         {
             int sourceX = beginX;
@@ -391,59 +284,7 @@ namespace Rogal_na_KaCu
             if(!corridor)rooms.Add(new Room(beginX, sizeX, beginY, sizeY));
             return true;
         }
-        /*
-        public Corridor CreateCorridor(int length, int direction, Room sourceRoom)
-        {
-            Point possibleBegin = sourceRoom.PointFromWall(direction);
-            switch (direction)
-            {
-                case 0:
-                    dungeon[possibleBegin.Y + 1][possibleBegin.X] = 0;
-                    break;
-                case 1:
-                    dungeon[possibleBegin.Y -1][possibleBegin.X] = 0;
-                    break;
-                case 2:
-                    dungeon[possibleBegin.Y][possibleBegin.X-1] = 0;
-                    break;
-                case 3:
-                    dungeon[possibleBegin.Y][possibleBegin.X + 1] = 0;
-                    break;
-            }
-            if (direction == 0 || direction == 1)
-            {
-                 if(CreateIfPossible(1, length, direction, possibleBegin.X, possibleBegin.Y,true)){
-                    Point end;
-                    end.X = possibleBegin.X;
-                    end.Y = possibleBegin.Y + length;
-                    Corridor cor = new Corridor(possibleBegin,end,direction);
-                    sourceRoom.AddToCorridorList(cor);
-                    return cor;
-                }
-                 else
-                    if(direction==0) Console.WriteLine("nie moge narysowac korytarza w gore");
-                    else Console.WriteLine("nie moge narysowac korytarza dol");
-            }
-            else
-            {
-                if (CreateIfPossible(length, 1, direction, possibleBegin.X, possibleBegin.Y,true))
-                {
-                    Point end;
-                    end.X = possibleBegin.X+length;
-                    end.Y = possibleBegin.Y;
-                    Corridor cor = new Corridor(possibleBegin, end, direction);
-                    sourceRoom.AddToCorridorList(cor);
-                    return cor;
-                }
-                else
-                    if(direction==2) Console.WriteLine("nie moge narysowac korytarza w prawo");
-                else Console.WriteLine("nie moge narysowac korytarza w lewo");
-            }
-            Console.WriteLine("Cos pojszlo ni tak.");
-            return null;
-            
-            
-        }*/
+        
 
         private Room FindFurthest(Room source)
         {
