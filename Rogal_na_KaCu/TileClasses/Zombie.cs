@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rogal_na_KaCu.EnemyBehaviour;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +10,16 @@ namespace Rogal_na_KaCu
     class Zombie : Enemy
     {
         bool directionHorizontal; //does zombie move left-right or up-down
-        bool moveDirectionUR; //if true, moves Up/right
+        public bool DirectionHorizontal
+        {
+            get { return directionHorizontal; }
+        }
         Random rnd;
+        ZombieMoveState movementState;
+        public ZombieMoveState MovementState
+        {
+            set { movementState = value; }
+        }
         public Zombie(int id, int posX, int posY,Map mp) : base(id, posX, posY, mp)
         {
             name = "Zombie";
@@ -27,44 +36,13 @@ namespace Rogal_na_KaCu
             {
                 directionHorizontal = false;
             }
+            if (rnd.Next(2) == 0) movementState = new MoveDownState();
+            else movementState = new MoveUpState();
         }
 
         public override void MovementBehaviour()
         {
-            if (directionHorizontal)
-            {
-                if (moveDirectionUR)
-                {
-                    if (!moveDirection(2))
-                    {
-                        moveDirectionUR = !moveDirectionUR;
-                    }
-                }
-                else
-                {
-                    if (!moveDirection(3))
-                    {
-                        moveDirectionUR = !moveDirectionUR;
-                    }
-                }
-            }
-            else
-            {
-                if (moveDirectionUR)
-                {
-                    if (!moveDirection(0))
-                    {
-                        moveDirectionUR = !moveDirectionUR;
-                    }
-                }
-                else
-                {
-                    if(!moveDirection(1))
-                    {
-                        moveDirectionUR = !moveDirectionUR;
-                    }
-                }
-            }
+            movementState.ZombieMove(this);
         }
         
 

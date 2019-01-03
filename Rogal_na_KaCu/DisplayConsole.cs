@@ -34,8 +34,21 @@ namespace Rogal_na_KaCu
         string[] crown;
         string[] gameMenu;
         string[] deathMenu;
+        private static DisplayConsole instance;
 
-        public DisplayConsole()
+        public static DisplayConsole Instance
+        {
+            get
+            {
+                if(instance == null)
+                {
+                    instance = new DisplayConsole();
+                }
+                return instance;
+            }
+        }
+
+        private DisplayConsole()
         {
             gold = 0;
             enemiesKilled = 0;

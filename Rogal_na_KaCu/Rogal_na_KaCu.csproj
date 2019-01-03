@@ -46,6 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DungeonGenerator.cs" />
+    <Compile Include="EnemyBehaviour\MoveDownState.cs" />
+    <Compile Include="EnemyBehaviour\MoveUpState.cs" />
+    <Compile Include="EnemyBehaviour\ZombieMoveState.cs" />
     <Compile Include="TileClasses\Character.cs" />
     <Compile Include="TileClasses\Coin.cs" />
     <Compile Include="TileClasses\Consumable.cs" />

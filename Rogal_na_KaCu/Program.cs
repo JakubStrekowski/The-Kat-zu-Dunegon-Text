@@ -19,7 +19,7 @@ namespace Rogal_na_KaCu
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
             Console.OutputEncoding = System.Text.Encoding.UTF8;
-            DisplayConsole display = new DisplayConsole();
+            DisplayConsole display = DisplayConsole.Instance;
             List<string> menuItems = new List<string>()
             {
                 "Start Game",
