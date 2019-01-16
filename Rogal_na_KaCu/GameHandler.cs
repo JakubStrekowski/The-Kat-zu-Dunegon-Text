@@ -59,6 +59,7 @@ namespace Rogal_na_KaCu
                 enemy.ReenableMove();
             }
         }
+
         public void NextLevel()
         {
             floorNumber++;
@@ -72,35 +73,9 @@ namespace Rogal_na_KaCu
                 Map newMap1 = LoadMap("2.txt");
                 return newMap1;
             }
-            DungeonGenerator mapGenerator = new DungeonGenerator(100, 50);
             int[][] dungeon=new int[100][];
-            int rowAmmount = 0;
-            int columnAmmount = 0;
-            switch (floorNumber)
-            {
-                case 1:
-                    rowAmmount = 25;
-                    columnAmmount = 50;
-                    dungeon = mapGenerator.CreateDungeon(columnAmmount, rowAmmount, 8);
-                    break;
-                case 2:
-                    rowAmmount = 35;
-                    columnAmmount = 70;
-                    dungeon = mapGenerator.CreateDungeon(columnAmmount, rowAmmount, 13);
-                    break;
-                case 3:
-                    rowAmmount = 45;
-                    columnAmmount = 85;
-                    dungeon = mapGenerator.CreateDungeon(columnAmmount, rowAmmount, 16);
-                    break;
-                case 4:
-                    rowAmmount = 50;
-                    columnAmmount = 100;
-                    dungeon = mapGenerator.CreateDungeon(columnAmmount, rowAmmount, 20);
-                    break;
-            }
-            
-            Map newMap = new Map(dungeon, display, this,rowAmmount,columnAmmount);
+            dungeon=SetDungeonSize(floorNumber);
+            Map newMap = new Map(dungeon, display, this,dungeon.Length,dungeon[0].Length);
             display.DrawFrame();
             currentMap = newMap;
             hero.SetCurrentMap(currentMap);
@@ -126,34 +101,91 @@ namespace Rogal_na_KaCu
             return newMap;
         }
 
+    private int[][] SetDungeonSize(int floorNumber)
+        {
+            DungeonGenerator mapGenerator = new DungeonGenerator(100, 50);
+            int rowAmmount = 0;
+            int columnAmmount = 0;
+            switch (floorNumber)
+            {
+                case 1:
+                    rowAmmount = 25;
+                    columnAmmount = 50;
+                    return mapGenerator.CreateDungeon(columnAmmount, rowAmmount, 8);
+                case 2:
+                    rowAmmount = 35;
+                    columnAmmount = 70;
+                    return mapGenerator.CreateDungeon(columnAmmount, rowAmmount, 13);
+                case 3:
+                    rowAmmount = 45;
+                    columnAmmount = 85;
+                    return  mapGenerator.CreateDungeon(columnAmmount, rowAmmount, 16);
+                case 4:
+                    rowAmmount = 50;
+                    columnAmmount = 100;
+                    return mapGenerator.CreateDungeon(columnAmmount, rowAmmount, 20);
+            }
+            return mapGenerator.CreateDungeon(columnAmmount, rowAmmount, 20); ;
+        }
+
     public Map LoadMap(string name="1.txt")
         {
             display.DrawFrame();
             int mapRowLimit=50;
             int mapColumnLimit = 100;
             int[][] intMap = new int[mapRowLimit][];
-            string line;
-            System.IO.StreamReader file = new System.IO.StreamReader("maps/"+name);
-            int rowCounter = 0;
-            while(rowCounter!= mapRowLimit)
-            if((line = file.ReadLine()) != null)
-            {
-                string[] strRow = line.Split(' ');
-                int[] intRow = new int[mapColumnLimit];
-                int counter = 0;
-                foreach (string st in strRow)
+            intMap = CreateIntMap(name, mapRowLimit, mapColumnLimit);
+            Map newMap = new Map(intMap, display, this, mapRowLimit, mapColumnLimit);
+            display.DrawFrame();
+            currentMap = newMap;
+            hero.SetCurrentMap(currentMap);
+            ChangeFloorNumber(floorNumber);
+            display.SetStatUI(1, hero.name);
+            display.SetStatUI(2, hero.hp.ToString());
+            display.SetStatUI(6, gold.ToString());
+            display.SetStatUI(7, enemiesKilled.ToString());
+            bool displayed = false;
+            for (int i = 0; i < 6; i++)
+                if (hero.equipment[i] != null)
                 {
-                    intRow[counter] = int.Parse(st);
-                    counter++;
+                    display.RefreshItem(i, hero.equipment[i].name);
+                    displayed = true;
+                    break;
                 }
+            if (!displayed)
+            {
+                display.RefreshItem(-1, "Whatever");
+            }
+            whatInControl = 0;
+            currentMap.SetFocus();
+            return newMap;
+        }
+
+        private int[][] CreateIntMap(string name, int mapRowLimit, int mapColumnLimit)
+        {
+            int[][] intMap = new int[mapRowLimit][];
+            string line;
+            System.IO.StreamReader file = new System.IO.StreamReader("maps/" + name);
+            int rowCounter = 0;
+            while (rowCounter != mapRowLimit)
+                if ((line = file.ReadLine()) != null)
+                {
+                    string[] strRow = line.Split(' ');
+                    int[] intRow = new int[mapColumnLimit];
+                    int counter = 0;
+                    foreach (string st in strRow)
+                    {
+                        intRow[counter] = int.Parse(st);
+                        counter++;
+                    }
                     while (counter < mapColumnLimit)
                     {
                         intRow[counter] = 0;
                         counter++;
                     }
-                intMap[rowCounter] = intRow;
-                rowCounter++;
-            }
+                    intMap[rowCounter] = intRow;
+                    rowCounter++;
+                }
                 else
                 {
                     while (rowCounter < mapRowLimit)
@@ -167,37 +199,9 @@ namespace Rogal_na_KaCu
                         }
                         rowCounter++;
                     }
-                    
                 }
             file.Close();
-            Map newMap = new Map(intMap, display, this, mapRowLimit, mapColumnLimit);
-            display.DrawFrame();
-            currentMap = newMap;
-            hero.SetCurrentMap(currentMap);
-            ChangeFloorNumber(floorNumber);
-            display.SetStatUI(1, hero.name);
-            display.SetStatUI(2, hero.hp.ToString());
-            /*
-            display.SetStatUI(3, hero.ReturnWeaponName());
-            display.SetStatUI(4, hero.ReturnArmorName());
-            */
-            display.SetStatUI(6, gold.ToString());
-            display.SetStatUI(7, enemiesKilled.ToString());
-            bool displayed = false;
-            for (int i = 0; i < 6; i++)
-                if (hero.equipment[i] != null)
-                {
-                    display.RefreshItem(i, hero.equipment[i].name);
-                    displayed = true;
-                    break;
-                }
-            if (!displayed)
-            {
-                display.RefreshItem(-1, "Whatever");
-            }
-            whatInControl = 0;
-            currentMap.SetFocus();
-            return newMap;
+            return intMap;
         }
 
         public void PlayInMap()
@@ -210,7 +214,6 @@ namespace Rogal_na_KaCu
                 {
                     ResolveTurn();
                 }
-                
             }
         }
 

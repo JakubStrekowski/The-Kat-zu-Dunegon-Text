@@ -53,31 +53,14 @@ namespace Rogal_na_KaCu
                         {
                             currentMap.MoveFocus(this);
                         }
-
-                        if (neighbor0 is Stairs)
-                        {
-                            currentMap.gameMaster.NextLevel();
-                            currentMap.gameMaster.GenerateRandom(currentMap.gameMaster.floorNumber);
-                            currentMap.SendLog("You went down the stairs");
-                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
-                            currentMap.MoveFocus(this);
-                        }
-                        if (neighbor0 is Coin)
-                        {
-                            currentMap.GotGold();
-                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
-                        }
-                        IfIsConsumable(neighbor0);
+                        IfIsOther(neighbor0);
                     }
                     else
                     {
                         if(neighbor0 is Enemy)
                         {
-                            Enemy enm = (Enemy)neighbor0;
-                            enm.GetDmg(attack);
-                            currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
+                            IfIsEnemy(neighbor0);
                         }
-
                     }
                     break;
                 case 1:
@@ -85,38 +68,20 @@ namespace Rogal_na_KaCu
                     Tile neighbor1 = currentMap.GiveNeighbor(positionX, positionY, 1);
                     if (neighbor1.passable)
                     {
-                        
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionY = positionY + 1;
                         if (isNearBorder())
                         {
                             currentMap.MoveFocus(this);
                         }
-                        if (neighbor1 is Stairs)
-                        {
-                            currentMap.gameMaster.NextLevel();
-                            currentMap.gameMaster.GenerateRandom(currentMap.gameMaster.floorNumber);
-                            currentMap.SendLog("You went down the stairs");
-                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
-                            currentMap.MoveFocus(this);
-                        }
-                        if (neighbor1 is Coin)
-                        {
-                            currentMap.GotGold();
-                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
-                        }
-                        IfIsConsumable(neighbor1);
-
+                        IfIsOther(neighbor1);
                     }
                     else
                     {
                         if (neighbor1 is Enemy)
                         {
-                            Enemy enm = (Enemy)neighbor1;
-                            enm.GetDmg(attack);
-                            currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
+                            IfIsEnemy(neighbor1);
                         }
-                        
                     }
                     break;
                 case 2:
@@ -131,28 +96,13 @@ namespace Rogal_na_KaCu
                             {
                                 currentMap.MoveFocus(this);
                             }
-                        if (neighbor2 is Stairs)
-                        {
-                            currentMap.gameMaster.NextLevel();
-                            currentMap.gameMaster.GenerateRandom(currentMap.gameMaster.floorNumber);
-                            currentMap.SendLog("You went down the stairs");
-                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
-                            currentMap.MoveFocus(this);
-                        }
-                        if (neighbor2 is Coin)
-                        {
-                            currentMap.GotGold();
-                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
-                        }
-                        IfIsConsumable(neighbor2);
+                        IfIsOther(neighbor2);
                     }
                     else
                     {
                         if (neighbor2 is Enemy)
                         {
-                            Enemy enm = (Enemy)neighbor2;
-                            enm.GetDmg(attack);
-                            currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
+                            IfIsEnemy(neighbor2);
                         }
                     }
                     break;
@@ -162,41 +112,49 @@ namespace Rogal_na_KaCu
                     neighbor3 = currentMap.GiveNeighbor(positionX, positionY, 3);
                     if (neighbor3.passable)
                     {
-
                         currentMap.StepOnElement(positionX, positionY, targetPositionX, targetPositionY);
                         positionX = positionX - 1;
                         if (isNearBorder())
                         {
                             currentMap.MoveFocus(this);
                         }
-
-                        if (neighbor3 is Stairs)
-                        {
-                            currentMap.gameMaster.NextLevel();
-                            currentMap.gameMaster.GenerateRandom(currentMap.gameMaster.floorNumber);
-                            currentMap.SendLog("You went down the stairs");
-                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
-                            currentMap.MoveFocus(this);
-                        }
-                        if( neighbor3 is Coin)
-                        {
-                            currentMap.GotGold();
-                            standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
-                        }
-                        IfIsConsumable(neighbor3);
+                        IfIsOther(neighbor3);
                     }
                     else
                     {
-                        if (neighbor3 is Enemy)
-                        {
-                            Enemy enm = (Enemy)neighbor3;
-                            enm.GetDmg(attack);
-                            currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
-                        }
+                        IfIsEnemy(neighbor3);
                     }
                     break;
             }
             Thread.Sleep(200);
+        }
+
+        void IfIsOther(Tile neighbor)
+        {
+            if (neighbor is Stairs)
+            {
+                currentMap.gameMaster.NextLevel();
+                currentMap.gameMaster.GenerateRandom(currentMap.gameMaster.floorNumber);
+                currentMap.SendLog("You went down the stairs");
+                standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
+                currentMap.MoveFocus(this);
+            }
+            if (neighbor is Coin)
+            {
+                currentMap.GotGold();
+                standingOnTile = TileFactory.Get(0, positionX, positionY, currentMap);
+            }
+            IfIsConsumable(neighbor);
+        }
+
+        void IfIsEnemy(Tile neighbor)
+        {
+            if (neighbor is Enemy)
+            {
+                Enemy enm = (Enemy)neighbor;
+                enm.GetDmg(attack);
+                currentMap.SendLog("You hit " + enm.name + " for " + attack.ToString() + " damage!");
+            }
         }
 
         void IfIsConsumable(Tile tile)
@@ -253,8 +211,8 @@ namespace Rogal_na_KaCu
                 isAlife = false;
                 currentMap.HeroDied();
             }
-            
         }
+
         public virtual void UseItem(int id)
         {
             id = id - 1;
@@ -270,7 +228,6 @@ namespace Rogal_na_KaCu
             {
                 currentMap.SendLog("You have no item in this slot!");
             }
-            
         }
 
         private void AddItem(int id,Consumable item)

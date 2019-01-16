@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rogal_na_KaCu.TileClasses
 {
-    public class EmptyTile:Tile
+    public class EmptyTile : Tile
     {
         private EmptyTile(int id, Map mp) : base(id, mp)
         {
@@ -15,7 +15,6 @@ namespace Rogal_na_KaCu.TileClasses
 
         public static void NewFloor(Dictionary<int, Tile> staticTiles)
         {
-
             staticTiles.Add(0, new EmptyTile(0, null));
         }
     }

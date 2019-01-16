@@ -190,11 +190,9 @@ namespace Rogal_na_KaCu
                 {
                     break;
                 }
-
                 if (mapObject.tileMap[rowCount] != null)
                 for(int i = beginX; i < maxColumn+beginX; i++)
                 {
-
                         if (i >= mapObject.tileMap[rowCount].Length)
                         {
                                 Console.SetCursorPosition(mapFirstXPosition + i - beginX, mapFirstYPosition + rowCount - beginY - 1);
@@ -205,7 +203,6 @@ namespace Rogal_na_KaCu
                             Console.SetCursorPosition(mapFirstXPosition + i - beginX, mapFirstYPosition + rowCount - beginY - 1);
                             PrintTile(tileDictionary[mapObject.tileMap[rowCount][i].representedByID].charID, tileDictionary[mapObject.tileMap[rowCount][i].representedByID].colorID);
                         }
-                        
                     }
                 Console.SetCursorPosition(mapFirstXPosition, mapFirstYPosition+rowCount-1);
             }
@@ -276,7 +273,7 @@ namespace Rogal_na_KaCu
             logCurrentPosition = 0;
             logLastID = 0;
             writeGreyLog = false;
-    }
+        }
 
         private void PrintTile(int charID, int color)
         {
@@ -356,7 +353,6 @@ namespace Rogal_na_KaCu
             switch (which)
             {
                 case 0:
-                    
                     int startPosition0 = 60;
                     for(int i = 0; i < mapLevel.ToString().Length; i++)
                     {
@@ -367,33 +363,25 @@ namespace Rogal_na_KaCu
                     Console.SetCursorPosition(startPosition0, 1);
                     Console.Write(value);
                     break;
-
                 case 1:
-                    
                     int startPosition1 = 10;
                     for (int i = 0; i < heroName.Length; i++)
                     {
-
                         Console.SetCursorPosition(startPosition1, 3);
                         Console.Write('\b');
                     }
-                    
                     heroName = value;
                     int writePosition1 = 12 - (heroName.Length / 2);
                     Console.SetCursorPosition(writePosition1, 3);
                     Console.Write(value);
                     break;
-
                 case 2:
-                    
                     int startPosition2 = 6;
                     for (int i = 0; i <3; i++)
                     {
-
                         Console.SetCursorPosition(startPosition2,5);
                         Console.Write('\b');
                     }
-                    
                     heroHp = Int32.Parse(value);
                     for(int i = heroHp.ToString().Length; i < 3; i++)
                     {
@@ -403,9 +391,7 @@ namespace Rogal_na_KaCu
                     Console.SetCursorPosition(startPosition2, 5);
                     Console.Write(value);
                     break;
-
                 case 3:
-                    
                     int startPosition3 = 6;
                     for (int i = 0; i < weaponName.Length; i++)
                     {
@@ -417,9 +403,7 @@ namespace Rogal_na_KaCu
                     Console.SetCursorPosition(startPosition3, 6);
                     Console.Write(value);
                     break;
-
                 case 4:
-                    
                     int startPosition4 = 6;
                     for (int i = 0; i < armorName.Length; i++)
                     {
@@ -431,15 +415,11 @@ namespace Rogal_na_KaCu
                     Console.SetCursorPosition(startPosition4, 8);
                     Console.Write(value);
                     break;
-
-                case 5:
-                    
-                    break;
+                case 5:break;
                 case 6:
                     int startPosition5 = 110;
                     for (int i = 0; i < value.Length; i++)
                     {
-
                         Console.SetCursorPosition(startPosition5, 7);
                         Console.Write('\b');
                     }
@@ -476,7 +456,6 @@ namespace Rogal_na_KaCu
             {
                 for (int i = 0; i < 19; i++)
                 {
-
                     Console.SetCursorPosition(startPosition8, 5 + counter);
                     Console.Write('\b');
                 }
